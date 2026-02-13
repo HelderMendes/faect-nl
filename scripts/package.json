@@ -1,0 +1,24 @@
+{
+  "name": "faect-migration-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "migrate:homepage": "npx tsx migrate-homepage.ts",
+    "migrate:posts": "npx tsx migrate-posts.ts",
+    "migrate:team": "npx tsx migrate-team.ts",
+    "migrate:apps": "npx tsx migrate-apps.ts",
+    "migrate:cases": "npx tsx migrate-cases.ts",
+    "migrate:all": "npx tsx migrate-all.ts"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.28.0",
+    "@sanity/image-url": "^1.1.0",
+    "dotenv": "^16.4.5",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
