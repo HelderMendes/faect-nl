@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
   --color-background: #ffffff;
@@ -67,8 +67,79 @@
   }
 }
 
-body {
-  background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans);
+.container {
+  max-width: 1460px;
+}
+
+/* sweep-right hover animation for nav items */
+.nav-item-sweep,
+.nav-contact-sweep {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.nav-item-sweep {
+  --sweep-bg: var(--color-faect-blue);
+}
+.nav-contact-sweep {
+  --sweep-bg: white;
+}
+
+.nav-item-sweep::before,
+.nav-contact-sweep::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  right: 100%;
+  background-color: var(--sweep-bg);
+  border-radius: 8px;
+  z-index: -1;
+  transition: right 0.4s ease;
+}
+
+.nav-item-sweep:hover::before,
+.nav-contact-sweep:hover::before {
+  right: 0;
+}
+
+.nav-item-sweep.active::before {
+  background-color: white;
+  right: 0;
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  p {
+    padding: 0.25rem 0;
+    margin: 0;
+    line-height: 1.7;
+  }
+}
+
+.block-background-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.block-background-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2b87c840;
+  background-image: url(/c54a5358-ellipse-21.png);
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
 }

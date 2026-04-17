@@ -1,18 +1,18 @@
 // Block components for page builder
-export {BlockHero} from './BlockHero'
-export {BlockCTA} from './BlockCTA'
-export {BlockTextWithImage} from './BlockTextWithImage'
-export {BlockFeatureGrid} from './BlockFeatureGrid'
-export {BlockRichText} from './BlockRichText'
-export {BlockSectorGrid} from './BlockSectorGrid'
-export {BlockServiceCards} from './BlockServiceCards'
-export {BlockFAQ} from './BlockFAQ'
-export {BlockProcessSteps} from './BlockProcessSteps'
-export {BlockStats} from './BlockStats'
-export {BlockContactForm} from './BlockContactForm'
-export {BlockContactInfo} from './BlockContactInfo'
-export {BlockAppShowcase} from './BlockAppShowcase'
-export {BlockTeamGrid} from './BlockTeamGrid'
-export {BlockPartnerLogos} from './BlockPartnerLogos'
-export {BlockCaseStudyGrid} from './BlockCaseStudyGrid'
-export {BlockRenderer} from './BlockRenderer'
+export { BlockHero } from "./BlockHero";
+export { BlockCTA } from "./BlockCTA";
+export { BlockTextWithImage } from "./BlockTextWithImage";
+export { BlockFeatureGrid } from "./BlockFeatureGrid";
+export { BlockRichText } from "./BlockRichText";
+export { BlockSectorGrid } from "./BlockSectorGrid";
+export { BlockServiceCards } from "./BlockServiceCards";
+export { BlockFAQ } from "./BlockFAQ";
+export { BlockProcessSteps } from "./BlockProcessSteps";
+export { BlockStats } from "./BlockStats";
+export { BlockContactForm } from "./BlockContactForm";
+export { BlockContactInfo } from "./BlockContactInfo";
+export { BlockAppShowcase } from "./BlockAppShowcase";
+export { BlockTeamGrid } from "./BlockTeamGrid";
+export { BlockPartnerLogos } from "./BlockPartnerLogos";
+export { BlockCaseStudyGrid } from "./BlockCaseStudyGrid";
+export { BlockRenderer } from "./BlockRenderer";

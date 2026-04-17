@@ -1,4 +1,10 @@
-import {groq} from 'next-sanity'
+import { groq } from "next-sanity";
+
+// Image asset expansion helper
+const imageAsset = `{
+  ...,
+  asset->
+}`;
 
 export const POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | order(publishedAt desc){
   _id,
@@ -17,28 +23,20 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | or
       asset->
     }
   }
-}`
+}`;
 
 export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
   ...,
-  mainImage {
+  hero {
     ...,
-    asset->
+    backgroundImage ${imageAsset}
   },
+  mainImage ${imageAsset},
   author->{
     name,
-    image {
-      ...,
-      asset->
-    }
+    image ${imageAsset}
   }
-}`
-
-// Image asset expansion helper
-const imageAsset = `{
-  ...,
-  asset->
-}`
+}`;
 
 // Reference expansions for block types
 const appReference = `{
@@ -48,7 +46,7 @@ const appReference = `{
   tagline,
   description,
   icon ${imageAsset}
-}`
+}`;
 
 const teamMemberReference = `{
   _id,
@@ -58,7 +56,7 @@ const teamMemberReference = `{
   photo ${imageAsset},
   email,
   linkedIn
-}`
+}`;
 
 const partnerReference = `{
   _id,
@@ -66,7 +64,7 @@ const partnerReference = `{
   logo ${imageAsset},
   description,
   website
-}`
+}`;
 
 const caseStudyReference = `{
   _id,
@@ -77,7 +75,7 @@ const caseStudyReference = `{
   mainImage ${imageAsset},
   summary,
   industry
-}`
+}`;
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug][0]{
@@ -149,7 +147,7 @@ export const PAGE_QUERY = groq`
       }
     }
   }
-`
+`;
 
 export const APPS_QUERY = groq`*[_type == "app" && defined(slug.current)] | order(order asc, title asc){
   _id,
@@ -158,13 +156,13 @@ export const APPS_QUERY = groq`*[_type == "app" && defined(slug.current)] | orde
   tagline,
   description,
   icon ${imageAsset}
-}`
+}`;
 
 export const APP_QUERY = groq`*[_type == "app" && slug.current == $slug][0]{
   ...,
   icon ${imageAsset},
   screenshots[] ${imageAsset}
-}`
+}`;
 
 export const CASE_STUDIES_QUERY = groq`*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc){
   _id,
@@ -175,14 +173,14 @@ export const CASE_STUDIES_QUERY = groq`*[_type == "caseStudy" && defined(slug.cu
   mainImage ${imageAsset},
   summary,
   industry
-}`
+}`;
 
 export const CASE_STUDY_QUERY = groq`*[_type == "caseStudy" && slug.current == $slug][0]{
   ...,
   clientLogo ${imageAsset},
   mainImage ${imageAsset},
   gallery[] ${imageAsset}
-}`
+}`;
 
 export const TEAM_MEMBERS_QUERY = groq`*[_type == "teamMember"] | order(order asc, name asc){
   _id,
@@ -192,7 +190,7 @@ export const TEAM_MEMBERS_QUERY = groq`*[_type == "teamMember"] | order(order as
   photo ${imageAsset},
   email,
   linkedIn
-}`
+}`;
 
 export const PARTNERS_QUERY = groq`*[_type == "partner"] | order(order asc, name asc){
   _id,
@@ -200,11 +198,11 @@ export const PARTNERS_QUERY = groq`*[_type == "partner"] | order(order asc, name
   logo ${imageAsset},
   description,
   website
-}`
+}`;
 
 export const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
   ...,
   logo ${imageAsset},
   favicon ${imageAsset},
   socialImage ${imageAsset}
-}`
+}`;

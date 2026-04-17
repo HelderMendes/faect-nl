@@ -1,59 +1,64 @@
-import Image from 'next/image'
-import {urlFor} from '@/sanity/lib/image'
-import {getSectionStyles, type SectionSettings} from './sectionUtils'
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { getSectionStyles, type SectionSettings } from "./sectionUtils";
 
 interface Step {
-  title: string
-  description?: string
-  icon?: any
+  title: string;
+  description?: string;
+  icon?: any;
 }
 
 interface BlockProcessStepsProps {
-  heading?: string
-  subheading?: string
-  steps?: Step[]
-  layout?: 'horizontal' | 'vertical' | 'numbered'
-  settings?: SectionSettings
+  heading?: string;
+  subheading?: string;
+  steps?: Step[];
+  layout?: "horizontal" | "vertical" | "numbered";
+  settings?: SectionSettings;
 }
 
 export function BlockProcessSteps({
   heading,
   subheading,
   steps,
-  layout = 'horizontal',
+  layout = "horizontal",
   settings,
 }: BlockProcessStepsProps) {
-  const displaySteps = steps || []
+  const displaySteps = steps || [];
 
-  if (displaySteps.length === 0) return null
+  if (displaySteps.length === 0) return null;
 
   return (
     <section className={getSectionStyles(settings)}>
       <div className="container mx-auto px-4 lg:px-8">
         {(heading || subheading) && (
-          <div className="text-center mb-16">
+          <div className="mb-16 text-center">
             {heading && (
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-faect-navy mb-4">
+              <h2 className="font-heading text-faect-navy mb-4 text-3xl font-bold md:text-4xl">
                 {heading}
               </h2>
             )}
             {subheading && (
-              <p className="text-lg text-faect-gray max-w-2xl mx-auto">{subheading}</p>
+              <p className="text-faect-gray mx-auto max-w-2xl text-lg">
+                {subheading}
+              </p>
             )}
           </div>
         )}
 
-        {layout === 'horizontal' && (
+        {layout === "horizontal" && (
           <div className="relative">
             {/* Connecting Line (Desktop) */}
-            <div className="hidden lg:block absolute top-10 left-0 w-full h-0.5 bg-gray-100 -z-1" />
+            <div className="absolute top-10 left-0 -z-1 hidden h-0.5 w-full bg-gray-100 lg:block" />
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+            <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               {displaySteps.map((step, index) => (
-                <div key={index} className="relative flex flex-col items-center text-center group">
-                  <div className="w-20 h-20 bg-white border-2 border-gray-100 rounded-full flex items-center justify-center mb-6 shadow-sm group-hover:border-faect-blue group-hover:shadow-md transition-all relative z-10">
+                <div
+                  key={index}
+                  className="group relative flex flex-col items-center text-center"
+                >
+                  <div className="group-hover:border-faect-blue relative z-10 mb-6 flex h-20 w-20 items-center justify-center rounded-full border-2 border-gray-100 bg-white shadow-sm transition-all group-hover:shadow-md">
                     {step.icon?.asset ? (
-                      <div className="relative w-10 h-10">
+                      <div className="relative h-10 w-10">
                         <Image
                           src={urlFor(step.icon).width(40).height(40).url()}
                           alt={step.title}
@@ -62,16 +67,18 @@ export function BlockProcessSteps({
                         />
                       </div>
                     ) : (
-                      <span className="text-2xl font-heading font-bold text-faect-blue">
+                      <span className="font-heading text-faect-blue text-2xl font-bold">
                         {index + 1}
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-heading font-bold text-faect-navy mb-3">
+                  <h3 className="font-heading text-faect-navy mb-3 text-xl font-bold">
                     {step.title}
                   </h3>
                   {step.description && (
-                    <p className="text-faect-gray text-sm leading-relaxed">{step.description}</p>
+                    <p className="text-faect-gray text-sm leading-relaxed">
+                      {step.description}
+                    </p>
                   )}
                 </div>
               ))}
@@ -79,24 +86,26 @@ export function BlockProcessSteps({
           </div>
         )}
 
-        {layout === 'vertical' && (
-          <div className="max-w-4xl mx-auto space-y-12">
+        {layout === "vertical" && (
+          <div className="mx-auto max-w-4xl space-y-12">
             {displaySteps.map((step, index) => (
-              <div key={index} className="flex gap-8 group">
+              <div key={index} className="group flex gap-8">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-faect-navy rounded-full flex items-center justify-center text-white font-bold shrink-0 relative z-10 group-hover:bg-faect-blue transition-colors">
+                  <div className="bg-faect-navy group-hover:bg-faect-blue relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-bold text-white transition-colors">
                     {index + 1}
                   </div>
                   {index < displaySteps.length - 1 && (
-                    <div className="w-0.5 h-full bg-gray-100 -mt-2 my-2" />
+                    <div className="my-2 -mt-2 h-full w-0.5 bg-gray-100" />
                   )}
                 </div>
                 <div className="pb-12">
-                  <h3 className="text-2xl font-heading font-bold text-faect-navy mb-4">
+                  <h3 className="font-heading text-faect-navy mb-4 text-2xl font-bold">
                     {step.title}
                   </h3>
                   {step.description && (
-                    <p className="text-faect-gray leading-relaxed text-lg">{step.description}</p>
+                    <p className="text-faect-gray text-lg leading-relaxed">
+                      {step.description}
+                    </p>
                   )}
                 </div>
               </div>
@@ -105,5 +114,5 @@ export function BlockProcessSteps({
         )}
       </div>
     </section>
-  )
+  );
 }

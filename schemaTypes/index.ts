@@ -7,6 +7,7 @@ import teamMember from './teamMember'
 import partner from './partner'
 import faqItem from './faqItem'
 import siteSettings from './siteSettings'
+import vacature from './vacature'
 
 // Block types
 import blockHero from './blockHero'
@@ -38,6 +39,7 @@ export const schemaTypes = [
   partner,
   faqItem,
   siteSettings,
+  vacature,
 
   // Blocks
   blockHero,

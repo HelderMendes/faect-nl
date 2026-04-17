@@ -1,7 +1,7 @@
 import {createClient} from '@sanity/client'
 import dotenv from 'dotenv'
 
-dotenv.config()
+dotenv.config({path: 'scripts/.env'})
 
 export const sanityClient = createClient({
   projectId: process.env.SANITY_PROJECT_ID || 'ymgfr312',

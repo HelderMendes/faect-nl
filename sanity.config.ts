@@ -2,15 +2,19 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
+import {structure} from './sanity.structure'
 
 export default defineConfig({
   name: 'default',
-  title: 'faect-2026',
+  title: 'Faect',
 
   projectId: 'ymgfr312',
   dataset: 'faect',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({structure}),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,

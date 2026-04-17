@@ -33,10 +33,20 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
+      name: 'hero',
+      title: 'Hero Section',
+      type: 'blockHero',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [
+        {type: 'block'},
+        {type: 'blockRichText'},
+        {type: 'blockTextWithImage'},
+        {type: 'blockFeatureGrid'},
+      ],
     }),
   ],
 })

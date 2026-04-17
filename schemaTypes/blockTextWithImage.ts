@@ -31,7 +31,7 @@ export default defineType({
       name: 'imagePosition',
       title: 'Image Position',
       type: 'string',
-      initialValue: 'right',
+      initialValue: 'left',
       options: {
         list: [
           {title: 'Left', value: 'left'},

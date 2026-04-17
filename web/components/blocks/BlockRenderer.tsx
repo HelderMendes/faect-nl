@@ -15,7 +15,7 @@ import {
   BlockTeamGrid,
   BlockPartnerLogos,
   BlockCaseStudyGrid,
-} from '@/components/blocks'
+} from "@/components/blocks";
 
 // Map block types to components
 const blockComponents: Record<string, React.ComponentType<any>> = {
@@ -35,44 +35,44 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
   blockTeamGrid: BlockTeamGrid,
   blockPartnerLogos: BlockPartnerLogos,
   blockCaseStudyGrid: BlockCaseStudyGrid,
-}
+};
 
 interface Block {
-  _type: string
-  _key: string
-  [key: string]: any
+  _type: string;
+  _key: string;
+  [key: string]: any;
 }
 
 interface BlockRendererProps {
-  blocks?: Block[]
+  blocks?: Block[];
 }
 
-export function BlockRenderer({blocks}: BlockRendererProps) {
-  if (!blocks || blocks.length === 0) return null
+export function BlockRenderer({ blocks }: BlockRendererProps) {
+  if (!blocks || blocks.length === 0) return null;
 
   return (
     <>
       {blocks.map((block) => {
-        const Component = blockComponents[block._type]
+        const Component = blockComponents[block._type];
 
         if (!Component) {
           // In development, show a warning for unknown block types
-          if (process.env.NODE_ENV === 'development') {
-            console.warn(`Unknown block type: ${block._type}`)
+          if (process.env.NODE_ENV === "development") {
+            console.warn(`Unknown block type: ${block._type}`);
             return (
               <div
                 key={block._key}
-                className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded my-4"
+                className="my-4 rounded border border-yellow-400 bg-yellow-100 px-4 py-3 text-yellow-700"
               >
                 Unknown block type: <code>{block._type}</code>
               </div>
-            )
+            );
           }
-          return null
+          return null;
         }
 
-        return <Component key={block._key} {...block} />
+        return <Component key={block._key} {...block} />;
       })}
     </>
-  )
+  );
 }

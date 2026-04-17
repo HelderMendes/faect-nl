@@ -31,6 +31,22 @@ export default defineType({
       group: 'content',
     }),
     defineField({
+      name: 'pageFolder',
+      title: 'Folder',
+      type: 'string',
+      group: 'content',
+      options: {
+        list: [
+          {title: 'Hoofdpagina\'s', value: 'main'},
+          {title: 'Microsoft Dynamics 365', value: 'dynamics'},
+          {title: 'Vacatures', value: 'vacatures'},
+          {title: 'Regels', value: 'regels'},
+        ],
+        layout: 'radio',
+      },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
       name: 'pageBuilder',
       title: 'Page Builder',
       type: 'array',

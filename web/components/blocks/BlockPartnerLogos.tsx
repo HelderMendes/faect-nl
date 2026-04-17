@@ -1,62 +1,64 @@
-import Image from 'next/image'
-import {urlFor} from '@/sanity/lib/image'
-import {getSectionStyles, type SectionSettings} from './sectionUtils'
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import { getSectionStyles, type SectionSettings } from "./sectionUtils";
 
 interface Partner {
-  _id: string
-  name: string
-  logo: any
-  website?: string
-  description?: string
+  _id: string;
+  name: string;
+  logo: any;
+  website?: string;
+  description?: string;
 }
 
 interface BlockPartnerLogosProps {
-  heading?: string
-  subheading?: string
-  partners?: Partner[]
-  showAll?: boolean
-  displayMode?: 'grid' | 'slider' | 'cards'
-  showDescription?: boolean
-  settings?: SectionSettings
+  heading?: string;
+  subheading?: string;
+  partners?: Partner[];
+  showAll?: boolean;
+  displayMode?: "grid" | "slider" | "cards";
+  showDescription?: boolean;
+  settings?: SectionSettings;
 }
 
 export function BlockPartnerLogos({
   heading,
   subheading,
   partners,
-  displayMode = 'grid',
+  displayMode = "grid",
   showDescription,
   settings,
 }: BlockPartnerLogosProps) {
-  const displayPartners = partners || []
+  const displayPartners = partners || [];
 
-  if (displayPartners.length === 0) return null
+  if (displayPartners.length === 0) return null;
 
   return (
     <section className={getSectionStyles(settings)}>
       <div className="container mx-auto px-4 lg:px-8">
         {(heading || subheading) && (
-          <div className="text-center mb-16">
+          <div className="mb-16 text-center">
             {heading && (
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-faect-navy mb-4">
+              <h2 className="font-heading text-faect-navy mb-4 text-3xl font-bold md:text-4xl">
                 {heading}
               </h2>
             )}
             {subheading && (
-              <p className="text-lg text-faect-gray max-w-2xl mx-auto">{subheading}</p>
+              <p className="text-faect-gray mx-auto max-w-2xl text-lg">
+                {subheading}
+              </p>
             )}
           </div>
         )}
 
-        {displayMode === 'grid' && (
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+        {displayMode === "grid" && (
+          <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-4 lg:grid-cols-6">
             {displayPartners.map((partner) => (
               <div
                 key={partner._id}
-                className="flex items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100"
+                className="flex items-center justify-center p-4 opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
               >
                 {partner.logo?.asset && (
-                  <div className="relative w-full h-12">
+                  <div className="relative h-12 w-full">
                     <Image
                       src={urlFor(partner.logo).url()}
                       alt={partner.name}
@@ -70,15 +72,15 @@ export function BlockPartnerLogos({
           </div>
         )}
 
-        {displayMode === 'cards' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {displayMode === "cards" && (
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {displayPartners.map((partner) => (
               <div
                 key={partner._id}
-                className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-lg transition-all"
+                className="rounded-xl border border-gray-100 bg-white p-8 shadow-sm transition-all hover:shadow-lg"
               >
                 {partner.logo?.asset && (
-                  <div className="relative w-40 h-12 mb-6">
+                  <div className="relative mb-6 h-12 w-40">
                     <Image
                       src={urlFor(partner.logo).url()}
                       alt={partner.name}
@@ -88,23 +90,25 @@ export function BlockPartnerLogos({
                   </div>
                 )}
                 {showDescription && partner.description && (
-                  <p className="text-faect-gray leading-relaxed text-sm">{partner.description}</p>
+                  <p className="text-faect-gray text-sm leading-relaxed">
+                    {partner.description}
+                  </p>
                 )}
               </div>
             ))}
           </div>
         )}
 
-        {displayMode === 'slider' && (
-          <div className="overflow-hidden bg-white/5 py-10 rounded-2xl">
-            <div className="flex animate-marquee space-x-12 whitespace-nowrap">
+        {displayMode === "slider" && (
+          <div className="overflow-hidden rounded-2xl bg-white/5 py-10">
+            <div className="animate-marquee flex space-x-12 whitespace-nowrap">
               {[...displayPartners, ...displayPartners].map((partner, idx) => (
                 <div
                   key={`${partner._id}-${idx}`}
-                  className="shrink-0 flex items-center justify-center grayscale hover:grayscale-0 transition-all opacity-40 hover:opacity-100 px-8"
+                  className="flex shrink-0 items-center justify-center px-8 opacity-40 grayscale transition-all hover:opacity-100 hover:grayscale-0"
                 >
                   {partner.logo?.asset && (
-                    <div className="relative w-32 h-10">
+                    <div className="relative h-10 w-32">
                       <Image
                         src={urlFor(partner.logo).url()}
                         alt={partner.name}
@@ -120,5 +124,5 @@ export function BlockPartnerLogos({
         )}
       </div>
     </section>
-  )
+  );
 }
