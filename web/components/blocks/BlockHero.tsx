@@ -1,11 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import { getSectionStyles, type SectionSettings, cn } from "./sectionUtils";
-import { text } from "stream/consumers";
 
 type SanityImageAsset = {
   _ref?: string;
@@ -67,11 +64,11 @@ export function BlockHero({
       )}
 
       <div className="relative z-10 container mx-auto px-4 lg:px-8">
-        <div className="my-18 flex flex-col justify-start pt-16 md:my-24 md:pt-20 lg:my-28 lg:pt-20 xl:my-44">
+        <div className="my-18 flex flex-col justify-start pt-16 md:my-24 md:pt-20 lg:my-28 lg:pt-20 xl:my-34">
           <div className="flex flex-col items-start gap-0">
             {/* Title Container */}
             <div className="animate-fade-in md:mr-[35%] xl:mr-[45%]">
-              <h1 className="md:text-faect-blue pb-3 text-center text-4xl font-semibold text-white text-shadow-lg md:text-left md:text-5xl md:text-shadow-none xl:text-6xl/16">
+              <h1 className="md:text-faect-blue pb-3 text-center text-4xl leading-14 font-semibold text-white text-shadow-lg md:text-left md:text-5xl md:text-shadow-none xl:text-[52px]">
                 {heading}
               </h1>
             </div>
@@ -89,7 +86,7 @@ export function BlockHero({
 
         {/* Intro Blocks 01 & 02 (Positioned 40px from absolute bottom of section) */}
         {activeIntroBlocks.length > 0 && (
-          <div className="animate-slide-up pointer-events-none absolute bottom-2 left-0 z-20 my-auto ml-4 flex flex-col gap-2 md:right-3 md:bottom-8 md:ml-[45%] md:gap-4 xl:right-7 xl:ml-[53%]">
+          <div className="animate-slide-up pointer-events-none absolute bottom-2 left-0 z-20 my-auto ml-4 flex flex-col gap-2 md:right-3 md:bottom-8 md:ml-[45%] md:gap-4 xl:right-7 xl:ml-[51.5%]">
             {activeIntroBlocks.map((block, idx) => (
               <div
                 key={idx}

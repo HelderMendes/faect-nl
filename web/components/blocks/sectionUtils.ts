@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export interface SectionSettings {
-  backgroundColor?: "white" | "gray" | "navy" | "none";
+  backgroundColor?: "white" | "gray" | "dither" | "navy" | "none";
   paddingTop?: "default" | "compact" | "none";
   paddingBottom?: "default" | "compact" | "none";
   verticalSpacing?: "default" | "compact";
@@ -19,6 +19,7 @@ export function getSectionStyles(
   const bgClasses = {
     white: "bg-white",
     gray: "bg-gray-50",
+    dither: "section-dither",
     navy: "bg-faect-navy text-white",
     none: "bg-transparent",
   };

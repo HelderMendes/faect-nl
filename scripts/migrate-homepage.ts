@@ -35,9 +35,7 @@ async function createHomepage() {
   console.log('🏠 Starting homepage migration...\n')
 
   // Check if homepage already exists
-  const existing = await sanityClient.fetch(
-    `*[_type == "page" && slug.current == "home"][0]._id`
-  )
+  const existing = await sanityClient.fetch(`*[_type == "page" && slug.current == "home"][0]._id`)
 
   if (existing) {
     console.log('⚠️  Homepage already exists. Delete it first or update manually.')
@@ -89,7 +87,7 @@ async function createHomepage() {
         _key: generateKey(),
         heading: 'Krachtige ERP-oplossingen met Microsoft Dynamics 365 Business Central',
         content: textToPortableText(
-          'Bij Faect zijn we gespecialiseerd in het configureren van Microsoft Dynamics 365 Business Central, volledig afgestemd op de unieke behoeften van jouw organisatie.\n\nOnze aanpak combineert de kracht van standaard software met de flexibiliteit van maatwerk configuratie. Dit betekent dat je profiteert van een robuust, bewezen platform dat naadloos aansluit op jouw bedrijfsprocessen.'
+          'Bij Faect zijn we gespecialiseerd in het configureren van Microsoft Dynamics 365 Business Central, volledig afgestemd op de unieke behoeften van jouw organisatie.\n\nOnze aanpak combineert de kracht van standaard software met de flexibiliteit van maatwerk configuratie. Dit betekent dat je profiteert van een robuust, bewezen platform dat naadloos aansluit op jouw bedrijfsprocessen.',
         ),
         image: solutionsImage,
         imagePosition: 'right',
@@ -237,9 +235,7 @@ async function createHomepage() {
     console.log(`   Title: ${result.title}`)
     console.log(`   Blocks: ${homepage.pageBuilder.length}`)
     console.log('\n🔗 View in Sanity Studio:')
-    console.log(
-      `   https://faect-2026.sanity.studio/structure/page;${result._id}`
-    )
+    console.log(`   https://faect-2026.sanity.studio/structure/page;${result._id}`)
   } catch (error) {
     console.error('❌ Failed to create homepage:', error)
     throw error

@@ -38,6 +38,9 @@ export default async function Home() {
         ]}
       />
 
+      <div>
+        <h1 className="text-center text-5xl">MY big Text</h1>
+      </div>
       {/* Partner Logos */}
       <BlockPartnerLogos
         heading="Onze Partners & Koppelingen"
@@ -55,6 +58,9 @@ export default async function Home() {
           { _id: "p5", name: "Exflow", logo: null },
         ]}
       />
+      <div>
+        <h1 className="text-center text-5xl">MY big Text 02</h1>
+      </div>
 
       {/* About Section - Text with Image */}
       <BlockTextWithImage
@@ -76,6 +82,10 @@ export default async function Home() {
         imagePosition="left"
         settings={{ backgroundColor: "gray" }}
       />
+
+      <div>
+        <h1 className="text-center text-5xl">MY big Text 03</h1>
+      </div>
 
       {/* Functonality Grid - Onze Apps */}
       <BlockAppShowcase

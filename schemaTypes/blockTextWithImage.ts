@@ -1,6 +1,5 @@
 import {defineField, defineType} from 'sanity'
 import {ImageIcon} from '@sanity/icons'
-import {sectionSettings} from './shared/sectionSettings'
 
 export default defineType({
   name: 'blockTextWithImage',
@@ -8,6 +7,11 @@ export default defineType({
   type: 'object',
   icon: ImageIcon,
   fields: [
+    defineField({
+      name: 'headerTitle',
+      title: 'Section Title',
+      type: 'string',
+    }),
     defineField({
       name: 'heading',
       title: 'Heading',

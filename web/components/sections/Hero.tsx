@@ -2,10 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
+type SanityImage = {
+  asset?: { _ref?: string; url?: string };
+  [key: string]: unknown;
+};
+
 interface HeroProps {
   heading: string;
   subheading?: string;
-  backgroundImage?: any; // Sanity Image
+  backgroundImage?: SanityImage | string;
   ctaText?: string;
   ctaLink?: string;
 }

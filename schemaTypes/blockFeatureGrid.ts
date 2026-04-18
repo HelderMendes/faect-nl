@@ -1,5 +1,4 @@
 import {defineField, defineType} from 'sanity'
-import {sectionSettings} from './shared/sectionSettings'
 
 export default defineType({
   name: 'blockFeatureGrid',
@@ -25,6 +24,16 @@ export default defineType({
           ],
         },
       ],
+    }),
+    defineField({
+      name: 'ctaText',
+      title: 'Button Text',
+      type: 'string',
+    }),
+    defineField({
+      name: 'ctaLink',
+      title: 'Button Link',
+      type: 'string',
     }),
     defineField({
       name: 'settings',

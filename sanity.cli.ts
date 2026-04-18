@@ -6,10 +6,7 @@ export default defineCliConfig({
     dataset: 'faect'
   },
   deployment: {
-    /**
-     * Enable auto-updates for studios.
-     * Learn more at https://www.sanity.io/docs/studio/latest-version-of-sanity#k47faf43faf56
-     */
+    appId: 'boj3hzl8skswmw4w65r8tigr',
     autoUpdates: true,
   }
 })
