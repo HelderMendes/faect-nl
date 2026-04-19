@@ -60,6 +60,7 @@ export default defineType({
         defineArrayMember({type: 'blockRichText'}),
         defineArrayMember({type: 'blockTextWithImage'}),
         defineArrayMember({type: 'blockFeatureGrid'}),
+        defineArrayMember({type: 'blockTextWithServiceGrid'}),
 
         // Process & FAQ
         defineArrayMember({type: 'blockProcessSteps'}),

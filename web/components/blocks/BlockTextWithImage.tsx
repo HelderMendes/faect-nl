@@ -4,7 +4,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import { getSectionStyles, type SectionSettings, cn } from "./sectionUtils";
 
-import type { PortableTextBlock } from "@portabletext/types";
+import type { PortableTextBlock } from "@portabletext/react";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };

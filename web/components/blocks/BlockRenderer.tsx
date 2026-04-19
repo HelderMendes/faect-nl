@@ -15,6 +15,7 @@ import {
   BlockTeamGrid,
   BlockPartnerLogos,
   BlockCaseStudyGrid,
+  BlockTextWithServiceGrid,
 } from "@/components/blocks";
 
 // Map block types to components
@@ -35,6 +36,7 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
   blockTeamGrid: BlockTeamGrid,
   blockPartnerLogos: BlockPartnerLogos,
   blockCaseStudyGrid: BlockCaseStudyGrid,
+  blockTextWithServiceGrid: BlockTextWithServiceGrid,
 };
 
 interface Block {

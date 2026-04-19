@@ -26,6 +26,7 @@ import blockCaseStudyGrid from './blockCaseStudyGrid'
 import blockContactForm from './blockContactForm'
 import blockContactInfo from './blockContactInfo'
 import blockStats from './blockStats'
+import blockTextWithServiceGrid from './blockTextWithServiceGrid'
 
 import {sectionSettings} from './shared/sectionSettings'
 
@@ -58,6 +59,7 @@ export const schemaTypes = [
   blockContactForm,
   blockContactInfo,
   blockStats,
+  blockTextWithServiceGrid,
 
   // Shared
   sectionSettings,
