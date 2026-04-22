@@ -61,6 +61,8 @@ export default defineType({
         defineArrayMember({type: 'blockTextWithImage'}),
         defineArrayMember({type: 'blockFeatureGrid'}),
         defineArrayMember({type: 'blockTextWithServiceGrid'}),
+        defineArrayMember({type: 'blockTextWithAccordion'}),
+        defineArrayMember({type: 'blockTwoColumnCTA'}),
 
         // Process & FAQ
         defineArrayMember({type: 'blockProcessSteps'}),

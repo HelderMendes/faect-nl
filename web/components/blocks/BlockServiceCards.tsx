@@ -3,11 +3,16 @@ import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { getSectionStyles, type SectionSettings } from "./sectionUtils";
 
+type SanityImage = {
+  asset?: { _ref?: string; url?: string };
+  [key: string]: unknown;
+};
+
 interface Service {
   title: string;
   description?: string;
-  icon?: any;
-  image?: any;
+  icon?: SanityImage;
+  image?: SanityImage;
   link?: string;
 }
 

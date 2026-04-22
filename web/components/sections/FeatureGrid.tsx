@@ -1,7 +1,11 @@
+type SanityImage = {
+  asset?: { _ref?: string; url?: string };
+  [key: string]: unknown;
+};
 interface Feature {
   title: string;
   description: string;
-  icon?: any; // Placeholder for now
+  icon?: SanityImage; // Placeholder for now
 }
 
 interface FeatureGridProps {

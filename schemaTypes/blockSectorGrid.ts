@@ -16,8 +16,14 @@ export default defineType({
       name: 'subheading',
       title: 'Subheading',
       type: 'text',
-      rows: 2,
+      rows: 1,
     }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+    }),
+
     defineField({
       name: 'sectors',
       title: 'Sectors',

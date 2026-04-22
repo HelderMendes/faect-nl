@@ -42,29 +42,26 @@ export function BlockTextWithImage({
         </div>
       )}
 
-      <div className="container mx-auto px-4 lg:px-12">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10">
+      <div className="container mx-auto space-x-12 px-4 pb-1 lg:px-12">
+        <div className="flex grid-cols-1 flex-col space-y-1 lg:grid lg:grid-cols-2 lg:gap-10">
           {/* Image */}
           <div
             className={cn(
-              "animate-fade-in relative m-4 h-80 md:mx-36 md:h-110 lg:mx-2 xl:mx-4",
+              "animate-fade-in mx-14 my-8 py-6 md:mx-20 lg:mx-2 xl:mx-4",
               isImageFirst
                 ? "order-last lg:order-first"
-                : "order-first lg:order-last",
+                : "order-last lg:order-last",
             )}
           >
             {image?.asset ? (
               <Image
-                src={image.asset.url || urlFor(image).width(500).url()}
+                src={image.asset.url || urlFor(image).width(800).url()}
                 alt={heading || ""}
-                fill
-                className="object-contain" // Use object-contain for illustrations
+                width={800}
+                height={560}
+                className="mx-auto h-auto max-w-2xl object-contain lg:max-w-full"
               />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-gray-50">
-                <span className="text-gray-300">Image</span>
-              </div>
-            )}
+            ) : null}
           </div>
 
           {/* Text Content */}

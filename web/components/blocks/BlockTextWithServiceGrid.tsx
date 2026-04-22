@@ -34,17 +34,15 @@ export function BlockTextWithServiceGrid({
   return (
     <section className={getSectionStyles(settings)}>
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[45%_55%] lg:gap-16">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[45%_55%] lg:items-stretch lg:gap-16">
           {/* Left column: heading + body + image */}
           <div className="flex flex-col justify-start">
             {heading && (
-              <h2 className="text-faect-navy mb-6 text-3xl font-bold leading-tight lg:text-4xl">
-                {heading}
+              <h2 className="text-faect-navy mb-6 text-3xl leading-tight font-bold lg:text-4xl">
+                {/* {heading} */}
               </h2>
             )}
-            {body && (
-              <p className="mb-8 leading-7 text-gray-600">{body}</p>
-            )}
+            {body && <p className="mb-8 leading-7 text-gray-600">{body}</p>}
             {image?.asset && (
               <div className="overflow-hidden rounded-xl">
                 <Image
@@ -57,26 +55,17 @@ export function BlockTextWithServiceGrid({
               </div>
             )}
           </div>
-
           {/* Right column: 2×2 service grid with dividers */}
-          {services && services.length > 0 && (
-            <div className="grid grid-cols-2">
-              {services.slice(0, 4).map((service, index) => {
-                const isLeftCol = index % 2 === 0;
-                const isTopRow = index < 2;
-                return (
+          <div className="grid h-full grid-cols-2 grid-rows-2 divide-x divide-y divide-gray-200 overflow-hidden rounded-2xl">
+            {services && services.length > 0 && (
+              <div className="grid h-full grid-cols-2 grid-rows-2 divide-x divide-y divide-gray-200">
+                {services.slice(0, 4).map((service) => (
                   <div
                     key={service._key}
-                    className={[
-                      "flex flex-col items-center px-6 py-8 text-center",
-                      isLeftCol ? "border-r border-gray-200" : "",
-                      isTopRow ? "border-b border-gray-200" : "",
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
+                    className="flex flex-col items-center justify-center px-6 py-8 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                   >
                     {service.icon?.asset && (
-                      <div className="mb-4 h-16 w-16 flex-shrink-0">
+                      <div className="mb-4 h-16 w-16 shrink-0">
                         <Image
                           src={urlFor(service.icon).width(64).height(64).url()}
                           alt={service.title}
@@ -89,16 +78,19 @@ export function BlockTextWithServiceGrid({
                     <h3 className="text-faect-blue mb-3 text-lg font-semibold">
                       {service.title}
                     </h3>
+                    <div className="bg-amber-800 font-bold text-amber-200">
+                      <h1> HHHHHHHHHH HHJHJH jhjhjhjh</h1>
+                    </div>
                     {service.description && (
-                      <p className="leading-6 text-gray-600 text-sm">
+                      <p className="text-sm leading-6 text-gray-600">
                         {service.description}
                       </p>
                     )}
                   </div>
-                );
-              })}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

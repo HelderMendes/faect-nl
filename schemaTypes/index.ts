@@ -27,6 +27,8 @@ import blockContactForm from './blockContactForm'
 import blockContactInfo from './blockContactInfo'
 import blockStats from './blockStats'
 import blockTextWithServiceGrid from './blockTextWithServiceGrid'
+import blockTextWithAccordion from './blockTextWithAccordion'
+import blockTwoColumnCTA from './blockTwoColumnCTA'
 
 import {sectionSettings} from './shared/sectionSettings'
 
@@ -60,6 +62,8 @@ export const schemaTypes = [
   blockContactInfo,
   blockStats,
   blockTextWithServiceGrid,
+  blockTextWithAccordion,
+  blockTwoColumnCTA,
 
   // Shared
   sectionSettings,

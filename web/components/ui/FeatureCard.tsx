@@ -1,10 +1,15 @@
 import Image from "next/image";
 
+type SanityImage = {
+  asset?: { _ref?: string; url?: string };
+  [key: string]: unknown;
+};
+
 interface FeatureCardProps {
   title: string;
   description: string;
   image?: string;
-  icon?: any;
+  icon?: SanityImage;
 }
 
 export function FeatureCard({ title, description, image }: FeatureCardProps) {
