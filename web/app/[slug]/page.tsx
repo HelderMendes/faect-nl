@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import { heroConfigs } from "@/config/heroConfigs";
 import { notFound } from "next/navigation";
 
 interface PageProps {
@@ -17,9 +18,13 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
+  const heroConfig = heroConfigs[slug];
+
   return (
     <main className="flex flex-col">
-      {data.pageBuilder && <BlockRenderer blocks={data.pageBuilder} />}
+      {data.pageBuilder && (
+        <BlockRenderer blocks={data.pageBuilder} heroConfig={heroConfig} />
+      )}
     </main>
   );
 }

@@ -50,7 +50,7 @@ export function Footer() {
   const pathname = usePathname();
 
   return (
-    <footer className="relative bg-[url(/faect_over-Business-Central_footer.jpg)] bg-cover bg-bottom pt-0 pb-6 font-sans text-white">
+    <footer className="relative bg-[url(/faect_over-Business-Central_footer.jpg)] bg-cover bg-bottom pt-0 pb-3 font-sans text-white">
       {/* Dark overlay */}
       <div className="absolute inset-0 z-0 bg-[#020b1a]/10" />
 
@@ -180,8 +180,8 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-white/10 pt-6">
-          <p className="text-center text-xs tracking-widest text-white/70 uppercase">
+        <div className="border-t border-white/20 pt-3">
+          <p className="text-center text-[0.8rem] tracking-widest text-white/80 uppercase">
             COPYRIGHT {new Date().getFullYear()} © ALL RIGHTS RESERVED. DESIGN
             VOOR FAECT
           </p>

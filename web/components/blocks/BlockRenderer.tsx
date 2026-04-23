@@ -18,6 +18,7 @@ import {
   BlockTextWithServiceGrid,
   BlockTextWithAccordion,
   BlockTwoColumnCTA,
+  type HeroConfig,
 } from "@/components/blocks";
 
 // Map block types to components
@@ -51,9 +52,10 @@ interface Block {
 
 interface BlockRendererProps {
   blocks?: Block[];
+  heroConfig?: HeroConfig;
 }
 
-export function BlockRenderer({ blocks }: BlockRendererProps) {
+export function BlockRenderer({ blocks, heroConfig }: BlockRendererProps) {
   if (!blocks || blocks.length === 0) return null;
 
   return (
@@ -62,7 +64,6 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
         const Component = blockComponents[block._type];
 
         if (!Component) {
-          // In development, show a warning for unknown block types
           if (process.env.NODE_ENV === "development") {
             console.warn(`Unknown block type: ${block._type}`);
             return (
@@ -77,7 +78,11 @@ export function BlockRenderer({ blocks }: BlockRendererProps) {
           return null;
         }
 
-        return <Component key={block._key} {...block} />;
+        const extraProps = block._type === "blockHero" && heroConfig
+          ? { heroConfig }
+          : {};
+
+        return <Component key={block._key} {...block} {...extraProps} />;
       })}
     </>
   );

@@ -1,4 +1,5 @@
 // Block components for page builder
+export type { HeroConfig } from "./sectionUtils";
 export { BlockHero } from "./BlockHero";
 export { BlockCTA } from "./BlockCTA";
 export { BlockTextWithImage } from "./BlockTextWithImage";
