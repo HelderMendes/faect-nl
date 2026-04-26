@@ -41,8 +41,10 @@ export function BlockTextWithImage({
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col items-center text-center">
             {headerTitle && (
-              <p className="text-faect-navy mb-6 inline-block border-b-2 border-gray-400 pb-1 text-sm font-semibold tracking-wide">
+              <p className="hover:text-faect-blue relative mb-6 border-b-2 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {headerTitle}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </p>
             )}
 

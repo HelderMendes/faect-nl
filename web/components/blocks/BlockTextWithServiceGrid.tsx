@@ -97,7 +97,7 @@ export function BlockTextWithServiceGrid({
           </div>
           {/* Right column: 2-column service grid with dividers */}
           {services && services.length > 0 && (
-            <div className="mx-4 grid grid-cols-1 gap-x-12 md:mx-12 md:grid-cols-2 lg:mx-4 lg:grid-cols-3 xl:mx-0 xl:grid-cols-2">
+            <div className="mx-4 grid grid-cols-1 gap-x-12 md:mx-12 md:grid-cols-2 lg:mx-3 lg:grid-cols-3 xl:mx-0 xl:grid-cols-2">
               {services.map((service) => (
                 <div
                   key={service._key}
