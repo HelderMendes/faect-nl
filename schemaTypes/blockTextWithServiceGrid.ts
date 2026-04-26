@@ -6,6 +6,12 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'label',
+      title: 'Eyebrow Label',
+      type: 'string',
+      description: 'Small uppercase label above the heading (e.g. "Wat Wij Doen")',
+    }),
+    defineField({
       name: 'heading',
       title: 'Heading',
       type: 'string',
@@ -23,10 +29,25 @@ export default defineType({
       options: {hotspot: true},
     }),
     defineField({
-      name: 'services',
-      title: 'Services (max 4)',
+      name: 'links',
+      title: 'CTA Links',
+      description: 'Bordered link buttons shown below the image on the left',
       type: 'array',
-      validation: (rule) => rule.max(4),
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({name: 'label', title: 'Label', type: 'string', validation: (r) => r.required()}),
+            defineField({name: 'href', title: 'URL', type: 'string', validation: (r) => r.required()}),
+          ],
+          preview: {select: {title: 'label'}},
+        }),
+      ],
+    }),
+    defineField({
+      name: 'services',
+      title: 'Services',
+      type: 'array',
       of: [
         defineArrayMember({
           type: 'object',
@@ -34,6 +55,8 @@ export default defineType({
             defineField({name: 'title', title: 'Title', type: 'string', validation: (r) => r.required()}),
             defineField({name: 'description', title: 'Description', type: 'text', rows: 3}),
             defineField({name: 'icon', title: 'Icon', type: 'image'}),
+            defineField({name: 'link', title: 'Link URL', type: 'string'}),
+            defineField({name: 'linkLabel', title: 'Link Label', type: 'string', description: 'Defaults to "Meer informatie"'}),
           ],
           preview: {
             select: {title: 'title', media: 'icon'},
@@ -48,11 +71,11 @@ export default defineType({
     }),
   ],
   preview: {
-    select: {title: 'heading'},
-    prepare({title}) {
+    select: {title: 'heading', subtitle: 'label'},
+    prepare({title, subtitle}) {
       return {
         title: title || 'Text + Service Grid',
-        subtitle: 'Left text/image — Right 2×2 grid',
+        subtitle: subtitle ?? 'Left text/image — Right service grid',
       }
     },
   },

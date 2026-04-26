@@ -18,11 +18,22 @@ const HEADING_OPLOSSINGEN =
 const SUBHEADING_OPLOSSINGEN =
   "text-2xl md:text-4xl lg:text-[2.5rem]/8 xl:text-[2.9rem]/9 font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left md:mb-2 sm:-mb-15 md:mt-0 -mt-5 text-[1.7rem] mb-28 ";
 
+const HEADING_HOME =
+  "font-extrabold tracking-tight sm:text-4xl md:text-[2.8rem] lg:text-[3.2rem] lg:-mt-16 xl:text-[3.6rem]/16  text-3xl/9 mb-4 md:mb-0 -mt-10 text-faect-blue ";
+
+const SUBHEADING_HOME =
+  "md:text-3xl lg:text-[1.9rem]/9 xl:text-[2rem]/10 pt-0 lg:pt-1 mx-auto text-center md:text-left md:mb-2 sm:-mb-15 md:mt-0 -mt-5 text-[1.5rem]/7 md:mr-[30%] lg:mr-[40%] xl:mr-[50%] -mb-12 sm:-mb-6";
+
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
 //   headingColor: "white-to-blue" | introVariant: "navy-tinted" | spacing: "default"
 
 export const heroConfigs: Record<string, HeroConfig> = {
+  home: {
+    headingClass: HEADING_HOME,
+    subheadingSizeClass: SUBHEADING_HOME,
+  },
+
   oplossingen: {
     headingColor: "white",
     paddingTop: "none",

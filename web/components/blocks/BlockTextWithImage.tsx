@@ -12,17 +12,19 @@ type SanityImage = {
 };
 
 interface BlockTextWithImageProps {
+  layout?: "side" | "centered";
   headerTitle?: string;
   heading?: string;
   content?: PortableTextBlock[];
   image?: SanityImage;
-  imagePosition?: "left" | "right";
+  imagePosition?: "left" | "right" | "center";
   ctaText?: string;
   ctaLink?: string;
   settings?: SectionSettings;
 }
 
 export function BlockTextWithImage({
+  layout = "side",
   headerTitle,
   heading,
   content,
@@ -32,6 +34,66 @@ export function BlockTextWithImage({
   ctaLink,
   settings,
 }: BlockTextWithImageProps) {
+  // ── Centered layout ────────────────────────────────────────────────────────
+  if (layout === "centered" || imagePosition === "center") {
+    return (
+      <section className={getSectionStyles(settings)}>
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex flex-col items-center text-center">
+            {headerTitle && (
+              <p className="text-faect-navy mb-6 inline-block border-b-2 border-gray-400 pb-1 text-sm font-semibold tracking-wide">
+                {headerTitle}
+              </p>
+            )}
+
+            {heading && (
+              <h2 className="text-faect-blue font-heading mb-6 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
+                {heading}
+              </h2>
+            )}
+
+            {content && (
+              <div className="text-faect-gray mx-auto mb-8 max-w-3xl text-lg leading-8 font-medium">
+                <PortableText
+                  value={content}
+                  components={{
+                    block: {
+                      normal: ({ children }) => (
+                        <p className="mb-4">{children}</p>
+                      ),
+                    },
+                  }}
+                />
+              </div>
+            )}
+
+            {image?.asset && (
+              <div className="w-full max-w-2xl overflow-hidden rounded-xl">
+                <Image
+                  src={image.asset.url || urlFor(image).width(900).url()}
+                  alt={heading ?? ""}
+                  width={900}
+                  height={600}
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+            )}
+
+            {ctaText && ctaLink && (
+              <Link
+                href={ctaLink}
+                className="border-faect-blue text-faect-blue hover:bg-faect-blue mt-8 inline-block rounded-lg border-2 px-10 py-3 font-semibold transition-colors hover:text-white"
+              >
+                {ctaText}
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Side layout (default) ──────────────────────────────────────────────────
   const isImageFirst = imagePosition === "left";
 
   return (

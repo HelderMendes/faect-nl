@@ -8,8 +8,21 @@ export default defineType({
   icon: ImageIcon,
   fields: [
     defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      initialValue: 'side',
+      options: {
+        list: [
+          {title: 'Side by side (image + text)', value: 'side'},
+          {title: 'Centered (stacked)', value: 'centered'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'headerTitle',
-      title: 'Section Title',
+      title: 'Eyebrow Label',
       type: 'string',
     }),
     defineField({
@@ -40,6 +53,7 @@ export default defineType({
         list: [
           {title: 'Left', value: 'left'},
           {title: 'Right', value: 'right'},
+          {title: 'Center (stacked)', value: 'center'},
         ],
         layout: 'radio',
       },
@@ -64,12 +78,13 @@ export default defineType({
   preview: {
     select: {
       title: 'heading',
+      subtitle: 'layout',
       media: 'image',
     },
-    prepare({title, media}) {
+    prepare({title, subtitle, media}) {
       return {
         title: title || 'Text with Image',
-        subtitle: 'Text + Image Section',
+        subtitle: subtitle === 'centered' ? 'Centered layout' : 'Side by side layout',
         media,
       }
     },

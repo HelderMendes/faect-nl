@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
+import { heroConfigs } from "@/config/heroConfigs";
 import {
   BlockRenderer,
   BlockHero,
@@ -19,7 +20,7 @@ export default async function Home() {
   if (data?.pageBuilder && data.pageBuilder.length > 0) {
     return (
       <main className="flex flex-col">
-        <BlockRenderer blocks={data.pageBuilder} />
+        <BlockRenderer blocks={data.pageBuilder} heroConfig={heroConfigs["home"]} />
       </main>
     );
   }

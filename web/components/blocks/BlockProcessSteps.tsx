@@ -14,14 +14,16 @@ interface Step {
 }
 
 interface BlockProcessStepsProps {
+  label?: string;
   heading?: string;
   subheading?: string;
   steps?: Step[];
-  layout?: "horizontal" | "vertical" | "numbered";
+  layout?: "horizontal" | "vertical" | "numbered" | "cards";
   settings?: SectionSettings;
 }
 
 export function BlockProcessSteps({
+  label,
   heading,
   subheading,
   steps,
@@ -35,26 +37,76 @@ export function BlockProcessSteps({
   return (
     <section className={getSectionStyles(settings)}>
       <div className="container mx-auto px-4 lg:px-8">
-        {(heading || subheading) && (
-          <div className="mb-16 text-center">
+        {/* Header — shared across all layouts */}
+        {(label || heading || subheading) && (
+          <div className="mb-14 flex flex-col items-center text-center">
+            {label && (
+              <p className="text-faect-navy mb-5 inline-block border-b-2 border-gray-400 pb-1 text-sm font-semibold tracking-wide">
+                {label}
+              </p>
+            )}
             {heading && (
-              <h2 className="font-heading text-faect-navy mb-4 text-3xl font-bold md:text-4xl">
+              <h2 className="text-faect-blue font-heading mb-5 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
                 {heading}
               </h2>
             )}
             {subheading && (
-              <p className="text-faect-gray mx-auto max-w-2xl text-lg">
+              <p className="text-faect-gray mx-auto max-w-3xl text-lg leading-8 font-medium">
                 {subheading}
               </p>
             )}
           </div>
         )}
 
+        {/* Cards layout */}
+        {layout === "cards" && (
+          <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2 lg:grid-cols-3">
+            {displaySteps.map((step, index) => (
+              <div
+                key={index}
+                className="border-faect-blue group relative flex flex-col border-t-2 py-8 transition-all duration-300"
+              >
+                {/* Large decorative step number */}
+                <span className="text-faect-blue/10 font-heading absolute top-6 right-0 text-[6rem] leading-none font-bold select-none">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                {/* Step number badge */}
+                <div className="bg-faect-blue mb-4 flex h-9 w-9 shrink-0 items-center justify-center rounded-full">
+                  <span className="font-heading text-sm font-bold text-white">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+
+                {step.icon?.asset && (
+                  <div className="mb-4 h-12 w-12 shrink-0">
+                    <Image
+                      src={urlFor(step.icon).width(48).height(48).url()}
+                      alt={step.title}
+                      width={48}
+                      height={48}
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                )}
+
+                <h3 className="text-faect-navy mb-3 text-xl leading-snug font-bold">
+                  {step.title}
+                </h3>
+                {step.description && (
+                  <p className="text-faect-gray text-base leading-7">
+                    {step.description}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Horizontal layout */}
         {layout === "horizontal" && (
           <div className="relative">
-            {/* Connecting Line (Desktop) */}
             <div className="absolute top-10 left-0 -z-1 hidden h-0.5 w-full bg-gray-100 lg:block" />
-
             <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               {displaySteps.map((step, index) => (
                 <div
@@ -91,6 +143,7 @@ export function BlockProcessSteps({
           </div>
         )}
 
+        {/* Vertical layout */}
         {layout === "vertical" && (
           <div className="mx-auto max-w-4xl space-y-12">
             {displaySteps.map((step, index) => (

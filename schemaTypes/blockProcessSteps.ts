@@ -9,15 +9,21 @@ export default defineType({
   icon: ActivityIcon,
   fields: [
     defineField({
+      name: 'label',
+      title: 'Eyebrow Label',
+      type: 'string',
+      description: 'Small label above the heading (e.g. "Implementatiebenadering")',
+    }),
+    defineField({
       name: 'heading',
       title: 'Section Heading',
       type: 'string',
     }),
     defineField({
       name: 'subheading',
-      title: 'Subheading',
+      title: 'Intro Text',
       type: 'text',
-      rows: 2,
+      rows: 3,
     }),
     defineField({
       name: 'steps',
@@ -65,6 +71,7 @@ export default defineType({
           {title: 'Horizontal Timeline', value: 'horizontal'},
           {title: 'Vertical Timeline', value: 'vertical'},
           {title: 'Numbered List', value: 'numbered'},
+          {title: 'Numbered Cards Grid', value: 'cards'},
         ],
         layout: 'radio',
       },
