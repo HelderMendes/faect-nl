@@ -55,6 +55,12 @@ export default defineType({
       options: {hotspot: true},
     }),
     defineField({
+      name: 'leftImage',
+      title: 'Links — Afbeelding (boven tekst)',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+    defineField({
       name: 'leftLabel',
       title: 'Links — Label',
       type: 'string',
@@ -92,6 +98,12 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'rightImage',
+      title: 'Rechts — Afbeelding (onder tekst op md+, boven op mobile)',
+      type: 'image',
+      options: {hotspot: true},
+    }),
+    defineField({
       name: 'rightLabel',
       title: 'Rechts — Label',
       type: 'string',
@@ -127,6 +139,36 @@ export default defineType({
       name: 'rightButtonHref',
       title: 'Rechts — Knop URL',
       type: 'string',
+    }),
+    defineField({
+      name: 'leftColumnAlign',
+      title: 'Links — Uitlijning (vanaf lg)',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Gecentreerd', value: 'center'},
+          {title: 'Links', value: 'left'},
+          {title: 'Rechts', value: 'right'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'center',
+    }),
+    defineField({
+      name: 'rightColumnAlign',
+      title: 'Rechts — Uitlijning (vanaf lg)',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Gecentreerd', value: 'center'},
+          {title: 'Links', value: 'left'},
+          {title: 'Rechts', value: 'right'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'center',
     }),
     defineField({
       name: 'settings',

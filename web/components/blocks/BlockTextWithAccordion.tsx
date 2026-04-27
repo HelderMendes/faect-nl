@@ -83,13 +83,15 @@ export function BlockTextWithAccordion({
             </p>
           )}
           {image?.asset && (
-            <Image
-              src={image.asset.url || urlFor(image).width(700).url()}
-              alt={heading ?? ""}
-              width={700}
-              height={480}
-              className="mx-auto mb-22 h-auto max-w-full rounded-xl object-cover lg:max-w-2xl"
-            />
+            <div className="mx-auto mb-0 max-w-2xl sm:w-full md:w-[70%] lg:mb-16 lg:w-full">
+              <Image
+                src={image.asset.url || urlFor(image).width(700).url()}
+                alt={heading ?? ""}
+                width={700}
+                height={480}
+                className="h-auto w-full rounded-xl object-cover"
+              />
+            </div>
           )}
         </div>
         {/* Right column: accordion */}

@@ -144,6 +144,12 @@ export const PAGE_QUERY = groq`
       _type == "blockCaseStudyGrid" => {
         ...,
         caseStudies[]-> ${caseStudyReference}
+      },
+      _type == "blockTwoColumnCTA" => {
+        ...,
+        centeredImage ${imageAsset},
+        leftImage ${imageAsset},
+        rightImage ${imageAsset}
       }
     }
   }
