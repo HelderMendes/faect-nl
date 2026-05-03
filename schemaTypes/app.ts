@@ -47,11 +47,24 @@ export default defineType({
       description: 'Brief explanation of the app functionality',
     }),
     defineField({
+      name: 'body',
+      title: 'Uitgebreide beschrijving',
+      type: 'array',
+      of: [{type: 'block'}],
+      description: 'Rijke tekst voor de detail pagina van de app',
+    }),
+    defineField({
       name: 'features',
       title: 'Key Features',
       type: 'array',
       of: [{type: 'string'}],
       description: 'List of key features/benefits',
+    }),
+    defineField({
+      name: 'appStoreUrl',
+      title: 'Microsoft AppSource URL',
+      type: 'url',
+      description: 'Link naar de app in de Microsoft AppSource store',
     }),
     defineField({
       name: 'factsheet',

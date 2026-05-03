@@ -8,6 +8,7 @@ import {
   ComposeIcon,
   UsersIcon,
   StarIcon,
+  PackageIcon,
 } from '@sanity/icons'
 
 const pageFolder = (S: StructureBuilder, title: string, folder: string, icon = FolderIcon) =>
@@ -48,6 +49,17 @@ export const structure = (S: StructureBuilder) =>
               pageFolder(S, 'Microsoft Dynamics 365', 'dynamics', CogIcon),
               pageFolder(S, 'Regels', 'regels', DocumentIcon),
             ])
+        ),
+
+      // ── Faect Apps ─────────────────────────────────────────
+      S.listItem()
+        .title('Faect Apps')
+        .icon(PackageIcon)
+        .child(
+          S.documentList()
+            .title('Faect Apps')
+            .filter('_type == "app" && !(slug.current match "/onze-apps/**")')
+            .defaultOrdering([{field: 'order', direction: 'asc'}, {field: 'title', direction: 'asc'}])
         ),
 
       // ── Vacatures ──────────────────────────────────────────

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 scripts/patch-beschikbaarheid.py)",
+      "Bash(python3 scripts/fix-voordelen.py)"
+    ]
+  }
+}

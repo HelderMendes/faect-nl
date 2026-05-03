@@ -25,7 +25,7 @@ export function Hero({
   return (
     <section className="bg-faect-navy relative w-full overflow-hidden py-24 md:py-32 lg:py-40">
       {backgroundImage && (
-        <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 z-0 min-h-150 opacity-20">
           <Image
             src={
               typeof backgroundImage === "string"
@@ -34,7 +34,7 @@ export function Hero({
             }
             alt={heading}
             fill
-            className="object-cover"
+            className="object-cover object-[center_bottom]"
             priority
           />
           <div className="from-faect-navy via-faect-navy/80 absolute inset-0 bg-linear-to-r to-transparent" />
@@ -47,7 +47,7 @@ export function Hero({
             {heading}
           </h1>
           {subheading && (
-            <p className="max-w-xl text-lg text-white/80 md:text-xl">
+            <p className="text-faect-blue max-w-xl text-lg md:text-xl">
               {subheading}
             </p>
           )}

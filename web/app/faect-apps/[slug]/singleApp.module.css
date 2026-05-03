@@ -1,0 +1,101 @@
+/* source quality determines styling complexity::after
+Clean Sanity content → clean PortableText renderer → clean styles. 
+PDF-derived content → messy pipeline → styling overhead. 
+I couldn't fully escape that chain.  This is one off */
+
+@reference "../../globals.css";
+
+.articleContent {
+  max-width: none;
+  line-height: 1.8;
+}
+
+.articleContent > *:first-child {
+  margin-top: -20px;
+}
+
+/* Paragraphs */
+.articleContent p {
+  @apply m-0 py-2 text-[1.2rem]/8 font-medium;
+}
+
+/* Headings */
+.articleContent h2 {
+  @apply mt-10 mb-4 flex items-start gap-3 text-3xl font-bold;
+}
+
+.articleContent h2 .icon-wrapper {
+  @apply border-faect-blue bg-faect-blue/10 text-faect-blue flex h-9 w-9 shrink-0 items-end justify-center rounded-lg;
+}
+
+.articleContent h3 {
+  @apply mt-3 mb-1 pl-11 text-xl font-semibold;
+}
+.articleContent h3:first-child {
+  @apply m-5;
+}
+
+/* Links */
+.articleContent a {
+  @apply text-faect-blue hover:text-faect-navy no-underline transition-colors duration-200;
+}
+
+/* Lists */
+.articleContent ul {
+  @apply mt-4 space-y-2 pb-1;
+  padding-left: 3.8rem;
+}
+.articleContent h3 + ul {
+  @apply mt-4 mb-0 space-y-2 pb-1;
+  padding-left: 3.72rem;
+}
+
+.articleContent li {
+  @apply text-[1.2rem]/8 font-medium;
+}
+
+.articleContent h3 + ul li {
+  @apply leading-5;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+/* Voordelen list */
+.voordelen-list p {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-left: 3.4rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Features box */
+.featuresBox {
+  @apply mt-10 rounded-2xl border p-8;
+}
+
+.featuresBox h2 {
+  @apply mb-6 text-2xl font-bold;
+}
+
+.featureList {
+  @apply grid gap-3;
+}
+
+.featureList li {
+  @apply flex items-start gap-3 font-medium;
+}
+
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}

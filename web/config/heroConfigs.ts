@@ -4,9 +4,11 @@ import type { HeroConfig } from "@/components/blocks/sectionUtils";
 // Format: "border-l-[6px] <border-color> <bg-color>"
 // Add a new constant here whenever a page needs its own intro block appearance.
 
-const INTRO_OPLOSSINGEN = "border-white bg-faect-blue/95 md:ml-0 pr-2 md:pr-3";
-const INTRO_APPS = "border-white bg-faect-blue/95";
-const INTRO_KLANTEN = "border-white bg-[#1E3E74]/80 ";
+const INTRO_HOME = "border-white bg-faect-blue/90 md:ml-[38%] lg:ml-[45%]";
+const INTRO_OPLOSSINGEN =
+  "border-white bg-faect-blue/95 md:ml-[30%] lg:ml-[46%] xl:ml-[45%]";
+const INTRO_APPS = "border-white bg-faect-blue/95 lg:ml-[40%] xl:ml-[52%]";
+const INTRO_KLANTEN = "border-white bg-[#1E3E74]/80";
 const INTRO_TEAM = "border-white bg-[#1E3E74]/80";
 const INTRO_PARTNERS = "border-white bg-[#1E3E74]/80";
 const INTRO_NIEUWS = "border-white bg-[#1E3E74]/80";
@@ -21,8 +23,13 @@ const SUBHEADING_OPLOSSINGEN =
 const HEADING_HOME =
   "font-extrabold tracking-tight sm:text-4xl md:text-[2.8rem] lg:text-[3.2rem] lg:-mt-16 xl:text-[3.6rem]/16  text-3xl/9 mb-4 md:mb-0 -mt-10 text-faect-blue ";
 
-const SUBHEADING_HOME =
+const SUBHEADING =
   "md:text-3xl lg:text-[1.9rem]/9 xl:text-[2rem]/10 pt-0 lg:pt-1 mx-auto text-center md:text-left md:mb-2 sm:-mb-15 md:mt-0 -mt-5 text-[1.5rem]/7 md:mr-[30%] lg:mr-[40%] xl:mr-[50%] -mb-12 sm:-mb-6";
+
+const HEADING_APPS = HEADING_HOME + " -mt-26 shadow-lg";
+
+const SUBHEADING_HOME = SUBHEADING + " mb-0";
+const SUBHEADING_APPS = SUBHEADING_HOME + " mb-8";
 
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
@@ -32,6 +39,7 @@ export const heroConfigs: Record<string, HeroConfig> = {
   home: {
     headingClass: HEADING_HOME,
     subheadingSizeClass: SUBHEADING_HOME,
+    introClass: INTRO_HOME,
   },
 
   oplossingen: {
@@ -45,34 +53,39 @@ export const heroConfigs: Record<string, HeroConfig> = {
     subheadingSizeClass: SUBHEADING_OPLOSSINGEN,
   },
 
-  apps: {
-    headingColor: "white",
-    subheadingColor: "blue",
+  "faect-apps": {
+    headingClass: HEADING_APPS,
+    subheadingSizeClass: SUBHEADING_APPS,
     introClass: INTRO_APPS,
+    mobileIntroBelow: true,
   },
 
   "klanten-cases": {
     headingColor: "white",
     subheadingColor: "white-faded",
     introClass: INTRO_KLANTEN,
+    mobileIntroBelow: true,
   },
 
   team: {
     headingColor: "white",
     subheadingColor: "white-faded",
     introClass: INTRO_TEAM,
+    mobileIntroBelow: true,
   },
 
   partners: {
     headingColor: "white",
     subheadingColor: "blue",
     introClass: INTRO_PARTNERS,
+    mobileIntroBelow: true,
   },
 
   nieuws: {
     headingColor: "white",
     subheadingColor: "white-faded",
     introClass: INTRO_NIEUWS,
+    mobileIntroBelow: true,
   },
 
   contact: {
@@ -80,5 +93,6 @@ export const heroConfigs: Record<string, HeroConfig> = {
     subheadingColor: "white-faded",
     spacing: "compact",
     introClass: INTRO_CONTACT,
+    mobileIntroBelow: true,
   },
 };

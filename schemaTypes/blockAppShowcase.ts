@@ -8,17 +8,6 @@ export default defineType({
   icon: RocketIcon,
   fields: [
     defineField({
-      name: 'heading',
-      title: 'Section Heading',
-      type: 'string',
-    }),
-    defineField({
-      name: 'subheading',
-      title: 'Subheading',
-      type: 'text',
-      rows: 2,
-    }),
-    defineField({
       name: 'apps',
       title: 'Apps to Display',
       type: 'array',
@@ -64,14 +53,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'heading',
       showAll: 'showAll',
       apps: 'apps',
     },
-    prepare({title, showAll, apps}) {
+    prepare({showAll, apps}) {
       const count = apps?.length || 0
       return {
-        title: title || 'App Showcase',
+        title: 'App Showcase',
         subtitle: showAll ? 'Showing all apps' : `${count} selected app${count !== 1 ? 's' : ''}`,
       }
     },

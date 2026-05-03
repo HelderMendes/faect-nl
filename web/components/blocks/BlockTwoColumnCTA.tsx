@@ -102,7 +102,7 @@ function Column({
           </p>
         )}
         {heading && (
-          <h2 className="text-faect-blue font-cairo text-3xl leading-snug font-extrabold lg:text-4xl">
+          <h2 className="text-faect-blue font-cairo text-3xl font-extrabold lg:text-4xl">
             {heading}
           </h2>
         )}

@@ -20,7 +20,10 @@ export default async function Home() {
   if (data?.pageBuilder && data.pageBuilder.length > 0) {
     return (
       <main className="flex flex-col">
-        <BlockRenderer blocks={data.pageBuilder} heroConfig={heroConfigs["home"]} />
+        <BlockRenderer
+          blocks={data.pageBuilder}
+          heroConfig={heroConfigs["home"]}
+        />
       </main>
     );
   }
@@ -88,10 +91,8 @@ export default async function Home() {
         <h1 className="text-center text-5xl">MY big Text 03</h1>
       </div>
 
-      {/* Functonality Grid - Onze Apps */}
+      {/* Functonality Grid - Faect Apps */}
       <BlockAppShowcase
-        heading="Slimmer werken met Faect Apps"
-        subheading="Onze apps zijn ontwikkeld om jouw dagelijkse processen in Business Central te optimaliseren."
         apps={[
           {
             _id: "app1",
@@ -110,8 +111,6 @@ export default async function Home() {
             excerpt: "Beheer je stamgegevens centraal en voorkom fouten.",
           },
         ]}
-        ctaText="Bekijk alle apps"
-        ctaLink="/faect-apps"
         settings={{ backgroundColor: "navy" }}
       />
 

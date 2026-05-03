@@ -37,11 +37,13 @@ export function BlockTextWithImage({
   // ── Centered layout ────────────────────────────────────────────────────────
   if (layout === "centered" || imagePosition === "center") {
     return (
-      <section className={getSectionStyles(settings)}>
+      <section
+        className={(getSectionStyles(settings), "section-dither -mb-8 pt-16")}
+      >
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col items-center text-center">
             {headerTitle && (
-              <p className="hover:text-faect-blue relative mb-6 border-b-2 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
+              <p className="hover:text-faect-blue relative mb-6 border-b-2 border-gray-500 pb-1 text-2xl font-medium text-gray-700 transition-all duration-200">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {headerTitle}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -49,7 +51,7 @@ export function BlockTextWithImage({
             )}
 
             {heading && (
-              <h2 className="text-faect-blue font-heading mb-6 text-4xl leading-tight font-bold md:text-5xl lg:text-6xl">
+              <h2 className="text-faect-blue font-heading mb-6 max-w-3xl text-4xl leading-tight font-bold md:text-5xl lg:text-6xl/16">
                 {heading}
               </h2>
             )}
@@ -70,7 +72,7 @@ export function BlockTextWithImage({
             )}
 
             {image?.asset && (
-              <div className="w-full max-w-2xl overflow-hidden rounded-xl">
+              <div className="mb-32 w-full max-w-2xl overflow-hidden rounded-xl">
                 <Image
                   src={image.asset.url || urlFor(image).width(900).url()}
                   alt={heading ?? ""}

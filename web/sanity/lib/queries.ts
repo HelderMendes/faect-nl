@@ -45,6 +45,8 @@ const appReference = `{
   slug,
   tagline,
   description,
+  features,
+  factsheet { asset-> { url } },
   icon ${imageAsset}
 }`;
 
@@ -165,9 +167,25 @@ export const APPS_QUERY = groq`*[_type == "app" && defined(slug.current)] | orde
 }`;
 
 export const APP_QUERY = groq`*[_type == "app" && slug.current == $slug][0]{
-  ...,
+  _id,
+  title,
+  slug,
+  tagline,
+  description,
+  body,
+  features,
+  appStoreUrl,
   icon ${imageAsset},
-  screenshots[] ${imageAsset}
+  factsheet { asset-> }
+}`;
+
+export const APPS_SIDEBAR_QUERY = groq`*[_type == "app" && defined(slug.current)] | order(order asc, title asc){
+  _id,
+  title,
+  slug,
+  tagline,
+  icon ${imageAsset},
+  factsheet { asset-> { url } }
 }`;
 
 export const CASE_STUDIES_QUERY = groq`*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc){

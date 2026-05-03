@@ -9,72 +9,60 @@ export default defineType({
   icon: HelpCircleIcon,
   fields: [
     defineField({
+      name: 'label',
+      title: 'Label (boven heading)',
+      type: 'string',
+    }),
+    defineField({
       name: 'heading',
-      title: 'Section Heading',
+      title: 'Heading',
       type: 'string',
       initialValue: 'Veelgestelde vragen',
     }),
     defineField({
-      name: 'subheading',
-      title: 'Subheading',
+      name: 'intro',
+      title: 'Intro tekst',
       type: 'text',
-      rows: 2,
-    }),
-    defineField({
-      name: 'sourceType',
-      title: 'FAQ Source',
-      type: 'string',
-      initialValue: 'manual',
-      options: {
-        list: [
-          {title: 'Manual (add items below)', value: 'manual'},
-          {title: 'Reference FAQ documents', value: 'reference'},
-        ],
-        layout: 'radio',
-      },
+      rows: 3,
+      description: 'Korte inleidende tekst onder de heading, boven de vragen.',
     }),
     defineField({
       name: 'items',
-      title: 'FAQ Items',
+      title: 'Vragen & Antwoorden',
       type: 'array',
-      hidden: ({parent}) => parent?.sourceType !== 'manual',
       of: [
         defineArrayMember({
           type: 'object',
           fields: [
             defineField({
               name: 'question',
-              title: 'Question',
+              title: 'Vraag',
               type: 'string',
               validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'answer',
-              title: 'Answer',
+              title: 'Antwoord',
               type: 'array',
               of: [{type: 'block'}],
               validation: (rule) => rule.required(),
             }),
           ],
           preview: {
-            select: {
-              title: 'question',
-            },
+            select: {title: 'question'},
           },
         }),
       ],
     }),
     defineField({
-      name: 'faqReferences',
-      title: 'FAQ References',
-      type: 'array',
-      hidden: ({parent}) => parent?.sourceType !== 'reference',
-      of: [
-        defineArrayMember({
-          type: 'reference',
-          to: [{type: 'faqItem'}],
-        }),
-      ],
+      name: 'ctaText',
+      title: 'CTA — Knop tekst',
+      type: 'string',
+    }),
+    defineField({
+      name: 'ctaLink',
+      title: 'CTA — Knop URL',
+      type: 'string',
     }),
     defineField({
       name: 'settings',
@@ -91,7 +79,7 @@ export default defineType({
       const count = items?.length || 0
       return {
         title: title || 'FAQ Section',
-        subtitle: `${count} question${count !== 1 ? 's' : ''}`,
+        subtitle: `${count} vraag${count !== 1 ? 'en' : ''}`,
       }
     },
   },

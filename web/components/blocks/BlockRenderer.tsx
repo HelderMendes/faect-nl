@@ -78,9 +78,8 @@ export function BlockRenderer({ blocks, heroConfig }: BlockRendererProps) {
           return null;
         }
 
-        const extraProps = block._type === "blockHero" && heroConfig
-          ? { heroConfig }
-          : {};
+        const extraProps =
+          block._type === "blockHero" && heroConfig ? { heroConfig } : {};
 
         return <Component key={block._key} {...block} {...extraProps} />;
       })}

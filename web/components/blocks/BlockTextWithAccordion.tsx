@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { getSectionStyles, type SectionSettings } from "./sectionUtils";
+import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -45,7 +45,11 @@ export function BlockTextWithAccordion({
   const toggle = (index: number) =>
     setOpenItems((prev) => {
       const next = new Set(prev);
-      next.has(index) ? next.delete(index) : next.add(index);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
       return next;
     });
 
@@ -57,18 +61,18 @@ export function BlockTextWithAccordion({
 
   return (
     <section
-      className={
-        (getSectionStyles(settings),
-        "section-dither bg-[url(/home/Faect-bkg_logo.png)] bg-bottom-right pt-22 contain-content")
-      }
+      className={cn(
+        getSectionStyles(settings),
+        "section-dither bg-[url(/home/Faect-bkg_logo.png)] bg-bottom-right py-22 contain-content",
+      )}
     >
-      <div className="container mx-auto px-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-8">
+      <div className="pb00 container mx-auto px-12 lg:grid lg:grid-cols-2 lg:items-start lg:gap-16 lg:px-8">
         {/* Left column */}
-        <div className="mb-12 text-center lg:mb-0 lg:text-left">
+        <div className="pb-4 text-center lg:text-left">
           {label && (
             <div className="mb-6 flex items-center justify-center lg:justify-end">
               <span className="group hover:text-faect-blue relative text-2xl font-medium text-gray-500 underline decoration-2 underline-offset-8 transition-all duration-200">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{label}
+                {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{label} */}
               </span>{" "}
             </div>
           )}
@@ -83,7 +87,7 @@ export function BlockTextWithAccordion({
             </p>
           )}
           {image?.asset && (
-            <div className="mx-auto mb-0 max-w-2xl sm:w-full md:w-[70%] lg:mb-16 lg:w-full">
+            <div className="mx-auto mb-0 max-w-2xl sm:w-full md:w-[70%] lg:w-full">
               <Image
                 src={image.asset.url || urlFor(image).width(700).url()}
                 alt={heading ?? ""}
@@ -96,7 +100,7 @@ export function BlockTextWithAccordion({
         </div>
         {/* Right column: accordion */}
         {items && items.length > 0 && (
-          <div className="bg-contain bg-no-repeat pb-22 lg:bg-[url(/home/Faect-bkg_logo.png)]">
+          <div className="bg-contain bg-no-repeat pb-4 lg:bg-[url(/home/Faect-bkg_logo.png)]">
             <div className="mb-2 flex justify-end">
               <button
                 onClick={toggleAll}
