@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python3 scripts/patch-beschikbaarheid.py)",
-      "Bash(python3 scripts/fix-voordelen.py)"
+      "Bash(python3 scripts/fix-voordelen.py)",
+      "WebFetch(domain:www.fancycomponents.dev)",
+      "mcp__Sanity__create_documents_from_json"
     ]
   }
 }

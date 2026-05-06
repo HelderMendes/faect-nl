@@ -22,7 +22,6 @@ import blockServiceCards from './blockServiceCards'
 import blockAppShowcase from './blockAppShowcase'
 import blockTeamGrid from './blockTeamGrid'
 import blockPartnerLogos from './blockPartnerLogos'
-import blockCaseStudyGrid from './blockCaseStudyGrid'
 import blockContactForm from './blockContactForm'
 import blockContactInfo from './blockContactInfo'
 import blockStats from './blockStats'
@@ -57,7 +56,6 @@ export const schemaTypes = [
   blockAppShowcase,
   blockTeamGrid,
   blockPartnerLogos,
-  blockCaseStudyGrid,
   blockContactForm,
   blockContactInfo,
   blockStats,

@@ -37,7 +37,7 @@ export default defineType({
       group: 'content',
       options: {
         list: [
-          {title: 'Hoofdpagina\'s', value: 'main'},
+          {title: "Hoofdpagina's", value: 'main'},
           {title: 'Microsoft Dynamics 365', value: 'dynamics'},
           {title: 'Vacatures', value: 'vacatures'},
           {title: 'Regels', value: 'regels'},
@@ -75,7 +75,6 @@ export default defineType({
         defineArrayMember({type: 'blockAppShowcase'}),
         defineArrayMember({type: 'blockTeamGrid'}),
         defineArrayMember({type: 'blockPartnerLogos'}),
-        defineArrayMember({type: 'blockCaseStudyGrid'}),
 
         // Contact
         defineArrayMember({type: 'blockContactForm'}),

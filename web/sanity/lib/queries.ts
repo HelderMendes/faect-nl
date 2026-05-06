@@ -68,16 +68,6 @@ const partnerReference = `{
   website
 }`;
 
-const caseStudyReference = `{
-  _id,
-  title,
-  slug,
-  clientName,
-  clientLogo ${imageAsset},
-  mainImage ${imageAsset},
-  summary,
-  industry
-}`;
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug][0]{
@@ -143,10 +133,6 @@ export const PAGE_QUERY = groq`
         ...,
         partners[]-> ${partnerReference}
       },
-      _type == "blockCaseStudyGrid" => {
-        ...,
-        caseStudies[]-> ${caseStudyReference}
-      },
       _type == "blockTwoColumnCTA" => {
         ...,
         centeredImage ${imageAsset},
@@ -188,23 +174,17 @@ export const APPS_SIDEBAR_QUERY = groq`*[_type == "app" && defined(slug.current)
   factsheet { asset-> { url } }
 }`;
 
-export const CASE_STUDIES_QUERY = groq`*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc){
+export const CASE_STUDIES_PAGE_QUERY = groq`*[_type == "caseStudy"] | order(order asc, clientName asc){
   _id,
   title,
-  slug,
   clientName,
-  clientLogo ${imageAsset},
-  mainImage ${imageAsset},
+  industry,
+  clientWebsite,
   summary,
-  industry
+  solution,
+  clientLogo { asset-> { url } }
 }`;
 
-export const CASE_STUDY_QUERY = groq`*[_type == "caseStudy" && slug.current == $slug][0]{
-  ...,
-  clientLogo ${imageAsset},
-  mainImage ${imageAsset},
-  gallery[] ${imageAsset}
-}`;
 
 export const TEAM_MEMBERS_QUERY = groq`*[_type == "teamMember"] | order(order asc, name asc){
   _id,

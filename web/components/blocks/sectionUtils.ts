@@ -101,6 +101,7 @@ export interface HeroConfig {
   paddingBottom?: HeroPadding; // overrides the bottom portion of spacing
   headingClass?: string; // escape hatch — extra classes appended to h1 (wins via twMerge)
   subheadingClass?: string; // escape hatch — extra classes appended to subheading (wins via twMerge)
+  subheadingWrapperClass?: string; // escape hatch — overrides pb on the subheading wrapper (controls gap to absolute intro blocks)
   mobileIntroBelow?: boolean; // move intro blocks below the hero on mobile instead of overlapping
 }
 

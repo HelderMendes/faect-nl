@@ -101,19 +101,19 @@ export function BlockTextWithImage({
   const isImageFirst = imagePosition === "left";
 
   return (
-    <section className={cn("pt-100", getSectionStyles(settings))}>
+    <section className={getSectionStyles(settings)}>
       {headerTitle && (
         <div className="text-faect-blue my-2 px-6 text-center text-3xl md:text-4xl lg:-my-4">
           {headerTitle}
         </div>
       )}
 
-      <div className="container mx-auto space-x-12 px-4 pb-1 lg:px-12">
+      <div className="container mx-auto px-4 pb-1 lg:px-12">
         <div className="flex grid-cols-1 flex-col space-y-1 lg:grid lg:grid-cols-2 lg:gap-10">
           {/* Image */}
           <div
             className={cn(
-              "animate-fade-in mx-14 my-8 py-6 md:mx-20 lg:mx-2 xl:mx-4",
+              "animate-fade-in mx-0 my-2 py-0 md:mx-8 md:my-6 md:py-4 lg:mx-2 xl:mx-4",
               isImageFirst
                 ? "order-last lg:order-first"
                 : "order-last lg:order-last",
@@ -125,7 +125,7 @@ export function BlockTextWithImage({
                 alt={heading || ""}
                 width={800}
                 height={560}
-                className="mx-auto h-auto max-w-2xl object-contain lg:max-w-full"
+                className="mx-auto h-auto max-h-[280px] max-w-full object-contain sm:max-h-[360px] lg:max-h-none lg:max-w-full"
               />
             ) : null}
           </div>

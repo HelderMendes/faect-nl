@@ -109,6 +109,7 @@ export function BlockHero({
                   className={cn(
                     "animate-fade-in m-0 min-w-full",
                     mobileIntroBelow ? "pb-4 md:pb-52" : "pb-52",
+                    heroConfig?.subheadingWrapperClass,
                   )}
                 >
                   <p

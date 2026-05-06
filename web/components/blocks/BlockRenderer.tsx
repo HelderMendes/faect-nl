@@ -14,14 +14,14 @@ import {
   BlockAppShowcase,
   BlockTeamGrid,
   BlockPartnerLogos,
-  BlockCaseStudyGrid,
   BlockTextWithServiceGrid,
   BlockTextWithAccordion,
   BlockTwoColumnCTA,
   type HeroConfig,
 } from "@/components/blocks";
 
-// Map block types to components
+// Component props are heterogeneous and checked at the Sanity schema level, not here.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const blockComponents: Record<string, React.ComponentType<any>> = {
   blockHero: BlockHero,
   blockCTA: BlockCTA,
@@ -38,7 +38,6 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
   blockAppShowcase: BlockAppShowcase,
   blockTeamGrid: BlockTeamGrid,
   blockPartnerLogos: BlockPartnerLogos,
-  blockCaseStudyGrid: BlockCaseStudyGrid,
   blockTextWithServiceGrid: BlockTextWithServiceGrid,
   blockTextWithAccordion: BlockTextWithAccordion,
   blockTwoColumnCTA: BlockTwoColumnCTA,
@@ -47,7 +46,7 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
 interface Block {
   _type: string;
   _key: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface BlockRendererProps {

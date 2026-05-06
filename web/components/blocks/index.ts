@@ -15,7 +15,6 @@ export { BlockContactInfo } from "./BlockContactInfo";
 export { BlockAppShowcase } from "./BlockAppShowcase";
 export { BlockTeamGrid } from "./BlockTeamGrid";
 export { BlockPartnerLogos } from "./BlockPartnerLogos";
-export { BlockCaseStudyGrid } from "./BlockCaseStudyGrid";
 export { BlockTextWithServiceGrid } from "./BlockTextWithServiceGrid";
 export { BlockTextWithAccordion } from "./BlockTextWithAccordion";
 export { BlockTwoColumnCTA } from "./BlockTwoColumnCTA";
