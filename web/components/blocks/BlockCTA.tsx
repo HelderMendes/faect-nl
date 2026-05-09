@@ -44,9 +44,7 @@ export function BlockCTA({
   };
 
   return (
-    <section
-      className={`relative overflow-hidden ${bgClasses[variant]} block-background-overlay py-20`}
-    >
+    <section className={`relative overflow-hidden ${bgClasses[variant]} py-20`}>
       {backgroundImage?.asset && (
         <div className="absolute inset-0 opacity-10">
           <Image

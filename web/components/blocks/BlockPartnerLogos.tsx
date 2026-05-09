@@ -39,7 +39,7 @@ export function BlockPartnerLogos({
     <section
       className={(getSectionStyles(settings), "section-dither pt-22 pb-12")}
     >
-      <div className="section-dither container mx-auto px-4 lg:px-8">
+      <div className="container mx-auto px-4 lg:px-8">
         {(eyebrow || heading || subheading) && (
           <div className="-mt-5 mb-14 min-w-full text-center">
             {eyebrow && (
