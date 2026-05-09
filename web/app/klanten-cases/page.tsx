@@ -49,6 +49,12 @@ export default async function KlantenCasesPage() {
           <CaseAccordion cases={normalised} />
         </div>
       </section>
+
+      <BlockRenderer
+        blocks={page?.pageBuilder?.filter(
+          (b: { _type: string }) => b._type !== "blockHero",
+        )}
+      />
     </main>
   );
 }

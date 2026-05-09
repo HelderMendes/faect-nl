@@ -65,7 +65,8 @@ const partnerReference = `{
   name,
   logo ${imageAsset},
   description,
-  website
+  website,
+  "type": partnerType
 }`;
 
 
@@ -201,7 +202,8 @@ export const PARTNERS_QUERY = groq`*[_type == "partner"] | order(order asc, name
   name,
   logo ${imageAsset},
   description,
-  website
+  website,
+  "type": partnerType
 }`;
 
 export const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{

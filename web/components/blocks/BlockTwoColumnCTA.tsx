@@ -45,6 +45,8 @@ type BlockTwoColumnCTAProps = {
   settings?: SectionSettings;
 };
 
+const DARK_BACKGROUNDS = new Set(["navy", "dither"]);
+
 type ColumnProps = {
   image?: SanityImage;
   imageAtBottom?: boolean;
@@ -56,6 +58,7 @@ type ColumnProps = {
   linkHref?: string;
   buttonText?: string;
   buttonHref?: string;
+  isDark?: boolean;
 };
 
 function Column({
@@ -69,6 +72,7 @@ function Column({
   linkHref,
   buttonText,
   buttonHref,
+  isDark = false,
 }: ColumnProps) {
   return (
     <div
@@ -96,25 +100,48 @@ function Column({
       )}
       <div className={cn("flex flex-col items-center gap-4", xlItems[align])}>
         {label && (
-          <p className="hover:text-faect-blue relative text-2xl font-medium text-gray-600 underline decoration-2 underline-offset-8 transition-all duration-200">
-            <span className="xl:hidden">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <p
+            className={cn(
+              "relative text-2xl font-medium underline decoration-2 underline-offset-8 transition-all duration-200",
+              isDark
+                ? "text-white/60 hover:text-white"
+                : "hover:text-faect-blue text-gray-600",
+            )}
+          >
+            <span className={align === "left" ? "xl:hidden" : undefined}>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
             {label}&nbsp;&nbsp;&nbsp;&nbsp;
           </p>
         )}
         {heading && (
-          <h2 className="text-faect-blue font-cairo text-3xl font-extrabold lg:text-4xl">
+          <h2
+            className={cn(
+              "font-cairo text-faect-blue text-3xl font-extrabold lg:text-4xl",
+            )}
+          >
             {heading}
           </h2>
         )}
         {body && (
-          <p className="font-work-sans text-faect-gray text-[1.2rem]/8 font-medium">
+          <p
+            className={cn(
+              "font-work-sans mb-3 text-[1.2rem]/8 font-medium",
+              isDark ? "text-white/90" : "text-faect-gray",
+            )}
+          >
             {body}
           </p>
         )}
         {linkText && linkHref && (
           <Link
             href={linkHref}
-            className="text-faect-blue hover:text-faect-navy text-[1.3rem]/7 font-medium transition-opacity"
+            className={cn(
+              "text-[1.3rem]/7 font-medium transition-opacity",
+              isDark
+                ? "text-white/80 hover:text-white"
+                : "text-faect-blue hover:text-faect-navy",
+            )}
           >
             {linkText}
           </Link>
@@ -122,7 +149,12 @@ function Column({
         {buttonText && buttonHref && (
           <Link
             href={buttonHref}
-            className="border-faect-blue text-faect-blue font-ui nav-item-sweep inline-block rounded-[8px] border bg-white px-8 py-1 text-[1.05rem] font-medium transition-all duration-900 ease-out hover:ml-2 hover:scale-110 hover:border-white hover:text-white"
+            className={cn(
+              "font-ui nav-item-sweep inline-block rounded-[8px] border bg-white px-8 py-1 text-[1.05rem] font-medium transition-all duration-900 ease-out hover:ml-2 hover:scale-110",
+              isDark
+                ? "text-faect-navy border-faect-blue -mb-10 hover:border-white hover:text-white"
+                : "border-faect-blue text-faect-blue hover:border-white hover:text-white",
+            )}
           >
             {buttonText}
           </Link>
@@ -154,6 +186,8 @@ export function BlockTwoColumnCTA({
   rightColumnAlign = "center",
   settings,
 }: BlockTwoColumnCTAProps) {
+  const isDark = DARK_BACKGROUNDS.has(settings?.backgroundColor ?? "");
+
   return (
     <section className={getSectionStyles(settings) ?? ""}>
       <div className="container mx-auto px-4 lg:px-8">
@@ -183,6 +217,7 @@ export function BlockTwoColumnCTA({
             linkHref={leftLinkHref}
             buttonText={leftButtonText}
             buttonHref={leftButtonHref}
+            isDark={isDark}
           />
           <Column
             image={rightImage}
@@ -195,6 +230,7 @@ export function BlockTwoColumnCTA({
             linkHref={rightLinkHref}
             buttonText={rightButtonText}
             buttonHref={rightButtonHref}
+            isDark={isDark}
           />
         </div>
       </div>

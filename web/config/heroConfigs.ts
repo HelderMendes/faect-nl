@@ -23,15 +23,20 @@ const SUBHEADING_APPS = SUBHEADING_HOME + " mb-8";
 const INTRO_APPS = "border-white bg-faect-blue/95 lg:ml-[40%] xl:ml-[52%]";
 
 const INTRO_TEAM = "border-white bg-[#1E3E74]/80";
-const INTRO_PARTNERS = "border-white bg-[#1E3E74]/80";
 const INTRO_NIEUWS = "border-white bg-[#1E3E74]/80";
 const INTRO_CONTACT = "border-white bg-[#1E3E74]/80";
 
 const HEADING_KLANTEN =
-  " sm:text-[3.4rem]/14 md:text-[3.6rem]/15 lg:text-[4.2rem]/17 xl:text-[4.4rem]/18 font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left  lg:-mt-15 -mt-17 text-[3.2rem]/15  xl:-mt-20 -mt-26  mb-2 md:mb-0";
+  "sm:text-[3.4rem]/14 md:text-[3.6rem]/15 lg:text-[4.2rem]/17 xl:text-[4.4rem]/18 font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left  lg:-mt-15 -mt-17 text-[3.2rem]/15  xl:-mt-20 -mt-26  mb-2 md:mb-0";
 const SUBHEADING_KLANTEN =
   "xl:text-[3rem]/9 font-semibold pt-0 lg:pt-2 mx-auto text-center md:text-left md:mb-2 sm:-mb-15 md:mt-0  -mt-5 text-[2.2rem]/9 md:text-[2.4rem]/8 md:text-[2.6rem]/8 md:px-0 px-8 -mb-1 md:-mb-10 lg:-mb-12 xl:-mb-28 -mb-10";
 const INTRO_KLANTEN = "border-red bg-[#1E3E74]/85 md:ml-[24%] lg:ml-[55%]";
+
+const HEADING_PARTNERS =
+  "-my-44 text-5xl sm:text-6xl sm:-mt-36 md:-mt-22 md:text-[4.4rem]/16 md:mb-0 lg:text-[5rem]/19 lg:-mt-24 xl:text-[5.2rem]/20 xl:-mt-36 font-extrabold tracking-tight ";
+const SUBHEADING_PARTNERS =
+  "text-4xl font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left md:-mb-12 md:text-5xl md:mt-0 sm:-mt-4  -mt-20 ";
+const INTRO_PARTNERS = " border-white bg-faect-blue/95 lg:ml-[52%] xl:ml-[55%]";
 
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
@@ -80,7 +85,9 @@ export const heroConfigs: Record<string, HeroConfig> = {
 
   partners: {
     headingColor: "white",
+    headingClass: HEADING_PARTNERS,
     subheadingColor: "blue",
+    subheadingSizeClass: SUBHEADING_PARTNERS,
     introClass: INTRO_PARTNERS,
     mobileIntroBelow: true,
   },

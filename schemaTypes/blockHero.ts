@@ -1,5 +1,5 @@
 import {defineField, defineType} from 'sanity'
-import {sectionSettings} from './shared/sectionSettings'
+// import {sectionSettings} from './shared/sectionSettings'
 
 export default defineType({
   name: 'blockHero',
