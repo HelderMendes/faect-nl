@@ -7,8 +7,7 @@ interface BlockCTAProps {
   text?: string;
   ctaText: string;
   ctaLink: string;
-  backgroundImage?: any;
-  variant?: "primary" | "secondary" | "accent";
+  backgroundImage?: { asset?: { _ref?: string; url?: string } };
 }
 
 export function BlockCTA({
@@ -17,61 +16,52 @@ export function BlockCTA({
   ctaText,
   ctaLink,
   backgroundImage,
-  variant = "primary",
 }: BlockCTAProps) {
-  const bgClasses = {
-    primary: "bg-faect-navy",
-    secondary: "bg-gray-100",
-    accent: "bg-faect-blue",
-  };
-
-  const textClasses = {
-    primary: "text-white",
-    secondary: "text-faect-navy",
-    accent: "text-white",
-  };
-
-  const subtextClasses = {
-    primary: "text-white/80",
-    secondary: "text-gray-600",
-    accent: "text-white/90",
-  };
-
-  const buttonClasses = {
-    primary: "bg-faect-blue hover:bg-blue-600",
-    secondary: "bg-faect-navy hover:bg-faect-navy/90",
-    accent: "bg-white text-faect-blue hover:bg-gray-100",
-  };
-
   return (
-    <section className={`relative overflow-hidden ${bgClasses[variant]} py-20`}>
-      {backgroundImage?.asset && (
-        <div className="absolute inset-0 opacity-10">
-          <Image
-            src={urlFor(backgroundImage).width(1920).height(600).url()}
-            alt=""
-            fill
-            className="object-cover"
-          />
-        </div>
-      )}
+    <section className="section-dither relative overflow-visible pt-20 pb-16 md:pt-28 md:pb-20 lg:pt-34 lg:pb-24">
+      <>
+        {/* Zero-size SVG — only carries the clip path definition */}
+        <svg width="0" height="0" className="absolute" aria-hidden="true">
+          <defs>
+            <clipPath id="cta-clip" clipPathUnits="objectBoundingBox">
+              {/* Arch top only — no bottom crop */}
+              <path d="M0,0.1 Q0.5,0 1,0.1 L1,1 L0,1 Z" />
+            </clipPath>
+          </defs>
+        </svg>
 
-      <div className="relative z-10 container mx-auto px-4 text-center">
-        <h2
-          className={`mb-4 text-3xl font-bold ${textClasses[variant]} md:text-4xl`}
+        {/* Image container — clip path applied here, not on the SVG */}
+        <div
+          className="absolute inset-0"
+          style={{ clipPath: "url(#cta-clip)" }}
         >
+          {backgroundImage?.asset && (
+            <Image
+              src={
+                backgroundImage.asset.url ||
+                urlFor(backgroundImage).width(1920).height(500).url()
+              }
+              alt={heading}
+              fill
+              className="object-cover object-bottom"
+              priority
+            />
+          )}
+        </div>
+      </>
+
+      <div className="relative z-10 container mx-auto px-8 pb-7 text-center lg:px-0">
+        <h2 className="font-cairo text-faect-blue mb-4 text-4xl font-bold md:text-6xl">
           {heading}
         </h2>
         {text && (
-          <p
-            className={`mb-8 text-lg ${subtextClasses[variant]} mx-auto max-w-2xl`}
-          >
+          <p className="mx-auto mb-10 max-w-4xl text-[1.25rem]/9 font-semibold text-white/90 sm:text-[1.3rem]/10 lg:text-[1.4rem]/11">
             {text}
           </p>
         )}
         <Link
           href={ctaLink}
-          className={`inline-flex items-center justify-center rounded-md ${buttonClasses[variant]} px-8 py-4 text-lg font-semibold text-white transition-all hover:shadow-lg`}
+          className="font-ui nav-item-sweep -mt-4 inline-block rounded-[8px] border border-white bg-transparent px-10 py-3 text-[1.2rem] font-semibold text-white/90 transition-all duration-300 hover:ml-2 hover:scale-105 hover:text-white lg:mt-0"
         >
           {ctaText}
         </Link>

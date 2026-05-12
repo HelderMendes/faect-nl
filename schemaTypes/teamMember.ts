@@ -29,7 +29,12 @@ export default defineType({
       options: {
         hotspot: true,
       },
-      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'photoUrl',
+      title: 'Photo URL (fallback)',
+      type: 'string',
+      description: 'Optional: public path or URL when no Sanity photo is uploaded (e.g. /team/name.jpg)',
     }),
     defineField({
       name: 'role',

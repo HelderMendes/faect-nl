@@ -56,7 +56,9 @@ const teamMemberReference = `{
   role,
   bio,
   photo ${imageAsset},
+  photoUrl,
   email,
+  phone,
   linkedIn
 }`;
 
@@ -128,7 +130,10 @@ export const PAGE_QUERY = groq`
       },
       _type == "blockTeamGrid" => {
         ...,
-        members[]-> ${teamMemberReference}
+        "members": select(
+          showAll == true => *[_type == "teamMember"] | order(order asc, name asc) ${teamMemberReference},
+          members[]-> ${teamMemberReference}
+        )
       },
       _type == "blockPartnerLogos" => {
         ...,
@@ -194,6 +199,7 @@ export const TEAM_MEMBERS_QUERY = groq`*[_type == "teamMember"] | order(order as
   bio,
   photo ${imageAsset},
   email,
+  phone,
   linkedIn
 }`;
 

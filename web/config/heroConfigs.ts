@@ -22,7 +22,6 @@ const HEADING_APPS = HEADING_HOME + " -mt-26 shadow-lg";
 const SUBHEADING_APPS = SUBHEADING_HOME + " mb-8";
 const INTRO_APPS = "border-white bg-faect-blue/95 lg:ml-[40%] xl:ml-[52%]";
 
-const INTRO_TEAM = "border-white bg-[#1E3E74]/80";
 const INTRO_NIEUWS = "border-white bg-[#1E3E74]/80";
 const INTRO_CONTACT = "border-white bg-[#1E3E74]/80";
 
@@ -36,7 +35,14 @@ const HEADING_PARTNERS =
   "-my-44 text-5xl sm:text-6xl sm:-mt-36 md:-mt-22 md:text-[4.4rem]/16 md:mb-0 lg:text-[5rem]/19 lg:-mt-24 xl:text-[5.2rem]/20 xl:-mt-36 font-extrabold tracking-tight ";
 const SUBHEADING_PARTNERS =
   "text-4xl font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left md:-mb-12 md:text-5xl md:mt-0 sm:-mt-4  -mt-20 ";
-const INTRO_PARTNERS = " border-white bg-faect-blue/95 lg:ml-[52%] xl:ml-[55%]";
+const INTRO_PARTNERS =
+  " border-white bg-faect-blue/95 lg:ml-[52%] xl:ml-[55%] md:text-sh";
+
+const HEADING_TEAM =
+  "sm:text-[3.4rem]/12 md:text-[3rem]/12 lg:text-[4.2rem]/17 xl:text-[4.4rem]/17 font-semibold pt-0 lg:pt-0 mx-auto text-center md:text-left  lg:-mt-52 text-[3rem]/11 -mt-40 md:-mt-45 md:text-shadow-lg xl:text-shadow-xl";
+const SUBHEADING_TEAM =
+  "sm:pt-3 xl:text-[2.6rem]/9 font-semibold lg:pt-2 mx-auto text-center md:text-left md:mb-2 sm:-mb-15 text-[1.6rem]/6 md:text-[2rem]/8 md:-my-18 md:p-0 px-8 xl:-mt-16  -mt-16 ";
+const INTRO_TEAM = " border-white bg-faect-blue/95 lg:ml-[54%] xl:ml-[55%]";
 
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
@@ -76,13 +82,6 @@ export const heroConfigs: Record<string, HeroConfig> = {
     headingClass: HEADING_KLANTEN,
   },
 
-  team: {
-    headingColor: "white",
-    subheadingColor: "white-faded",
-    introClass: INTRO_TEAM,
-    mobileIntroBelow: true,
-  },
-
   partners: {
     headingColor: "white",
     headingClass: HEADING_PARTNERS,
@@ -90,6 +89,17 @@ export const heroConfigs: Record<string, HeroConfig> = {
     subheadingSizeClass: SUBHEADING_PARTNERS,
     introClass: INTRO_PARTNERS,
     mobileIntroBelow: true,
+  },
+
+  team: {
+    headingColor: "blue",
+    subheadingSizeClass: SUBHEADING_TEAM,
+    subheadingWrapperClass: "md:pb-64 xl:pb-72",
+    introClass: INTRO_TEAM,
+    mobileIntroBelow: false,
+    headingClass: HEADING_TEAM,
+    contentAlign: "start",
+    paddingTop: "default",
   },
 
   nieuws: {

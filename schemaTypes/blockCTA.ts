@@ -42,6 +42,12 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'backgroundPhotoUrl',
+      title: 'Background Photo URL (fallback)',
+      type: 'string',
+      description: 'Public path fallback when no Sanity image is uploaded (e.g. /team/photo.jpg)',
+    }),
+    defineField({
       name: 'variant',
       title: 'Style Variant',
       type: 'string',
@@ -51,6 +57,7 @@ export default defineType({
           {title: 'Primary (Dark)', value: 'primary'},
           {title: 'Secondary (Light)', value: 'secondary'},
           {title: 'Accent (Blue)', value: 'accent'},
+          {title: 'Transparent', value: 'transparent'},
         ],
         layout: 'radio',
       },

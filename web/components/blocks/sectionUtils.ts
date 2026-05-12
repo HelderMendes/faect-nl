@@ -103,6 +103,7 @@ export interface HeroConfig {
   subheadingClass?: string; // escape hatch — extra classes appended to subheading (wins via twMerge)
   subheadingWrapperClass?: string; // escape hatch — overrides pb on the subheading wrapper (controls gap to absolute intro blocks)
   mobileIntroBelow?: boolean; // move intro blocks below the hero on mobile instead of overlapping
+  contentAlign?: "center" | "start"; // "center" (default) vertically centers content; "start" top-aligns so subheading tracks the heading
 }
 
 // Resolved class maps — consumed by BlockHero

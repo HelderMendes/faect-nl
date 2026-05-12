@@ -47,13 +47,13 @@ export function BlockHero({
 
   const cx = resolveHeroClasses(heroConfig);
 
+  const alignItems =
+    heroConfig?.contentAlign === "start" ? "items-start" : "items-center";
+
   const baseClasses =
     settings?.backgroundColor === "navy" || !settings?.backgroundColor
-      ? "flex items-center"
-      : cn(
-          getSectionStyles(settings, { noOverlay: true }),
-          "flex items-center",
-        );
+      ? cn("flex", alignItems)
+      : cn(getSectionStyles(settings, { noOverlay: true }), "flex", alignItems);
 
   const mobileIntroBelow = heroConfig?.mobileIntroBelow ?? false;
 
@@ -87,7 +87,12 @@ export function BlockHero({
           >
             <div className="mb-5 flex flex-col items-start md:mb-0">
               {/* Title */}
-              <div className={cn("animate-fade-in w-full md:w-auto", cx.headingWidth)}>
+              <div
+                className={cn(
+                  "animate-fade-in w-full md:w-auto",
+                  cx.headingWidth,
+                )}
+              >
                 <h1
                   className={cn(
                     "text-center leading-14 text-shadow-lg md:text-left md:text-shadow-none",

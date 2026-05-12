@@ -43,7 +43,7 @@ export function BlockTextWithImage({
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col items-center text-center">
             {headerTitle && (
-              <p className="hover:text-faect-blue relative mb-6 border-b-2 border-gray-500 pb-1 text-2xl font-medium text-gray-700 transition-all duration-200">
+              <p className="hover:text-faect-blue relative mb-6 border-b-3 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 {headerTitle}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,13 +51,13 @@ export function BlockTextWithImage({
             )}
 
             {heading && (
-              <h2 className="text-faect-blue font-heading mb-6 max-w-3xl text-4xl leading-tight font-bold md:text-5xl lg:text-6xl/16">
+              <h2 className="text-faect-blue font-heading mb-6 max-w-4xl text-4xl leading-tight font-bold md:text-5xl lg:text-6xl/16">
                 {heading}
               </h2>
             )}
 
             {content && (
-              <div className="text-faect-gray mx-auto mb-8 max-w-3xl text-lg leading-8 font-medium">
+              <div className="text-faect-gray mx-auto mb-8 max-w-4xl text-lg leading-8 font-medium">
                 <PortableText
                   value={content}
                   components={{

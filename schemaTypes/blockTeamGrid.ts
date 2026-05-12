@@ -8,6 +8,11 @@ export default defineType({
   icon: UsersIcon,
   fields: [
     defineField({
+      name: 'headerTitle',
+      title: 'Eyebrow Label',
+      type: 'string',
+    }),
+    defineField({
       name: 'heading',
       title: 'Section Heading',
       type: 'string',
@@ -73,7 +78,9 @@ export default defineType({
       const count = members?.length || 0
       return {
         title: title || 'Team Grid',
-        subtitle: showAll ? 'Showing all members' : `${count} selected member${count !== 1 ? 's' : ''}`,
+        subtitle: showAll
+          ? 'Showing all members'
+          : `${count} selected member${count !== 1 ? 's' : ''}`,
       }
     },
   },
