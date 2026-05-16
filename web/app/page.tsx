@@ -146,7 +146,6 @@ export default async function Home() {
         text="Neem contact met ons op voor een vrijblijvend gesprek over de mogelijkheden voor jouw organisatie."
         ctaText="Neem contact op"
         ctaLink="/contact"
-        variant="accent"
       />
     </main>
   );
