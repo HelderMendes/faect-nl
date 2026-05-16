@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
-import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import { BlockRenderer } from "@/components/BlockRenderer";
 import { heroConfigs } from "@/config/heroConfigs";
 
 export const revalidate = 60;

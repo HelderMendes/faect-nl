@@ -1,12 +1,26 @@
 import { client } from "@/sanity/lib/client";
 import { POSTS_QUERY, PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockHero } from "@/components/blocks/BlockHero";
+import { heroConfigs } from "@/config/heroConfigs";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 
+type Post = {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  publishedAt: string;
+  excerpt?: string;
+  mainImage?: { asset?: { _ref?: string; url?: string } };
+};
+
+type PageBlock = {
+  _type: string;
+  [key: string]: unknown;
+};
+
 export default async function NewsPage() {
-  // Try to get page-specific hero content from a page named "blog-nieuws"
   const pageData = await client.fetch(PAGE_QUERY, { slug: "blog-nieuws" });
   const posts = await client.fetch(POSTS_QUERY);
 
@@ -14,7 +28,10 @@ export default async function NewsPage() {
     <main className="flex flex-col">
       {pageData?.pageBuilder ? (
         <BlockHero
-          {...pageData.pageBuilder.find((b: any) => b._type === "blockHero")}
+          {...pageData.pageBuilder.find(
+            (b: PageBlock) => b._type === "blockHero",
+          )}
+          heroConfig={heroConfigs["blog-nieuws"]}
         />
       ) : (
         <BlockHero
@@ -23,13 +40,14 @@ export default async function NewsPage() {
           backgroundImage={{
             asset: { url: "/home/Faect-Header-Home01-1.jpg" },
           }}
+          heroConfig={heroConfigs["blog-nieuws"]}
         />
       )}
 
       <section className="bg-white py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post: any) => (
+            {posts.map((post: Post) => (
               <Link
                 key={post._id}
                 href={`/blog-nieuws/${post.slug.current}`}
@@ -58,10 +76,10 @@ export default async function NewsPage() {
                   <h2 className="text-faect-navy group-hover:text-faect-blue mb-4 text-2xl leading-tight font-bold transition-colors">
                     {post.title}
                   </h2>
-                  <p className="mb-6 line-clamp-3 flex-1 text-gray-600">
+                  <p className="mb-6 line-clamp-4 text-gray-600">
                     {post.excerpt}
                   </p>
-                  <div className="text-faect-blue flex items-center gap-2 font-bold transition-transform group-hover:translate-x-1">
+                  <div className="text-faect-blue mt-auto flex items-center gap-2 font-bold transition-transform group-hover:translate-x-1">
                     Lees meer <span>→</span>
                   </div>
                 </div>

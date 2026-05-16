@@ -79,6 +79,7 @@ export default defineType({
         // Contact
         defineArrayMember({type: 'blockContactForm'}),
         defineArrayMember({type: 'blockContactInfo'}),
+        defineArrayMember({type: 'blockContactSplit'}),
       ],
     }),
     // SEO Fields (spread from shared)

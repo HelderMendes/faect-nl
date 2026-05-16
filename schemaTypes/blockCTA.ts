@@ -30,8 +30,8 @@ export default defineType({
       name: 'ctaLink',
       title: 'Button Link',
       type: 'string',
-      description: 'Internal path (e.g., /contact) or external URL',
-      validation: (rule) => rule.required(),
+      initialValue: '/contact',
+      description: 'Internal path (e.g., /contact) or external URL. Leave empty to hide the button.',
     }),
     defineField({
       name: 'backgroundImage',

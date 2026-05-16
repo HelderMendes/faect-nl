@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY, CASE_STUDIES_PAGE_QUERY } from "@/sanity/lib/queries";
-import { BlockRenderer } from "@/components/blocks/BlockRenderer";
+import { BlockRenderer } from "@/components/BlockRenderer";
 import { CaseAccordion } from "@/components/klanten/CaseAccordion";
 import { heroConfigs } from "@/config/heroConfigs";
 

@@ -23,9 +23,7 @@ export default defineType({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: {hotspot: true},
     }),
     defineField({
       name: 'publishedAt',
@@ -33,9 +31,26 @@ export default defineType({
       type: 'datetime',
     }),
     defineField({
-      name: 'hero',
-      title: 'Hero Section',
-      type: 'blockHero',
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'text',
+      rows: 3,
+      description: 'Short summary shown in post cards and meta descriptions',
+    }),
+    defineField({
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      initialValue: 'Nieuws',
+      options: {
+        list: [
+          {title: 'Nieuws', value: 'Nieuws'},
+          {title: 'Klanten', value: 'Klanten'},
+          {title: 'Producten', value: 'Producten'},
+          {title: 'Evenementen', value: 'Evenementen'},
+        ],
+        layout: 'radio',
+      },
     }),
     defineField({
       name: 'body',
@@ -46,7 +61,22 @@ export default defineType({
         {type: 'blockRichText'},
         {type: 'blockTextWithImage'},
         {type: 'blockFeatureGrid'},
+        {type: 'blockCTA'},
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'publishedAt',
+      media: 'mainImage',
+    },
+    prepare({title, subtitle, media}) {
+      return {
+        title: title || 'Untitled post',
+        subtitle: subtitle ? new Date(subtitle).toLocaleDateString('nl-NL') : '',
+        media,
+      }
+    },
+  },
 })

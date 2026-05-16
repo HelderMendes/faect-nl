@@ -24,6 +24,7 @@ import blockTeamGrid from './blockTeamGrid'
 import blockPartnerLogos from './blockPartnerLogos'
 import blockContactForm from './blockContactForm'
 import blockContactInfo from './blockContactInfo'
+import blockContactSplit from './blockContactSplit'
 import blockStats from './blockStats'
 import blockTextWithServiceGrid from './blockTextWithServiceGrid'
 import blockTextWithAccordion from './blockTextWithAccordion'
@@ -58,6 +59,7 @@ export const schemaTypes = [
   blockPartnerLogos,
   blockContactForm,
   blockContactInfo,
+  blockContactSplit,
   blockStats,
   blockTextWithServiceGrid,
   blockTextWithAccordion,

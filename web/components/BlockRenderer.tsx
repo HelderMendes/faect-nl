@@ -1,24 +1,23 @@
-import {
-  BlockHero,
-  BlockCTA,
-  BlockTextWithImage,
-  BlockFeatureGrid,
-  BlockRichText,
-  BlockSectorGrid,
-  BlockServiceCards,
-  BlockFAQ,
-  BlockProcessSteps,
-  BlockStats,
-  BlockContactForm,
-  BlockContactInfo,
-  BlockAppShowcase,
-  BlockTeamGrid,
-  BlockPartnerLogos,
-  BlockTextWithServiceGrid,
-  BlockTextWithAccordion,
-  BlockTwoColumnCTA,
-  type HeroConfig,
-} from "@/components/blocks";
+import { BlockHero } from "./blocks/BlockHero";
+import { BlockCTA } from "./blocks/BlockCTA";
+import { BlockTextWithImage } from "./blocks/BlockTextWithImage";
+import { BlockFeatureGrid } from "./blocks/BlockFeatureGrid";
+import { BlockRichText } from "./blocks/BlockRichText";
+import { BlockSectorGrid } from "./blocks/BlockSectorGrid";
+import { BlockServiceCards } from "./blocks/BlockServiceCards";
+import { BlockFAQ } from "./blocks/BlockFAQ";
+import { BlockProcessSteps } from "./blocks/BlockProcessSteps";
+import { BlockStats } from "./blocks/BlockStats";
+import { BlockContactForm } from "./blocks/BlockContactForm";
+import { BlockContactInfo } from "./blocks/BlockContactInfo";
+import { BlockAppShowcase } from "./blocks/BlockAppShowcase";
+import { BlockTeamGrid } from "./blocks/BlockTeamGrid";
+import { BlockPartnerLogos } from "./blocks/BlockPartnerLogos";
+import { BlockTextWithServiceGrid } from "./blocks/BlockTextWithServiceGrid";
+import { BlockTextWithAccordion } from "./blocks/BlockTextWithAccordion";
+import { BlockTwoColumnCTA } from "./blocks/BlockTwoColumnCTA";
+import { BlockContactSplit } from "./blocks/BlockContactSplit";
+import type { HeroConfig } from "./blocks/sectionUtils";
 
 // Component props are heterogeneous and checked at the Sanity schema level, not here.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -41,6 +40,7 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
   blockTextWithServiceGrid: BlockTextWithServiceGrid,
   blockTextWithAccordion: BlockTextWithAccordion,
   blockTwoColumnCTA: BlockTwoColumnCTA,
+  blockContactSplit: BlockContactSplit,
 };
 
 interface Block {

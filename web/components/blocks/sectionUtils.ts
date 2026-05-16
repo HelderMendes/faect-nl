@@ -5,6 +5,60 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// 3-char Dutch national prefixes that have 2 significant area-code digits (0XX + 7 subscriber digits)
+const NL_TWO_DIGIT_AREA_PREFIXES = new Set([
+  "010","013","015","020","023","024","026","030","033","035","036","038",
+  "040","043","045","046","050","053","055","058","070","071","072","073",
+  "074","075","076","077","078","079","085","087","088",
+]);
+
+/**
+ * Formats a raw Dutch phone number stored in E.164 or local notation into a
+ * human-readable display string. The href value for tel: links should always
+ * use the raw stripped value (no spaces).
+ *
+ * Examples:
+ *   +31880707000  →  +31 (0)88 070 7000
+ *   +31641100316  →  +31 (0)6 41 10 03 16
+ *   +31201234567  →  +31 (0)20 123 4567
+ *   +31318123456  →  +31 (0)318 12 34 56
+ */
+export function formatDutchPhone(raw: string): string {
+  const digits = raw.replace(/[\s\-\.\(\)]/g, "");
+
+  // Normalise to national form (10 digits, leading 0)
+  let national: string;
+  if (digits.startsWith("+31")) {
+    national = "0" + digits.slice(3);
+  } else if (digits.startsWith("0031")) {
+    national = "0" + digits.slice(4);
+  } else if (digits.startsWith("0")) {
+    national = digits;
+  } else {
+    return raw;
+  }
+
+  if (national.length !== 10) return raw;
+
+  // Mobile: 06XXXXXXXX → +31 (0)6 XX XX XX XX
+  if (national.startsWith("06")) {
+    const s = national.slice(2);
+    return `+31 (0)6 ${s.slice(0, 2)} ${s.slice(2, 4)} ${s.slice(4, 6)} ${s.slice(6)}`;
+  }
+
+  // 2-digit area codes (088, 020, …) → +31 (0)XX XXX XXXX
+  if (NL_TWO_DIGIT_AREA_PREFIXES.has(national.slice(0, 3))) {
+    const area = national.slice(1, 3);
+    const s = national.slice(3);
+    return `+31 (0)${area} ${s.slice(0, 3)} ${s.slice(3)}`;
+  }
+
+  // 3-digit area codes (0XXX) → +31 (0)XXX XX XX XX
+  const area = national.slice(1, 4);
+  const s = national.slice(4);
+  return `+31 (0)${area} ${s.slice(0, 2)} ${s.slice(2, 4)} ${s.slice(4)}`;
+}
+
 export interface SectionSettings {
   backgroundColor?: "white" | "gray" | "dither" | "navy" | "none";
   paddingTop?: "default" | "compact" | "none";

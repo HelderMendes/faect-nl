@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { X, Mail, Linkedin, Phone, ChevronRight } from "lucide-react";
+import { X, Mail, Phone, ChevronRight } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
-import { cn } from "./sectionUtils";
+import { cn, formatDutchPhone } from "./sectionUtils";
 
 export type TeamMemberData = {
   _id: string;
@@ -28,6 +28,20 @@ function getPhotoSrc(
   if (member.photo?.asset?._ref)
     return urlFor(member.photo).width(width).height(height).url();
   return null;
+}
+
+function LinkedInIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
 }
 
 function MemberMonogram({ name, large }: { name: string; large?: boolean }) {
@@ -110,7 +124,7 @@ function TeamModal({
               Ons Team
             </p>
           </div>
-          <nav className="flex flex-col gap-0.5 py-2">
+          <nav className="flex flex-col py-2">
             {members.map((m, idx) => {
               const isActive = idx === activeIndex;
               const thumbSrc = getPhotoSrc(m, 64, 64);
@@ -119,7 +133,7 @@ function TeamModal({
                 <button
                   key={m._id}
                   onClick={() => onSelect(idx)}
-                  className="text-faect-navy flex w-full items-center gap-2 px-3 py-1.5 text-left transition-colors duration-150 hover:bg-gray-50"
+                  className="text-faect-navy border-faect-blue/15 hover:border-faect-blue hover:bg-faect-blue group flex w-full items-center gap-2 border-b-2 px-3 py-2.5 text-left transition-colors duration-150"
                 >
                   {/* Small circle avatar */}
                   <div className="relative h-9 w-9 shrink-0 overflow-hidden rounded-full border border-gray-100">
@@ -139,11 +153,11 @@ function TeamModal({
                   </div>
 
                   <div className="min-w-0">
-                    <span className="font-cairo block truncate text-[.9rem] leading-tight font-semibold">
+                    <span className="font-cairo block truncate text-[.95rem] leading-tight font-semibold group-hover:font-bold group-hover:text-white">
                       {m.name}
                     </span>
                     {m.role && (
-                      <span className="mt-0.25 block truncate text-[0.75rem] text-gray-600">
+                      <span className="hover: mt-0.25 block truncate text-[0.85rem] text-gray-700 group-hover:font-medium group-hover:text-gray-200">
                         {m.role}
                       </span>
                     )}
@@ -201,17 +215,17 @@ function TeamModal({
 
               {/* Bio */}
               {member.bio && (
-                <p className="text-faect-gray text-[1.05rem]/8 font-medium">
+                <p className="text-faect-gray leading-9 font-medium">
                   {member.bio}
                 </p>
               )}
 
               {(member.email || member.phone || member.linkedIn) && (
-                <div className="flex flex-wrap items-center gap-4 border-t border-gray-100 pt-4">
+                <div className="flex flex-wrap items-center gap-6 border-t border-gray-100 pt-4">
                   {member.email && (
                     <a
                       href={`mailto:${member.email}`}
-                      className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
+                      className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-2 font-medium transition-all hover:gap-3"
                     >
                       <Mail className="size-4 shrink-0" />
                       {member.email}
@@ -219,11 +233,11 @@ function TeamModal({
                   )}
                   {member.phone && (
                     <a
-                      href={`tel:${member.phone}`}
-                      className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
+                      href={`tel:${member.phone.replace(/[\s\-\.\(\)]/g, "")}`}
+                      className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-2 font-medium transition-all hover:gap-3"
                     >
                       <Phone className="size-4 shrink-0" />
-                      {member.phone}
+                      {formatDutchPhone(member.phone)}
                     </a>
                   )}
                   {member.linkedIn && (
@@ -231,9 +245,9 @@ function TeamModal({
                       href={member.linkedIn}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-2 text-sm font-medium transition-all hover:gap-3"
+                      className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-2 font-medium transition-all hover:gap-3"
                     >
-                      <Linkedin className="size-4 shrink-0" />
+                      <LinkedInIcon className="size-4 shrink-0" />
                       LinkedIn
                     </a>
                   )}
@@ -242,18 +256,34 @@ function TeamModal({
             </div>
           </div>
 
-          {/* Mobile nav strip */}
+          {/* Mobile nav strip — avatar pill per team member, active excluded */}
           <div className="shrink-0 overflow-x-auto border-t border-gray-100 px-4 py-3 md:hidden">
             <div className="flex gap-2">
               {members.map((m, idx) => {
                 if (idx === activeIndex) return null;
+                const thumbSrc = getPhotoSrc(m, 64, 64);
                 return (
                   <button
                     key={m._id}
                     onClick={() => onSelect(idx)}
-                    className="font-cairo text-faect-navy shrink-0 rounded-lg border border-gray-200 bg-white px-3 py-2 text-xs font-semibold transition-all hover:border-gray-300"
+                    className="hover:border-faect-blue hover:bg-faect-blue font-cairo text-faect-navy flex shrink-0 items-center gap-2 rounded-full border border-gray-200 bg-white py-1 pr-3 pl-1 font-semibold transition-all duration-150 hover:text-white active:scale-95"
                   >
-                    {m.name.split(" ")[0]}
+                    <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-gray-100">
+                      {thumbSrc ? (
+                        <Image
+                          src={thumbSrc}
+                          alt={m.name}
+                          fill
+                          style={{
+                            objectFit: "cover",
+                            objectPosition: "top center",
+                          }}
+                        />
+                      ) : (
+                        <MemberMonogram name={m.name} />
+                      )}
+                    </div>
+                    <span>{m.name.split(" ")[0]}</span>
                   </button>
                 );
               })}

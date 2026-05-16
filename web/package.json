@@ -10,6 +10,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.6",
     "@portabletext/react": "^6.0.3",
     "@portabletext/types": "^4.0.2",
     "@sanity/image-url": "^2.1.1",
@@ -20,6 +21,7 @@
     "next-sanity": "^12.2.2",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-google-recaptcha-v3": "^1.11.0",
     "resend": "^6.12.2",
     "tailwind-merge": "^3.5.0"
   },

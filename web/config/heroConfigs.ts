@@ -22,9 +22,6 @@ const HEADING_APPS = HEADING_HOME + " -mt-26 shadow-lg";
 const SUBHEADING_APPS = SUBHEADING_HOME + " mb-8";
 const INTRO_APPS = "border-white bg-faect-blue/95 lg:ml-[40%] xl:ml-[52%]";
 
-const INTRO_NIEUWS = "border-white bg-[#1E3E74]/80";
-const INTRO_CONTACT = "border-white bg-[#1E3E74]/80";
-
 const HEADING_KLANTEN =
   "sm:text-[3.4rem]/14 md:text-[3.6rem]/15 lg:text-[4.2rem]/17 xl:text-[4.4rem]/18 font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left  lg:-mt-15 -mt-17 text-[3.2rem]/15  xl:-mt-20 -mt-26  mb-2 md:mb-0";
 const SUBHEADING_KLANTEN =
@@ -43,6 +40,16 @@ const HEADING_TEAM =
 const SUBHEADING_TEAM =
   "sm:pt-3 xl:text-[2.6rem]/9 font-semibold lg:pt-2 mx-auto text-center md:text-left md:mb-2 sm:-mb-15 text-[1.6rem]/6 md:text-[2rem]/8 md:-my-18 md:p-0 px-8 xl:-mt-16  -mt-16 ";
 const INTRO_TEAM = " border-white bg-faect-blue/95 lg:ml-[54%] xl:ml-[55%]";
+
+const HEADING_BLOG_NIEUWS =
+  "font-extrabold tracking-tight sm:text-4xl md:text-[3rem]/14 lg:text-[3.2rem] xl:text-[3.6rem]/16  text-4xl/10 -mt-10 px-4 md:px-0 md:-mt-16 ";
+const SUBHEADING_BLOG_NIEUWS = "text-3xl font-semibold -mt-2 md:text-[2.6rem]";
+const INTRO_BLOG_NIEUWS =
+  "border-white bg-faect-blue/95 md:ml-[30%] lg:ml-[56%] ";
+
+const HEADING_NIEUWS = HEADING_OPLOSSINGEN;
+const SUBHEADING_NIEUWS = SUBHEADING_OPLOSSINGEN;
+const INTRO_NIEUWS = INTRO_OPLOSSINGEN;
 
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
@@ -102,18 +109,19 @@ export const heroConfigs: Record<string, HeroConfig> = {
     paddingTop: "default",
   },
 
-  nieuws: {
+  "blog-nieuws": {
     headingColor: "white",
-    subheadingColor: "white-faded",
-    introClass: INTRO_NIEUWS,
-    mobileIntroBelow: true,
+    headingClass: HEADING_BLOG_NIEUWS,
+    subheadingColor: "blue",
+    subheadingSizeClass: SUBHEADING_BLOG_NIEUWS,
+    introClass: INTRO_BLOG_NIEUWS,
   },
 
-  contact: {
+  nieuws: {
     headingColor: "white",
+    headingClass: HEADING_NIEUWS,
+    subheadingSizeClass: SUBHEADING_NIEUWS,
     subheadingColor: "white-faded",
-    spacing: "compact",
-    introClass: INTRO_CONTACT,
-    mobileIntroBelow: true,
+    introClass: INTRO_NIEUWS,
   },
 };

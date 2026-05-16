@@ -1,8 +1,8 @@
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { heroConfigs } from "@/config/heroConfigs";
+import { BlockRenderer } from "@/components/BlockRenderer";
 import {
-  BlockRenderer,
   BlockHero,
   BlockFeatureGrid,
   BlockTextWithImage,

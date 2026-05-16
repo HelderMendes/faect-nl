@@ -25,16 +25,31 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | or
   }
 }`;
 
+const relatedPostFields = `{
+  title,
+  slug,
+  publishedAt,
+  mainImage { asset->{ url } }
+}`;
+
 export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
-  ...,
-  hero {
-    ...,
-    backgroundImage ${imageAsset}
-  },
+  _id,
+  title,
+  slug,
+  publishedAt,
+  excerpt,
+  category,
   mainImage ${imageAsset},
-  author->{
-    name,
-    image ${imageAsset}
+  body[]{
+    ...,
+    asset->
+  },
+  author->{ name, image ${imageAsset} },
+  "prevPost": *[_type == "post" && publishedAt < ^.publishedAt && defined(slug.current)] | order(publishedAt desc)[0] ${relatedPostFields},
+  "nextPost": *[_type == "post" && publishedAt > ^.publishedAt && defined(slug.current)] | order(publishedAt asc)[0] ${relatedPostFields},
+  "otherPosts": *[_type == "post" && slug.current != $slug && defined(slug.current)] | order(publishedAt desc)[0...3]{
+    _id, title, slug, publishedAt, excerpt,
+    mainImage { asset->{ url } }
   }
 }`;
 
