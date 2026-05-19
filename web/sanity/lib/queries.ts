@@ -12,6 +12,7 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | or
   slug,
   publishedAt,
   excerpt,
+  "categories": categories[]->{ _id, title },
   mainImage {
     ...,
     asset->
@@ -38,7 +39,8 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
   slug,
   publishedAt,
   excerpt,
-  category,
+  "categories": categories[]->{ _id, title },
+  cta,
   mainImage ${imageAsset},
   body[]{
     ...,
@@ -47,7 +49,7 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
   author->{ name, image ${imageAsset} },
   "prevPost": *[_type == "post" && publishedAt < ^.publishedAt && defined(slug.current)] | order(publishedAt desc)[0] ${relatedPostFields},
   "nextPost": *[_type == "post" && publishedAt > ^.publishedAt && defined(slug.current)] | order(publishedAt asc)[0] ${relatedPostFields},
-  "otherPosts": *[_type == "post" && slug.current != $slug && defined(slug.current)] | order(publishedAt desc)[0...3]{
+  "otherPosts": *[_type == "post" && slug.current != $slug && defined(slug.current) && count((categories[]._ref)[@ in ^.categories[]._ref]) > 0] | order(publishedAt desc)[0...3]{
     _id, title, slug, publishedAt, excerpt,
     mainImage { asset->{ url } }
   }

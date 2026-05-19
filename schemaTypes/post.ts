@@ -38,19 +38,30 @@ export default defineType({
       description: 'Short summary shown in post cards and meta descriptions',
     }),
     defineField({
-      name: 'category',
-      title: 'Category',
-      type: 'string',
-      initialValue: 'Nieuws',
-      options: {
-        list: [
-          {title: 'Nieuws', value: 'Nieuws'},
-          {title: 'Klanten', value: 'Klanten'},
-          {title: 'Producten', value: 'Producten'},
-          {title: 'Evenementen', value: 'Evenementen'},
-        ],
-        layout: 'radio',
-      },
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'category'}]}],
+    }),
+    defineField({
+      name: 'cta',
+      title: 'Call to Action',
+      type: 'object',
+      description: 'Button shown at the bottom of the post. Leave empty to hide.',
+      fields: [
+        defineField({
+          name: 'text',
+          title: 'Button Text',
+          type: 'string',
+          initialValue: 'Maak een afspraak',
+        }),
+        defineField({
+          name: 'link',
+          title: 'Button Link',
+          type: 'string',
+          initialValue: '/contact',
+        }),
+      ],
     }),
     defineField({
       name: 'body',
@@ -58,10 +69,8 @@ export default defineType({
       type: 'array',
       of: [
         {type: 'block'},
-        {type: 'blockRichText'},
         {type: 'blockTextWithImage'},
         {type: 'blockFeatureGrid'},
-        {type: 'blockCTA'},
       ],
     }),
   ],

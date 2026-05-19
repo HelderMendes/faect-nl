@@ -17,11 +17,11 @@ const footerGroups: FooterGroup[] = [
     links: [
       { name: "Home", href: "/" },
       { name: "Oplossingen", href: "/oplossingen" },
-      { name: "Apps", href: "/apps" },
+      { name: "Apps", href: "/faect-apps" },
       { name: "Klanten & Cases", href: "/klanten-cases" },
       { name: "Team", href: "/team" },
       { name: "Partners", href: "/partners" },
-      { name: "Nieuws", href: "/nieuws" },
+      { name: "Nieuws", href: "/blog-nieuws" },
     ],
   },
   {
@@ -37,11 +37,26 @@ const footerGroups: FooterGroup[] = [
     title: "Over Business Central:",
     checkmarks: true,
     links: [
-      { name: "Mogelijkheden van Business Central", href: "#" },
-      { name: "Upgraden naar Business Central", href: "#" },
-      { name: "Overstappen naar Business Central", href: "#" },
-      { name: "Aflopende support Navision versies 2016-2018", href: "#" },
-      { name: "Verschil tussen Navision en Microsoft Dynamics 365", href: "#" },
+      {
+        name: "Standaardvoordelen van Microsoft Dynamics 365...",
+        href: "/ontdek-de-standaardvoordelen-van-microsoft-dynamics-365-business-central-voor-nieuwe-klanten",
+      },
+      {
+        name: "Upgraden naar Business Central",
+        href: "/upgraden-naar-business-central",
+      },
+      {
+        name: "Overstappen naar Business Central",
+        href: "/overstappen-naar-business-central-de-slimme-keuze",
+      },
+      {
+        name: "Aflopende support Navision versies 2016-2018",
+        href: "/aflopende-microsoft-support-voor-navision-versies-2016-2017-en-2018",
+      },
+      {
+        name: "Verschil tussen Navision en Microsoft Dynamics 365",
+        href: "/wat-is-het-verschil-tussen-navision-en-microsoft-dynamics-365-business-central",
+      },
     ],
   },
 ];

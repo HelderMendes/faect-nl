@@ -44,16 +44,16 @@ export default async function NewsPage() {
         />
       )}
 
-      <section className="bg-white py-20">
+      <section className="section-dither-flipped py-20">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((post: Post) => (
               <Link
                 key={post._id}
                 href={`/blog-nieuws/${post.slug.current}`}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:shadow-xl"
+                className="group bg-faect-blue/10 flex flex-col overflow-hidden rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:bg-white hover:shadow-xl"
               >
-                <div className="relative h-64 w-full">
+                <div className="relative h-54 w-full">
                   {post.mainImage && (
                     <Image
                       src={urlFor(post.mainImage).width(800).height(600).url()}
@@ -64,8 +64,8 @@ export default async function NewsPage() {
                   )}
                 </div>
                 <div className="flex flex-1 flex-col p-8">
-                  <div className="mb-4 flex items-center gap-4">
-                    <span className="font-ui text-faect-blue text-sm font-medium">
+                  <div className="mb-1 flex items-center gap-4">
+                    <span className="font-ui text-faect-blue font-medium">
                       {new Date(post.publishedAt).toLocaleDateString("nl-NL", {
                         day: "numeric",
                         month: "long",
@@ -73,13 +73,13 @@ export default async function NewsPage() {
                       })}
                     </span>
                   </div>
-                  <h2 className="text-faect-navy group-hover:text-faect-blue mb-4 text-2xl leading-tight font-bold transition-colors">
+                  <h2 className="text-faect-navy group-hover:text-faect-blue mb-2 text-2xl leading-tight font-bold transition-colors">
                     {post.title}
                   </h2>
-                  <p className="mb-6 line-clamp-4 text-gray-600">
+                  <p className="mt-auto mb-2 line-clamp-4 text-gray-600">
                     {post.excerpt}
                   </p>
-                  <div className="text-faect-blue mt-auto flex items-center gap-2 font-bold transition-transform group-hover:translate-x-1">
+                  <div className="text-faect-blue mt-3 flex items-center gap-2 font-bold transition-transform group-hover:translate-x-1">
                     Lees meer <span>→</span>
                   </div>
                 </div>

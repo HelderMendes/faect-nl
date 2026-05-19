@@ -1,6 +1,7 @@
 // Document types
 import page from './page'
 import post from './post'
+import category from './category'
 import caseStudy from './caseStudy'
 import app from './app'
 import teamMember from './teamMember'
@@ -36,6 +37,7 @@ export const schemaTypes = [
   // Documents
   page,
   post,
+  category,
   caseStudy,
   app,
   teamMember,
