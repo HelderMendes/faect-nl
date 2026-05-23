@@ -59,7 +59,7 @@ export default defineType({
           },
         }),
       ],
-      validation: (rule) => rule.min(2).max(8),
+      validation: (rule) => rule.min(2).max(10),
     }),
     defineField({
       name: 'layout',

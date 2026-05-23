@@ -18,7 +18,7 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
-  const heroConfig = heroConfigs[slug];
+  const heroConfig = heroConfigs[slug] ?? heroConfigs[data.pageFolder];
 
   return (
     <main className="flex flex-col">

@@ -42,7 +42,7 @@ const SUBHEADING_TEAM =
 const INTRO_TEAM = " border-white bg-faect-blue/95 lg:ml-[54%] xl:ml-[55%]";
 
 const HEADING_BLOG_NIEUWS =
-  "font-extrabold tracking-tight sm:text-4xl md:text-[3rem]/14 lg:text-[3.2rem] xl:text-[3.6rem]/16  text-4xl/10 -mt-10 px-4 md:px-0 md:-mt-16 ";
+  "font-extrabold tracking-tight sm:text-4xl md:text-[3rem]/14 lg:text-[3.2rem] xl:text-[3.6rem]/16  text-4xl/10 -mt-10 px-4 md:px-0 sm:-mt-6 ";
 const SUBHEADING_BLOG_NIEUWS = "text-3xl font-semibold -mt-2 md:text-[2.6rem]";
 const INTRO_BLOG_NIEUWS =
   "border-white bg-faect-blue/95 md:ml-[30%] lg:ml-[56%] ";
@@ -50,6 +50,13 @@ const INTRO_BLOG_NIEUWS =
 const HEADING_NIEUWS = HEADING_OPLOSSINGEN;
 const SUBHEADING_NIEUWS = SUBHEADING_OPLOSSINGEN;
 const INTRO_NIEUWS = INTRO_OPLOSSINGEN;
+
+const HEADING_MS365_ONDEKT =
+  "font-extrabold tracking-tight sm:text-4xl md:text-[2.6rem]/12 lg:text-[2.8rem]/13 xl:text-[2.9rem]/14 text-[2.5rem]/10 mt-10 px-2 md:px-0 sm:mt-14 md:-mt-24 xl:-mt-42 text-shadow-md text-shadow-black/40 md:text-shadow-lg  lg:text-shadow-xl  xl:tracking-normal";
+const SUBHEADING_MS365_ONTDEKT =
+  "text-[1.6rem]/8 font-semibold -mt-2 md:mt-0 md:text-[1.9rem] md:text-shadow-sm md:text-shadow-black/40 lg:text-[2.2rem] lg:tracking-tight lg:text-shadow-md lg:text-shadow-black/50 xl:text-shadow-lg xl:text-shadow-black/60 md:pb-6 lg:pb-16 xl:-mb-4 xl:pb-12 xl:tracking-normal xl:text-[2.4rem]/9";
+const INTRO_MS365_ONTDEKT =
+  " border-white bg-faect-blue/95 md:ml-[30%] lg:ml-[54%]";
 
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
@@ -124,4 +131,28 @@ export const heroConfigs: Record<string, HeroConfig> = {
     subheadingColor: "white-faded",
     introClass: INTRO_NIEUWS,
   },
+
+  // Shared config for all Microsoft Dynamics 365 subpages (pageFolder: "dynamics")
+  dynamics: {
+    headingColor: "white",
+    paddingTop: "none",
+    headingSize: "lg",
+    subheadingColor: "blue",
+    introClass: INTRO_OPLOSSINGEN,
+    headingClass: HEADING_OPLOSSINGEN,
+    subheadingSizeClass: SUBHEADING_OPLOSSINGEN,
+    mobileIntroBelow: true,
+  },
+
+  "ontdek-de-standaardvoordelen-van-microsoft-dynamics-365-business-central-voor-nieuwe-klanten":
+    {
+      headingColor: "blue",
+      paddingTop: "none",
+      headingSize: "lg",
+      subheadingColor: "white",
+      introClass: INTRO_MS365_ONTDEKT,
+      headingClass: HEADING_MS365_ONDEKT,
+      subheadingSizeClass: SUBHEADING_MS365_ONTDEKT,
+      mobileIntroBelow: true,
+    },
 };

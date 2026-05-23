@@ -1,4 +1,4 @@
-/**
+/*
  * Create Pages Script
  *
  * This script creates the skeleton for all requested pages in Sanity.

@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Force-include heading size variants used dynamically in BlockTextWithImage */
+@source inline("text-2xl text-3xl text-4xl text-5xl text-6xl md:text-3xl md:text-4xl md:text-5xl md:text-6xl");
+
 @theme {
   --color-background: #ffffff;
   --color-foreground: #050a14;

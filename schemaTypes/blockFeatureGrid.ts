@@ -6,9 +6,42 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      initialValue: 'grid',
+      options: {
+        list: [
+          {title: 'Card Grid (default)', value: 'grid'},
+          {title: 'Numbered Cards (app-style)', value: 'numbered-cards'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'title',
       title: 'Section Title',
       type: 'string',
+    }),
+    defineField({
+      name: 'subtitle',
+      title: 'Section Subtitle',
+      type: 'string',
+      description: 'Optional subtitle shown below the section title (grid layout only).',
+    }),
+    defineField({
+      name: 'gridCols',
+      title: 'Grid Columns',
+      type: 'string',
+      initialValue: '3',
+      description: 'Number of columns in the card grid (grid layout only).',
+      options: {
+        list: [
+          {title: '3 columns — lg:grid-cols-3 (default)', value: '3'},
+          {title: '4 columns — lg:grid-cols-4', value: '4'},
+        ],
+        layout: 'radio',
+      },
     }),
     defineField({
       name: 'features',
@@ -19,9 +52,25 @@ export default defineType({
           type: 'object',
           fields: [
             defineField({name: 'title', type: 'string', title: 'Title'}),
-            defineField({name: 'description', type: 'text', rows: 3, title: 'Description'}),
+            defineField({name: 'subtitle', type: 'string', title: 'Subtitle'}),
+            defineField({
+              name: 'body',
+              title: 'Body (rich text)',
+              type: 'array',
+              of: [{type: 'block'}],
+              description: 'Supports bold, paragraphs, lists. Used in numbered-cards layout.',
+            }),
+            defineField({
+              name: 'description',
+              type: 'text',
+              rows: 3,
+              title: 'Description (plain, legacy)',
+            }),
             defineField({name: 'icon', type: 'image', title: 'Icon (Optional)'}),
           ],
+          preview: {
+            select: {title: 'title', subtitle: 'subtitle'},
+          },
         },
       ],
     }),
@@ -44,11 +93,12 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
+      layout: 'layout',
     },
-    prepare({title}) {
+    prepare({title, layout}) {
       return {
         title: title || 'Feature Grid',
-        subtitle: 'Grid of features',
+        subtitle: layout === 'numbered-cards' ? 'Numbered Cards' : 'Card Grid',
       }
     },
   },

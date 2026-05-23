@@ -31,6 +31,21 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'headingSize',
+      title: 'Heading Size',
+      type: 'string',
+      initialValue: 'default',
+      options: {
+        list: [
+          {title: 'Small  — text-2xl / md:text-3xl', value: 'sm'},
+          {title: 'Default — text-3xl / md:text-4xl', value: 'default'},
+          {title: 'Large  — text-4xl / md:text-5xl', value: 'lg'},
+          {title: 'XL     — text-5xl / md:text-6xl', value: 'xl'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'content',
       title: 'Content',
       type: 'array',
@@ -43,6 +58,12 @@ export default defineType({
       options: {
         hotspot: true,
       },
+    }),
+    defineField({
+      name: 'imageUrl',
+      title: 'Image URL (fallback)',
+      type: 'string',
+      description: 'Public path fallback when no Sanity image is uploaded (e.g. /MicrosoftDynamics-365_BusinessCentral/hero.jpg)',
     }),
     defineField({
       name: 'imagePosition',

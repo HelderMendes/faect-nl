@@ -101,7 +101,7 @@ export function BlockTextWithAccordion({
         {/* Right column: accordion */}
         {items && items.length > 0 && (
           <div className="bg-contain bg-no-repeat pb-4 lg:bg-[url(/home/Faect-bkg_logo.png)]">
-            <div className="mb-2 flex justify-end">
+            <div className="mt-12 mb-2 flex justify-end">
               <button
                 onClick={toggleAll}
                 className="bg-faect-blue/80 hover:bg-faect-blue hover:border-faect-navy rounded-lg border-2 border-white px-6 py-1.5 text-sm font-medium text-white transition-opacity"
