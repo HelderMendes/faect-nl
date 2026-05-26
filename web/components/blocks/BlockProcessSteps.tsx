@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { getSectionStyles, type SectionSettings } from "./sectionUtils";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/react";
+import DownloadPDFButton from "../DownloadPDFButton";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -16,7 +19,9 @@ interface Step {
 interface BlockProcessStepsProps {
   label?: string;
   heading?: string;
+  content?: PortableTextBlock[];
   subheading?: string;
+  introImage?: SanityImage;
   steps?: Step[];
   layout?: "horizontal" | "vertical" | "numbered" | "cards";
   settings?: SectionSettings;
@@ -25,7 +30,9 @@ interface BlockProcessStepsProps {
 export function BlockProcessSteps({
   label,
   heading,
+  content,
   subheading,
+  introImage,
   steps,
   layout = "horizontal",
   settings,
@@ -39,7 +46,11 @@ export function BlockProcessSteps({
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-1 gap-8 xl:grid-cols-[33%_1fr]">
           {/* Left column: label + heading + body + image + CTA links */}
-          {(label || heading || subheading) && (
+          {(label ||
+            heading ||
+            (content && content.length > 0) ||
+            subheading ||
+            introImage?.asset) && (
             <section className="mx-4 mb-8 flex flex-col items-center justify-start md:px-15 lg:px-30 xl:items-start xl:px-0">
               {label && (
                 <p className="hover:text-faect-blue relative mb-6 border-b-2 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
@@ -55,10 +66,42 @@ export function BlockProcessSteps({
                   {heading}
                 </h2>
               )}
-              {subheading && (
+              {content && content.length > 0 ? (
+                <div className="text-center text-[1.3rem]/8 font-medium text-gray-700 xl:text-left">
+                  <PortableText
+                    value={content}
+                    components={{
+                      block: {
+                        normal: ({ children }) => (
+                          <p className="mb-3 last:mb-0">{children}</p>
+                        ),
+                      },
+                    }}
+                  />
+                </div>
+              ) : subheading ? (
                 <p className="text-center text-[1.3rem]/8 font-medium text-gray-700 xl:text-left">
                   {subheading}
                 </p>
+              ) : null}
+              {introImage?.asset && (
+                <div className="mt-8 w-full max-w-sm overflow-hidden rounded-xl xl:mt-10">
+                  <Image
+                    src={urlFor(introImage).width(700).height(1120).url()}
+                    alt={heading || label || "Process illustration"}
+                    width={700}
+                    height={1120}
+                    className="h-auto w-full object-cover"
+                  />
+                  <div className="mt-10">
+                    <DownloadPDFButton
+                      pdfUrl="/pdfs/microsoft-cloud-benefits.pdf"
+                      fileName="Microsoft-Cloud-Voordelen.pdf"
+                    >
+                      Download Brochure
+                    </DownloadPDFButton>
+                  </div>
+                </div>
               )}
             </section>
           )}

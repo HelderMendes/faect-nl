@@ -20,11 +20,12 @@ export default defineType({
       initialValue: 'Veelgestelde vragen',
     }),
     defineField({
-      name: 'intro',
-      title: 'Intro tekst',
-      type: 'text',
-      rows: 3,
-      description: 'Korte inleidende tekst onder de heading, boven de vragen.',
+      name: 'content',
+      title: 'Content (rich text)',
+      type: 'array',
+      of: [{type: 'block'}],
+      description:
+        'Inleidende content onder de heading, boven de vragen (ondersteunt o.a. vetgedrukte tekst).',
     }),
     defineField({
       name: 'items',

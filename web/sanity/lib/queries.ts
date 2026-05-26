@@ -88,7 +88,6 @@ const partnerReference = `{
   "type": partnerType
 }`;
 
-
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug][0]{
     _id,
@@ -132,6 +131,7 @@ export const PAGE_QUERY = groq`
       },
       _type == "blockProcessSteps" => {
         ...,
+        introImage ${imageAsset},
         steps[]{
           ...,
           icon ${imageAsset}
@@ -207,7 +207,6 @@ export const CASE_STUDIES_PAGE_QUERY = groq`*[_type == "caseStudy"] | order(orde
   solution,
   clientLogo { asset-> { url } }
 }`;
-
 
 export const TEAM_MEMBERS_QUERY = groq`*[_type == "teamMember"] | order(order asc, name asc){
   _id,

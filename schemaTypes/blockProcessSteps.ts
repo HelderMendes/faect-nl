@@ -20,10 +20,17 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'subheading',
-      title: 'Intro Text',
-      type: 'text',
-      rows: 3,
+      name: 'content',
+      title: 'Content (Rich Text)',
+      type: 'array',
+      of: [defineArrayMember({type: 'block'})],
+    }),
+    defineField({
+      name: 'introImage',
+      title: 'Intro Image (Optional)',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Optional image shown in the left column below the intro text.',
     }),
     defineField({
       name: 'steps',

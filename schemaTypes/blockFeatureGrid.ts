@@ -14,6 +14,7 @@ export default defineType({
         list: [
           {title: 'Card Grid (default)', value: 'grid'},
           {title: 'Numbered Cards (app-style)', value: 'numbered-cards'},
+          {title: 'Icon List (2 columns)', value: 'icon-list-2col'},
         ],
         layout: 'radio',
       },
@@ -27,14 +28,14 @@ export default defineType({
       name: 'subtitle',
       title: 'Section Subtitle',
       type: 'string',
-      description: 'Optional subtitle shown below the section title (grid layout only).',
+      description: 'Optional subtitle shown below the section title.',
     }),
     defineField({
       name: 'gridCols',
       title: 'Grid Columns',
       type: 'string',
       initialValue: '3',
-      description: 'Number of columns in the card grid (grid layout only).',
+      description: 'Number of columns in the card grid (used by grid layout only).',
       options: {
         list: [
           {title: '3 columns — lg:grid-cols-3 (default)', value: '3'},
@@ -58,7 +59,8 @@ export default defineType({
               title: 'Body (rich text)',
               type: 'array',
               of: [{type: 'block'}],
-              description: 'Supports bold, paragraphs, lists. Used in numbered-cards layout.',
+              description:
+                'Supports bold, paragraphs, lists. Used in numbered-cards and icon-list layouts.',
             }),
             defineField({
               name: 'description',
@@ -96,9 +98,16 @@ export default defineType({
       layout: 'layout',
     },
     prepare({title, layout}) {
+      const layoutLabel =
+        layout === 'numbered-cards'
+          ? 'Numbered Cards'
+          : layout === 'icon-list-2col'
+            ? 'Icon List (2 columns)'
+            : 'Card Grid'
+
       return {
         title: title || 'Feature Grid',
-        subtitle: layout === 'numbered-cards' ? 'Numbered Cards' : 'Card Grid',
+        subtitle: layoutLabel,
       }
     },
   },

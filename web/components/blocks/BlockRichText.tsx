@@ -1,17 +1,24 @@
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import type { PortableTextBlock } from "@portabletext/react";
+
+type PortableTextImageValue = {
+  asset?: { _ref?: string; _id?: string; url?: string };
+  alt?: string;
+  [key: string]: unknown;
+};
 
 interface BlockRichTextProps {
   heading?: string;
-  content?: any[];
+  content?: PortableTextBlock[];
   alignment?: "left" | "center";
   maxWidth?: "default" | "narrow" | "wide";
 }
 
 const portableTextComponents = {
   types: {
-    image: ({ value }: any) => {
+    image: ({ value }: { value: PortableTextImageValue }) => {
       if (!value?.asset) return null;
       return (
         <div className="relative my-8">

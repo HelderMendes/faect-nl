@@ -25,7 +25,7 @@ const GRID_COLS: Record<string, string> = {
 };
 
 type BlockFeatureGridProps = {
-  layout?: "grid" | "numbered-cards";
+  layout?: "grid" | "numbered-cards" | "icon-list-2col";
   title?: string;
   subtitle?: string;
   gridCols?: "3" | "4";
@@ -101,6 +101,78 @@ export function BlockFeatureGrid({
 }: BlockFeatureGridProps) {
   if (!features || features.length === 0) return null;
 
+  if (layout === "icon-list-2col") {
+    return (
+      <section className={getSectionStyles(settings) + ""}>
+        <div className="container mx-auto px-8">
+          {title && (
+            <h2 className="text-faect-blue m-auto mb-3 max-w-4xl text-center text-3xl font-medium md:text-4xl">
+              {title}
+            </h2>
+          )}
+          {subtitle && (
+            <p className="text-faect-gray mx-auto mb-8 max-w-4xl text-center leading-relaxed lg:mb-10">
+              {subtitle}
+            </p>
+          )}
+
+          <div className="mt-10 grid grid-cols-1 gap-x-14 gap-y-12 md:grid-cols-2 lg:mt-16">
+            {features.map((feature) => (
+              <article key={feature._key} className="text-center md:text-left">
+                <div className="flex flex-col items-center md:flex-row md:items-end md:gap-3">
+                  {feature.icon?.asset && (
+                    <div className="h-12 w-12 shrink-0 md:mt-1">
+                      <Image
+                        src={urlFor(feature.icon).width(96).height(96).url()}
+                        alt={feature.title}
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 object-contain"
+                      />
+                    </div>
+                  )}
+                  <h3 className="text-faect-navy mb-[.4rem] text-[1.4rem] font-medium tracking-tight md:text-[1.6rem]/8">
+                    {feature.title}
+                  </h3>
+                </div>
+
+                {feature.body && feature.body.length > 0 ? (
+                  <div className="text-faect-gray text-[1.05rem]/8 font-normal lg:text-[1.1rem]/8">
+                    <PortableText
+                      value={feature.body}
+                      components={{
+                        block: {
+                          normal: ({ children }) => (
+                            <p className="mb-2 last:mb-0">{children}</p>
+                          ),
+                        },
+                      }}
+                    />
+                  </div>
+                ) : feature.description ? (
+                  <p className="text-faect-gray text-[1.05rem]/8 font-normal lg:text-[1.1rem]/8">
+                    {feature.description}
+                  </p>
+                ) : null}
+              </article>
+            ))}
+          </div>
+
+          {ctaText && ctaLink && (
+            <div className="mt-12 flex justify-center">
+              <Link
+                href={ctaLink}
+                className="border-faect-blue text-faect-blue font-ui nav-item-sweep inline-block rounded-[8px] border bg-white px-10 py-1 text-center text-[1.15rem] font-medium transition-all duration-900 ease-out hover:ml-2 hover:scale-110 hover:border-white hover:text-white"
+              >
+                {ctaText}
+              </Link>
+            </div>
+          )}
+        </div>
+      </section>
+    );
+  }
+
   if (layout === "numbered-cards") {
     return (
       <section
@@ -114,7 +186,7 @@ export function BlockFeatureGrid({
           )}
           {subtitle && (
             <p className="text-faect-gray mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed">
-              {subtitle} test
+              {subtitle}
             </p>
           )}
 

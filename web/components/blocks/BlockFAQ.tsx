@@ -4,7 +4,10 @@ import { useState } from "react";
 import { PortableText } from "@portabletext/react";
 import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
 import { ContactModal } from "@/components/ui/ContactModal";
-import type { PortableTextBlock } from "@portabletext/react";
+import type {
+  PortableTextBlock,
+  PortableTextComponents,
+} from "@portabletext/react";
 
 type FAQItem = {
   _key: string;
@@ -15,6 +18,7 @@ type FAQItem = {
 type BlockFAQProps = {
   label?: string;
   heading?: string;
+  content?: PortableTextBlock[];
   intro?: string;
   items?: FAQItem[];
   ctaText?: string;
@@ -22,9 +26,72 @@ type BlockFAQProps = {
   settings?: SectionSettings;
 };
 
+const faqRichTextComponents: PortableTextComponents = {
+  marks: {
+    strong: ({ children }) => (
+      <strong className="font-semibold">{children}</strong>
+    ),
+    em: ({ children }) => <em>{children}</em>,
+    underline: ({ children }) => <span className="underline">{children}</span>,
+    "strike-through": ({ children }) => <s>{children}</s>,
+    code: ({ children }) => (
+      <code className="rounded bg-gray-100 px-1 font-mono text-sm">
+        {children}
+      </code>
+    ),
+    link: ({ children, value }) => (
+      <a
+        href={value?.href}
+        className="text-faect-blue underline hover:opacity-75"
+        target={value?.href?.startsWith("http") ? "_blank" : undefined}
+        rel={
+          value?.href?.startsWith("http") ? "noopener noreferrer" : undefined
+        }
+      >
+        {children}
+      </a>
+    ),
+  },
+  list: {
+    bullet: ({ children }) => (
+      <ul className="mb-4 list-disc space-y-1 pl-5 text-left">{children}</ul>
+    ),
+    number: ({ children }) => (
+      <ol className="mb-4 list-decimal space-y-1 pl-5 text-left">{children}</ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }) => <li>{children}</li>,
+    number: ({ children }) => <li>{children}</li>,
+  },
+  block: {
+    normal: ({ children }) => <p className="mb-3 last:mb-0">{children}</p>,
+    h1: ({ children }) => (
+      <h1 className="mb-3 text-4xl font-bold">{children}</h1>
+    ),
+    h2: ({ children }) => (
+      <h2 className="mb-3 text-3xl font-bold">{children}</h2>
+    ),
+    h3: ({ children }) => (
+      <h3 className="prose text-faect-blue mb-4 border-gray-200 text-2xl font-semibold [:not(:first-child)]:mt-10">
+        {children}
+      </h3>
+    ),
+    h4: ({ children }) => (
+      <h4 className="mb-2 text-xl font-semibold">{children}</h4>
+    ),
+    blockquote: ({ children }) => (
+      <blockquote className="border-faect-blue/30 mb-3 border-l-2 pl-4 italic">
+        {children}
+      </blockquote>
+    ),
+  },
+};
+
 export function BlockFAQ({
   label,
   heading,
+  content,
   intro,
   items,
   ctaText,
@@ -42,7 +109,7 @@ export function BlockFAQ({
         {/* Constrained width — intentionally not full-width at xl */}
         <div className="mx-auto max-w-3xl">
           {/* Header */}
-          {(label || heading || intro) && (
+          {(label || heading || (content && content.length > 0) || intro) && (
             <div className="mb-12 text-center">
               {label && (
                 <p className="hover:text-faect-blue relative mb-6 inline-block border-b-2 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
@@ -55,11 +122,18 @@ export function BlockFAQ({
                   {heading}
                 </h2>
               )}
-              {intro && (
+              {content && content.length > 0 ? (
+                <div className="text-faect-gray mx-auto mt-4 text-[1.2rem]/9 font-medium">
+                  <PortableText
+                    value={content}
+                    components={faqRichTextComponents}
+                  />
+                </div>
+              ) : intro ? (
                 <p className="text-faect-gray mx-auto mt-4 text-[1.2rem]/9 font-medium">
                   {intro}
                 </p>
-              )}
+              ) : null}
             </div>
           )}
 
@@ -110,13 +184,7 @@ export function BlockFAQ({
                         <div className="border-faect-blue/30 text-faect-gray mb-5 border-l-2 pl-11 text-[1.05rem]/7 font-medium">
                           <PortableText
                             value={item.answer}
-                            components={{
-                              block: {
-                                normal: ({ children }) => (
-                                  <p className="mb-3 last:mb-0">{children}</p>
-                                ),
-                              },
-                            }}
+                            components={faqRichTextComponents}
                           />
                         </div>
                       )}
