@@ -60,10 +60,6 @@ const INTRO_MS365_ONTDEKT =
 
 const HEADING_UPGRADEN =
   "font-extrabold tracking-tight sm:text-4xl md:text-[2.6rem]/12 lg:text-[2.8rem]/13 xl:text-[2.9rem]/14 text-[2.5rem]/10 mt-15 px-2 md:pl-0  md:mr-20 sm:mt-24  md:-mt-24 xl:-mt-32 xl:mr-0 text-shadow-md text-shadow-black/40 md:text-shadow-lg  lg:text-shadow-xl  xl:tracking-normal";
-
-const HEADING_OVERSTAPEN =
-  "font-extrabold  xl:pr-25 lg:pr-55 lg:-mt-8 md:-mt-18 md:pr-40 md:pt-0 sm:pt-55 pt-10 tracking-tight sm:text-4xl md:text-[2.6rem] lg:text-[3rem] xl:text-[3.6rem]/16  text-3xl";
-
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
 //   headingColor: "white-to-blue" | introVariant: "navy-tinted" | spacing: "default"
