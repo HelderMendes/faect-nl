@@ -183,7 +183,7 @@ export function BlockTextWithImage({
       )}
 
       <div className="pb- container mx-auto px-4 lg:px-12">
-        <div className="flex grid-cols-1 flex-col space-y-1 lg:grid lg:grid-cols-2 lg:gap-10">
+        <div className="flex grid-cols-1 flex-col gap-8 space-y-1 lg:grid lg:grid-cols-2 lg:gap-10">
           {/* Image */}
           <div
             className={cn(

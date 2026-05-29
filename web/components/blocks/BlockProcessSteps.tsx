@@ -1,9 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { getSectionStyles, type SectionSettings } from "./sectionUtils";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/react";
 import DownloadPDFButton from "../DownloadPDFButton";
+import { usePathname } from "next/navigation";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -38,6 +41,11 @@ export function BlockProcessSteps({
   settings,
 }: BlockProcessStepsProps) {
   const displaySteps = steps || [];
+  const pathname = usePathname();
+
+  const showDownloadButton = pathname === "/upgraden-naar-business-central";
+  const useSmallTitle =
+    pathname === "/overstappen-naar-business-central-de-slimme-keuze";
 
   if (displaySteps.length === 0) return null;
 
@@ -61,11 +69,18 @@ export function BlockProcessSteps({
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </p>
               )}
-              {heading && (
-                <h2 className="font-cairo text-faect-blue mb-3 text-center text-4xl font-extrabold tracking-tight md:text-5xl/14 lg:mb-6 lg:text-6xl/16 xl:text-left">
-                  {heading}
-                </h2>
-              )}
+              {useSmallTitle
+                ? heading && (
+                    <h2 className="font-cairo text-faect-blue mb-3 text-center text-3xl font-extrabold tracking-tight md:text-4xl/11 xl:text-left">
+                      {heading}
+                    </h2>
+                  )
+                : heading && (
+                    <h2 className="font-cairo text-faect-blue mb-3 text-center text-4xl font-extrabold tracking-tight md:text-5xl/14 lg:mb-6 lg:text-6xl/16 xl:text-left">
+                      {heading}
+                    </h2>
+                  )}
+
               {content && content.length > 0 ? (
                 <div className="text-center text-[1.3rem]/8 font-medium text-gray-700 xl:text-left">
                   <PortableText
@@ -85,7 +100,7 @@ export function BlockProcessSteps({
                 </p>
               ) : null}
               {introImage?.asset && (
-                <div className="mt-8 w-full max-w-sm overflow-hidden rounded-xl xl:mt-10">
+                <div className="mx-auto mt-8 w-full max-w-xs overflow-hidden rounded-xl xl:mt-10">
                   <Image
                     src={urlFor(introImage).width(700).height(1120).url()}
                     alt={heading || label || "Process illustration"}
@@ -93,14 +108,16 @@ export function BlockProcessSteps({
                     height={1120}
                     className="h-auto w-full object-cover"
                   />
-                  <div className="mt-10">
-                    <DownloadPDFButton
-                      pdfUrl="/pdfs/microsoft-cloud-benefits.pdf"
-                      fileName="Microsoft-Cloud-Voordelen.pdf"
-                    >
-                      Download Brochure
-                    </DownloadPDFButton>
-                  </div>
+                  {showDownloadButton && (
+                    <div className="mt-10">
+                      <DownloadPDFButton
+                        pdfUrl="/pdfs/NAV%20upgrade%2010%20stappenplan.pdf"
+                        fileName="Microsoft-Cloud-Voordelen.pdf"
+                      >
+                        Download Brochure
+                      </DownloadPDFButton>
+                    </div>
+                  )}
                 </div>
               )}
             </section>

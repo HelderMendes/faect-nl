@@ -1,9 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "@portabletext/react";
 import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
 import type { PortableTextBlock } from "@portabletext/react";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -28,6 +32,8 @@ type BlockFeatureGridProps = {
   layout?: "grid" | "numbered-cards" | "icon-list-2col";
   title?: string;
   subtitle?: string;
+  gridIntroRich?: PortableTextBlock[];
+  intro?: string;
   gridCols?: "3" | "4";
   features?: Feature[];
   ctaText?: string;
@@ -93,12 +99,19 @@ export function BlockFeatureGrid({
   layout = "grid",
   title,
   subtitle,
+  gridIntroRich,
+  intro,
   gridCols = "3",
   features,
   ctaText,
   ctaLink,
   settings,
 }: BlockFeatureGridProps) {
+  const pathname = usePathname();
+  const isAflopendeMicoisoft =
+    pathname ===
+    "/aflopende-microsoft-support-voor-navision-versies-2016-2017-en-2018";
+
   if (!features || features.length === 0) return null;
 
   if (layout === "icon-list-2col") {
@@ -185,8 +198,11 @@ export function BlockFeatureGrid({
             </h2>
           )}
           {subtitle && (
-            <p className="text-faect-gray mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed">
-              {subtitle}
+            <p className="text-faect-gray mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed"></p>
+          )}
+          {intro && (
+            <p className="text-faect-gray mx-auto mt-4 -mb-6 max-w-3xl text-center leading-relaxed">
+              {intro}
             </p>
           )}
 
@@ -230,6 +246,25 @@ export function BlockFeatureGrid({
             {subtitle}
           </p>
         )}
+        {gridIntroRich && gridIntroRich.length > 0 && (
+          <div className="text-faect-gray mx-auto my-5 max-w-4xl text-center leading-relaxed">
+            <PortableText
+              value={gridIntroRich}
+              components={{
+                block: {
+                  normal: ({ children }) => (
+                    <p className="mb-3 last:mb-0">{children}</p>
+                  ),
+                },
+                marks: {
+                  strong: ({ children }) => (
+                    <strong className="font-semibold">{children}</strong>
+                  ),
+                },
+              }}
+            />
+          </div>
+        )}
         <div
           className={cn(
             "grid grid-cols-1 gap-8 text-center",
@@ -255,7 +290,13 @@ export function BlockFeatureGrid({
               <h3 className="text-faect-blue mb-2 text-xl font-semibold tracking-wide">
                 {feature.title}
               </h3>
-              <p className="leading-relaxed text-gray-600">
+
+              <p
+                className={clsx({
+                  "text-[1.05rem]/7 text-gray-700": isAflopendeMicoisoft,
+                  "leading-relaxed": !isAflopendeMicoisoft,
+                })}
+              >
                 {feature.description}
               </p>
             </div>

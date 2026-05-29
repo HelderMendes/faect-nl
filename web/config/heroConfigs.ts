@@ -60,6 +60,8 @@ const INTRO_MS365_ONTDEKT =
 
 const HEADING_UPGRADEN =
   "font-extrabold tracking-tight sm:text-4xl md:text-[2.6rem]/12 lg:text-[2.8rem]/13 xl:text-[2.9rem]/14 text-[2.5rem]/10 mt-15 px-2 md:pl-0  md:mr-20 sm:mt-24  md:-mt-24 xl:-mt-32 xl:mr-0 text-shadow-md text-shadow-black/40 md:text-shadow-lg  lg:text-shadow-xl  xl:tracking-normal";
+
+const HEADING_OVERSTAPEN = HEADING_HOME + " -mt-38 tracking-wide";
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
 //   headingColor: "white-to-blue" | introVariant: "navy-tinted" | spacing: "default"
@@ -171,9 +173,28 @@ export const heroConfigs: Record<string, HeroConfig> = {
   },
 
   "overstappen-naar-business-central-de-slimme-keuze": {
-    headingClass: HEADING_APPS,
+    headingClass: HEADING_OVERSTAPEN,
     subheadingSizeClass: SUBHEADING_APPS,
     introClass: INTRO_APPS,
     mobileIntroBelow: true,
   },
+
+  "aflopende-microsoft-support-voor-navision-versies-2016-2017-en-2018": {
+    headingColor: "blue",
+    headingClass:
+      "xl:text-[3.2rem]/14 lg:text-[3rem]/14 md:text-[2.6rem]/12 text-3xl/10 px-2 md:px-0 -mt-14 xl:tracking-normal font-extrabold xl:text-shadow-xl text-shadow-lg text-shadow-black/40 md:-mb-2 mb-3",
+    subheadingSizeClass: SUBHEADING_HOME + " ",
+    introClass: INTRO_HOME,
+    mobileIntroBelow: true,
+  },
+
+  "wat-is-het-verschil-tussen-navision-en-microsoft-dynamics-365-business-central":
+    {
+      headingColor: "blue",
+      headingClass:
+        "xl:text-[3.1rem]/15 lg:text-[3rem]/14 md:text-[2.6rem]/12 text-3xl/10 mt-10 px-2 md:px-0 -mt-24 xl:-mt-32 xl:tracking-normal font-extrabold xl:text-shadow-xl text-shadow-lg text-shadow-black/40 md:-mb-2 mb-3",
+      subheadingSizeClass: SUBHEADING_HOME + " ",
+      introClass: INTRO_HOME,
+      mobileIntroBelow: true,
+    },
 };

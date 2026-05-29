@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
+import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/react";
 import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
+import { usePathname } from "next/navigation";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -28,6 +33,7 @@ type BlockTwoColumnCTAProps = {
   leftLabel?: string;
   leftHeading?: string;
   leftBody?: string;
+  leftBodyRich?: PortableTextBlock[];
   leftLinkText?: string;
   leftLinkHref?: string;
   leftButtonText?: string;
@@ -36,6 +42,7 @@ type BlockTwoColumnCTAProps = {
   rightLabel?: string;
   rightHeading?: string;
   rightBody?: string;
+  rightBodyRich?: PortableTextBlock[];
   rightLinkText?: string;
   rightLinkHref?: string;
   rightButtonText?: string;
@@ -52,6 +59,7 @@ type ColumnProps = {
   label?: string;
   heading?: string;
   body?: string;
+  bodyRich?: PortableTextBlock[];
   linkText?: string;
   linkHref?: string;
   buttonText?: string;
@@ -65,11 +73,17 @@ function Column({
   label,
   heading,
   body,
+  bodyRich,
   linkText,
   linkHref,
   buttonText,
   buttonHref,
 }: ColumnProps) {
+  const pathname = usePathname();
+  const isAflopendeMicrosoftSupportPage =
+    pathname ===
+    "/aflopende-microsoft-support-voor-navision-versies-2016-2017-en-2018";
+
   return (
     <div
       className={cn(
@@ -107,16 +121,64 @@ function Column({
             {label}&nbsp;&nbsp;&nbsp;&nbsp;
           </p>
         )}
-        {heading && (
-          <h2
+
+        {isAflopendeMicrosoftSupportPage
+          ? heading && (
+              <h2
+                className={cn(
+                  "font-cairo text-faect-blue text-left text-3xl font-extrabold lg:text-4xl",
+                )}
+              >
+                {heading}
+              </h2>
+            )
+          : heading && (
+              <h2
+                className={cn(
+                  "font-cairo text-faect-blue text-3xl font-extrabold lg:text-4xl",
+                )}
+              >
+                {heading}
+              </h2>
+            )}
+
+        {bodyRich && bodyRich.length > 0 ? (
+          <div
             className={cn(
-              "font-cairo text-faect-blue text-3xl font-extrabold lg:text-4xl",
+              "font-work-sans text-faect-gray mb-3 text-left text-[1.2rem]/8 font-medium",
             )}
           >
-            {heading}
-          </h2>
-        )}
-        {body && (
+            <PortableText
+              value={bodyRich}
+              components={{
+                block: {
+                  normal: ({ children }) => (
+                    <p className="mb-3 last:mb-0">{children}</p>
+                  ),
+                },
+                list: {
+                  bullet: ({ children }) => (
+                    <ul className="my-4 list-disc space-y-2 pl-6 text-left marker:text-slate-500">
+                      {children}
+                    </ul>
+                  ),
+                },
+                listItem: {
+                  bullet: ({ children }) => (
+                    <li className="leading-relaxed">{children}</li>
+                  ),
+                },
+                marks: {
+                  strong: ({ children }) => (
+                    <strong className="text-faect-navy font-bold">
+                      {children}
+                    </strong>
+                  ),
+                },
+              }}
+            />
+          </div>
+        ) : body ? (
           <p
             className={cn(
               "font-work-sans text-faect-gray mb-3 text-[1.2rem]/8 font-medium",
@@ -124,7 +186,7 @@ function Column({
           >
             {body}
           </p>
-        )}
+        ) : null}
         {linkText && linkHref && (
           <Link
             href={linkHref}
@@ -156,6 +218,7 @@ export function BlockTwoColumnCTA({
   leftLabel,
   leftHeading,
   leftBody,
+  leftBodyRich,
   leftLinkText,
   leftLinkHref,
   leftButtonText,
@@ -164,6 +227,7 @@ export function BlockTwoColumnCTA({
   rightLabel,
   rightHeading,
   rightBody,
+  rightBodyRich,
   rightLinkText,
   rightLinkHref,
   rightButtonText,
@@ -197,6 +261,7 @@ export function BlockTwoColumnCTA({
             label={leftLabel}
             heading={leftHeading}
             body={leftBody}
+            bodyRich={leftBodyRich}
             linkText={leftLinkText}
             linkHref={leftLinkHref}
             buttonText={leftButtonText}
@@ -209,6 +274,7 @@ export function BlockTwoColumnCTA({
             label={rightLabel}
             heading={rightHeading}
             body={rightBody}
+            bodyRich={rightBodyRich}
             linkText={rightLinkText}
             linkHref={rightLinkHref}
             buttonText={rightButtonText}

@@ -73,9 +73,16 @@ export default defineType({
     }),
     defineField({
       name: 'leftBody',
-      title: 'Links — Body',
+      title: 'Links — Body (legacy plain text)',
       type: 'text',
       rows: 4,
+    }),
+    defineField({
+      name: 'leftBodyRich',
+      title: 'Links — Body (rich text)',
+      type: 'array',
+      of: [defineArrayMember({type: 'block'})],
+      description: 'Gebruik dit voor meerdere paragrafen, vetgedrukte tekst en lijsten.',
     }),
     defineField({
       name: 'leftLinkText',
@@ -116,9 +123,16 @@ export default defineType({
     }),
     defineField({
       name: 'rightBody',
-      title: 'Rechts — Body',
+      title: 'Rechts — Body (legacy plain text)',
       type: 'text',
       rows: 4,
+    }),
+    defineField({
+      name: 'rightBodyRich',
+      title: 'Rechts — Body (rich text)',
+      type: 'array',
+      of: [defineArrayMember({type: 'block'})],
+      description: 'Gebruik dit voor meerdere paragrafen, vetgedrukte tekst en lijsten.',
     }),
     defineField({
       name: 'rightLinkText',

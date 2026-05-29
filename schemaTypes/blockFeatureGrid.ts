@@ -31,6 +31,23 @@ export default defineType({
       description: 'Optional subtitle shown below the section title.',
     }),
     defineField({
+      name: 'gridIntroRich',
+      title: 'Grid Intro (rich text)',
+      type: 'array',
+      of: [{type: 'block'}],
+      hidden: ({parent}) => parent?.layout !== 'grid',
+      description:
+        'Optional rich intro shown in Card Grid between subtitle and the cards. Supports paragraphs, bold and lists.',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro Text',
+      type: 'text',
+      rows: 4,
+      hidden: ({parent}) => parent?.layout !== 'numbered-cards',
+      description: 'Optional intro text shown below the title (supports line breaks).',
+    }),
+    defineField({
       name: 'gridCols',
       title: 'Grid Columns',
       type: 'string',
