@@ -21,6 +21,12 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'sectionId',
+      title: 'Section ID',
+      type: 'string',
+      description: 'Unique identifier for this section (used for anchor links)',
+    }),
+    defineField({
       name: 'headerTitle',
       title: 'Eyebrow Label',
       type: 'string',
@@ -63,7 +69,8 @@ export default defineType({
       name: 'imageUrl',
       title: 'Image URL (fallback)',
       type: 'string',
-      description: 'Public path fallback when no Sanity image is uploaded (e.g. /MicrosoftDynamics-365_BusinessCentral/hero.jpg)',
+      description:
+        'Public path fallback when no Sanity image is uploaded (e.g. /MicrosoftDynamics-365_BusinessCentral/hero.jpg)',
     }),
     defineField({
       name: 'imagePosition',

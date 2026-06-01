@@ -29,6 +29,7 @@ const GRID_COLS: Record<string, string> = {
 };
 
 type BlockFeatureGridProps = {
+  _key?: string;
   layout?: "grid" | "numbered-cards" | "icon-list-2col";
   title?: string;
   subtitle?: string;
@@ -96,6 +97,7 @@ function NumberedFeatureCard({
 }
 
 export function BlockFeatureGrid({
+  _key,
   layout = "grid",
   title,
   subtitle,
@@ -116,7 +118,10 @@ export function BlockFeatureGrid({
 
   if (layout === "icon-list-2col") {
     return (
-      <section className={getSectionStyles(settings) + ""}>
+      <section
+        className={getSectionStyles(settings) + ""}
+        data-block-key={_key}
+      >
         <div className="container mx-auto px-8">
           {title && (
             <h2 className="text-faect-blue m-auto mb-3 max-w-4xl text-center text-3xl font-medium md:text-4xl">
@@ -190,6 +195,7 @@ export function BlockFeatureGrid({
     return (
       <section
         className={cn(getSectionStyles(settings), "section-dither-flipped")}
+        data-block-key={_key}
       >
         <div className="container mx-auto -mt-6 px-4 pb-16 lg:px-8">
           {title && (
@@ -234,7 +240,10 @@ export function BlockFeatureGrid({
 
   // ── Default grid layout ────────────────────────────────────────────────────
   return (
-    <section className={getSectionStyles(settings) + " -mt-10 py-0"}>
+    <section
+      className={getSectionStyles(settings) + " -mt-10 py-0"}
+      data-block-key={_key}
+    >
       <div className="container mx-auto px-4">
         {title && (
           <h2 className="text-faect-blue m-auto mb-2 max-w-4xl text-center text-3xl font-medium md:text-4xl">
