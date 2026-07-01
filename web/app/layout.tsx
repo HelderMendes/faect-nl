@@ -21,8 +21,9 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Faect – Microsoft business software",
-  description: "Standaard or op maat Microsoft oplossingen.",
+  title: "Faect | Microsoft Dynamics 365 Business Central specialist",
+  description:
+    "Faect helpt organisaties met Microsoft Dynamics 365 Business Central: implementatie, optimalisatie, support en apps op maat.",
 };
 
 export default function RootLayout({
@@ -31,7 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="nl">
       <body
         className={`${cairo.variable} ${varelaRound.variable} ${workSans.variable} flex min-h-screen flex-col antialiased`}
       >

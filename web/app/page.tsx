@@ -2,6 +2,8 @@ import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { heroConfigs } from "@/config/heroConfigs";
 import { BlockRenderer } from "@/components/BlockRenderer";
+import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import {
   BlockHero,
   BlockFeatureGrid,
@@ -12,6 +14,30 @@ import {
 } from "@/components/blocks";
 
 export const revalidate = 60; // ISR
+
+type HomeSeoData = {
+  title?: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<HomeSeoData | null>(PAGE_QUERY, {
+    slug: "home",
+  });
+
+  return buildMetadata({
+    title:
+      page?.seoTitle ||
+      "Faect | Microsoft Dynamics 365 Business Central specialist",
+    description:
+      page?.seoDescription ||
+      "Faect helpt organisaties met Microsoft Dynamics 365 Business Central: implementatie, optimalisatie, support en apps op maat.",
+    path: "/",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 export default async function Home() {
   const data = await client.fetch(PAGE_QUERY, { slug: "home" });

@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 import { POST_QUERY } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
+import { buildMetadata } from "@/lib/seo";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 type PostImage = { asset?: { url?: string; _ref?: string } };
@@ -42,6 +44,33 @@ type Post = {
 };
 
 type BodyBlock = { _type: string; children?: { text?: string }[] };
+
+interface PostPageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await client.fetch<Post | null>(POST_QUERY, { slug });
+
+  if (!post) {
+    return buildMetadata({
+      title: "Nieuws — Faect",
+      description: "Nieuws en inzichten van Faect.",
+      path: `/blog-nieuws/${slug}`,
+      noIndex: true,
+    });
+  }
+
+  return buildMetadata({
+    title: `${post.title} — Faect`,
+    description: post.excerpt || `Lees ${post.title} op de website van Faect.`,
+    path: `/blog-nieuws/${slug}`,
+    image: getImageSrc(post.mainImage, 1200, 630) || undefined,
+  });
+}
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -179,10 +208,6 @@ const bodyComponents: PortableTextComponents = {
 };
 
 // ── Page ───────────────────────────────────────────────────────────────────
-interface PostPageProps {
-  params: Promise<{ slug: string }>;
-}
-
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = await client.fetch<Post>(POST_QUERY, { slug });
@@ -232,7 +257,10 @@ export default async function PostPage({ params }: PostPageProps) {
               {post.categories && post.categories.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                   {post.categories.map((cat) => (
-                    <span key={cat._id} className="font-ui bg-faect-blue/20 text-faect-blue inline-block w-fit rounded-full px-4 py-1 text-xs font-semibold tracking-widest uppercase">
+                    <span
+                      key={cat._id}
+                      className="font-ui bg-faect-blue/20 text-faect-blue inline-block w-fit rounded-full px-4 py-1 text-xs font-semibold tracking-widest uppercase"
+                    >
                       {cat.title}
                     </span>
                   ))}

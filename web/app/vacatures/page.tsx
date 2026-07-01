@@ -1,16 +1,32 @@
-import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import { heroConfigs } from "@/config/heroConfigs";
+import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Vacatures — Faect",
-  description:
-    "Bekijk de vacatures van Faect en ontdek werken bij een specialist in Microsoft Dynamics 365 Business Central.",
+type VacaturesSeoData = {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<VacaturesSeoData | null>(PAGE_QUERY, {
+    slug: "vacatures",
+  });
+
+  return buildMetadata({
+    title: page?.seoTitle || "Vacatures — Faect",
+    description:
+      page?.seoDescription ||
+      "Bekijk de vacatures van Faect en ontdek werken bij een specialist in Microsoft Dynamics 365 Business Central.",
+    path: "/vacatures",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 function paragraph(text: string) {
   return {

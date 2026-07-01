@@ -1,17 +1,33 @@
-import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY, CASE_STUDIES_PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import { CaseAccordion } from "@/components/klanten/CaseAccordion";
 import { heroConfigs } from "@/config/heroConfigs";
+import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
-  title: "Klanten & Cases — Faect",
-  description:
-    "Ontdek hoe Faect organisaties helpt groeien met Microsoft Dynamics 365 Business Central.",
+type CasesSeoData = {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<CasesSeoData | null>(PAGE_QUERY, {
+    slug: "klanten-cases",
+  });
+
+  return buildMetadata({
+    title: page?.seoTitle || "Klanten & Cases — Faect",
+    description:
+      page?.seoDescription ||
+      "Ontdek hoe Faect organisaties helpt groeien met Microsoft Dynamics 365 Business Central.",
+    path: "/klanten-cases",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 type CaseStudy = {
   _id: string;

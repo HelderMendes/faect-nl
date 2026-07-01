@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import type { PortableTextBlock } from "@portabletext/types";
@@ -6,6 +5,8 @@ import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import Image from "next/image";
+import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
 type RichTextBlock = {
   _key?: string;
@@ -14,10 +15,26 @@ type RichTextBlock = {
   content?: PortableTextBlock[];
 };
 
-export const metadata: Metadata = {
-  title: "Help & Ondersteuning — Faect",
-  description: "Support en hulp van Faect voor Business Central klanten.",
+type HelpSeoData = {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<HelpSeoData | null>(PAGE_QUERY, {
+    slug: "help-en-ondersteuning",
+  });
+
+  return buildMetadata({
+    title: page?.seoTitle || "Help & Ondersteuning — Faect",
+    description:
+      page?.seoDescription ||
+      "Support en hulp van Faect voor Business Central klanten.",
+    path: "/help-en-ondersteuning",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 export default async function HelpEnOndersteuningPage() {
   const page = await client.fetch(PAGE_QUERY, {

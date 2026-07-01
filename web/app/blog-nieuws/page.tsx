@@ -5,6 +5,29 @@ import { heroConfigs } from "@/config/heroConfigs";
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
+
+type BlogSeoData = {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
+};
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<BlogSeoData | null>(PAGE_QUERY, {
+    slug: "blog-nieuws",
+  });
+
+  return buildMetadata({
+    title: page?.seoTitle || "Blog & Nieuws — Faect",
+    description:
+      page?.seoDescription ||
+      "Lees het laatste nieuws en inzichten over Microsoft Dynamics 365 Business Central, implementatie, upgrades en optimalisatie.",
+    path: "/blog-nieuws",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 type Post = {
   _id: string;

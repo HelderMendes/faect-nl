@@ -1,0 +1,15 @@
+Route file | has metadata
+web/app/[slug]/page.tsx | no
+web/app/blog-nieuws/[slug]/page.tsx | no
+web/app/blog-nieuws/page.tsx | no
+web/app/contact/page.tsx | yes
+web/app/faect-apps/[slug]/page.tsx | yes
+web/app/help-en-ondersteuning/page.tsx | yes
+web/app/klanten-cases/page.tsx | yes
+web/app/ons-team/page.tsx | yes
+web/app/page.tsx | no
+web/app/partners/page.tsx | yes
+web/app/privacy/page.tsx | yes
+web/app/support/page.tsx | no
+web/app/vacatures/page.tsx | yes
+web/app/voorwaarden/page.tsx | yes

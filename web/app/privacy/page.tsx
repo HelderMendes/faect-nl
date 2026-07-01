@@ -1,15 +1,31 @@
-import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import { SimpleContentPage } from "@/components/layout/SimpleContentPage";
 import Link from "next/link";
+import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy — Faect",
-  description:
-    "Het privacybeleid van Faect en de manier waarop persoonsgegevens worden verwerkt.",
+type PrivacySeoData = {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<PrivacySeoData | null>(PAGE_QUERY, {
+    slug: "privacy",
+  });
+
+  return buildMetadata({
+    title: page?.seoTitle || "Privacy Policy — Faect",
+    description:
+      page?.seoDescription ||
+      "Het privacybeleid van Faect en de manier waarop persoonsgegevens worden verwerkt.",
+    path: "/privacy",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 export default async function PrivacyPage() {
   const page = await client.fetch(PAGE_QUERY, { slug: "privacy" });

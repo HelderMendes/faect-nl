@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { PAGE_QUERY } from "@/sanity/lib/queries";
 import { BlockRenderer } from "@/components/BlockRenderer";
@@ -6,11 +5,29 @@ import {
   DownloadIcon,
   SimpleContentPage,
 } from "@/components/layout/SimpleContentPage";
+import { buildMetadata } from "@/lib/seo";
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Algemene Voorwaarden — Faect",
-  description: "De algemene voorwaarden van Faect en de NLdigital downloads.",
+type VoorwaardenSeoData = {
+  seoTitle?: string;
+  seoDescription?: string;
+  seoImage?: { asset?: { url?: string } };
 };
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await client.fetch<VoorwaardenSeoData | null>(PAGE_QUERY, {
+    slug: "voorwaarden",
+  });
+
+  return buildMetadata({
+    title: page?.seoTitle || "Algemene Voorwaarden — Faect",
+    description:
+      page?.seoDescription ||
+      "De algemene voorwaarden van Faect en de NLdigital downloads.",
+    path: "/voorwaarden",
+    image: page?.seoImage?.asset?.url,
+  });
+}
 
 export default async function VoorwaardenPage() {
   const page = await client.fetch(PAGE_QUERY, { slug: "voorwaarden" });

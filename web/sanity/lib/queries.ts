@@ -93,7 +93,9 @@ export const PAGE_QUERY = groq`
     _id,
     title,
     slug,
-    seo,
+    seoTitle,
+    seoDescription,
+    seoImage { asset-> { url } },
     pageBuilder[]{
       ...,
       _type == "blockHero" => {

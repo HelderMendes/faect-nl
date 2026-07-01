@@ -16,6 +16,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { APP_QUERY, APPS_SIDEBAR_QUERY } from "@/sanity/lib/queries";
 import { AppNavModal } from "@/components/ui/AppNavModal";
+import { buildMetadata } from "@/lib/seo";
 import styles from "./singleApp.module.css";
 
 export const revalidate = 60;
@@ -51,17 +52,21 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const app = await client.fetch<App>(APP_QUERY, { slug });
-  if (!app) return {};
+  if (!app) {
+    return buildMetadata({
+      title: "Faect Apps — Faect",
+      description: "Apps voor Microsoft Dynamics 365 Business Central.",
+      path: `/faect-apps/${slug}`,
+      noIndex: true,
+    });
+  }
 
-  return {
+  return buildMetadata({
     title: `${app.title} — Faect App voor Business Central`,
     description: app.tagline || app.description || "",
-    openGraph: {
-      title: `${app.title} — Faect`,
-      description: app.tagline || app.description || "",
-      images: app.icon?.asset?.url ? [app.icon.asset.url] : [],
-    },
-  };
+    path: `/faect-apps/${slug}`,
+    image: app.icon?.asset?.url,
+  });
 }
 
 export async function generateStaticParams() {
