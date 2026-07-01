@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 
-const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://faect.nl").replace(
-  /\/$/,
-  "",
-);
+const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://faect.nl"
+).replace(/\/$/, "");
 
-export function toAbsoluteUrl(path: string): string {
+function toAbsoluteUrl(path: string): string {
   const normalizedPath = path.startsWith("/") ? path : `/${path}`;
   if (normalizedPath === "/") return SITE_URL;
   return `${SITE_URL}${normalizedPath}`;

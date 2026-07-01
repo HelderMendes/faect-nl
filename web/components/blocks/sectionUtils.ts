@@ -192,87 +192,85 @@ export interface HeroConfig {
 }
 
 // Resolved class maps — consumed by BlockHero
-export const HERO_INTRO_CLASSES: Record<HeroIntroVariant, string> = {
+const HERO_INTRO_CLASSES: Record<HeroIntroVariant, string> = {
   "navy-tinted": "border-white bg-[#1E3E74]/80",
   "white-tinted": "border-faect-blue bg-white/20",
   blue: "border-white bg-faect-blue/95",
   dark: "border-white bg-black/60",
 };
 
-export const HERO_HEADING_CLASSES: Record<HeroHeadingColor, string> = {
+const HERO_HEADING_CLASSES: Record<HeroHeadingColor, string> = {
   "white-to-blue": "text-white md:text-faect-blue",
   white: "text-white",
   blue: "text-faect-blue",
 };
 
-export const HERO_SUBHEADING_CLASSES: Record<HeroSubheadingColor, string> = {
+const HERO_SUBHEADING_CLASSES: Record<HeroSubheadingColor, string> = {
   "white-faded": "text-white/90",
   white: "text-white",
   blue: "text-faect-blue",
 };
 
-export const HERO_FONT_CLASSES: Record<HeroFont, string> = {
+const HERO_FONT_CLASSES: Record<HeroFont, string> = {
   sans: "font-sans",
   heading: "font-heading",
   ui: "font-ui",
 };
 
-export const HERO_HEADING_WIDTH_CLASSES: Record<HeroHeadingWidth, string> = {
+const HERO_HEADING_WIDTH_CLASSES: Record<HeroHeadingWidth, string> = {
   default: "md:mr-[35%] xl:mr-[45%]",
   narrow: "md:mr-[45%] xl:mr-[55%]",
   wide: "md:mr-[20%] xl:mr-[25%]",
   full: "",
 };
 
-export const HERO_HEADING_WEIGHT_CLASSES: Record<HeroHeadingWeight, string> = {
+const HERO_HEADING_WEIGHT_CLASSES: Record<HeroHeadingWeight, string> = {
   semibold: "font-semibold",
   bold: "font-bold",
   normal: "font-normal",
 };
 
-export const HERO_HEADING_SIZE_CLASSES: Record<HeroHeadingSize, string> = {
+const HERO_HEADING_SIZE_CLASSES: Record<HeroHeadingSize, string> = {
   default: "text-4xl md:text-5xl xl:text-[52px]",
   sm: "text-3xl md:text-4xl xl:text-[44px]",
   lg: "text-5xl md:text-6xl xl:text-[64px]",
   xl: "text-6xl md:text-[4.5rem] xl:text-[5rem]",
 };
 
-export const HERO_HEADING_SPACING_CLASSES: Record<HeroHeadingSpacing, string> =
-  {
-    default: "pb-3",
-    tight: "pb-1",
-    loose: "pb-6",
-  };
+const HERO_HEADING_SPACING_CLASSES: Record<HeroHeadingSpacing, string> = {
+  default: "pb-3",
+  tight: "pb-1",
+  loose: "pb-6",
+};
 
-export const HERO_SUBHEADING_SIZE_CLASSES: Record<HeroSubheadingSize, string> =
-  {
-    default: "text-2xl md:text-[1.5rem]/8 xl:text-[1.7rem]/9",
-    sm: "text-lg md:text-xl xl:text-2xl",
-    lg: "text-3xl md:text-[1.8rem]/9 xl:text-[2rem]/10",
-    xl: "text-4xl md:text-[2.7rem]/10 xl:text-[3rem]/12  font-semibold -mb-5",
-  };
+const HERO_SUBHEADING_SIZE_CLASSES: Record<HeroSubheadingSize, string> = {
+  default: "text-2xl md:text-[1.5rem]/8 xl:text-[1.7rem]/9",
+  sm: "text-lg md:text-xl xl:text-2xl",
+  lg: "text-3xl md:text-[1.8rem]/9 xl:text-[2rem]/10",
+  xl: "text-4xl md:text-[2.7rem]/10 xl:text-[3rem]/12  font-semibold -mb-5",
+};
 
-export const HERO_SPACING_CLASSES: Record<HeroSpacing, string> = {
+const HERO_SPACING_CLASSES: Record<HeroSpacing, string> = {
   default: "my-18 pt-16 md:my-24 md:pt-20 lg:my-28 lg:pt-20 xl:my-34",
   compact: "my-10 pt-12 md:my-16 md:pt-16 lg:my-20",
   tall: "my-24 pt-20 md:my-32 md:pt-24 lg:my-40 lg:pt-28",
 };
 
-export const HERO_PADDING_TOP_CLASSES: Record<HeroPadding, string> = {
+const HERO_PADDING_TOP_CLASSES: Record<HeroPadding, string> = {
   none: "pt-0 mt-0",
   compact: "pt-8 mt-8 md:pt-12 md:mt-10",
   default: "pt-16 mt-18 md:pt-20 md:mt-24",
   large: "pt-24 mt-24 md:pt-32 md:mt-32",
 };
 
-export const HERO_PADDING_BOTTOM_CLASSES: Record<HeroPadding, string> = {
+const HERO_PADDING_BOTTOM_CLASSES: Record<HeroPadding, string> = {
   none: "pb-0 mb-0",
   compact: "pb-8 mb-8 md:pb-12 md:mb-10",
   default: "pb-16 mb-18 md:pb-20 md:mb-24",
   large: "pb-24 mb-24 md:pb-32 md:mb-32",
 };
 
-export const HERO_INTRO_POSITION_CLASSES: Record<HeroIntroPosition, string> = {
+const HERO_INTRO_POSITION_CLASSES: Record<HeroIntroPosition, string> = {
   default: "bottom-2 md:bottom-8",
   low: "bottom-0",
   high: "bottom-12 md:bottom-16",

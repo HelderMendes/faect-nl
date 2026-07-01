@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
+import { FeatureCard } from "@/components/ui/FeatureCard";
 import { PortableText } from "@portabletext/react";
 import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
 import type { PortableTextBlock } from "@portabletext/react";
@@ -314,36 +315,28 @@ export function BlockFeatureGrid({
             GRID_COLS[gridCols] ?? GRID_COLS["3"],
           )}
         >
-          {features.map((feature) => (
-            <div
-              key={feature._key}
-              className="group rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg"
-            >
-              {feature.icon?.asset && (
-                <div className="mb-6 overflow-hidden rounded-lg">
-                  <Image
-                    src={urlFor(feature.icon).width(400).height(232).url()}
-                    alt={feature.title}
-                    width={400}
-                    height={232}
-                    className="h-auto w-full object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
-                  />
-                </div>
-              )}
-              <h3 className="text-faect-blue mb-2 text-xl font-semibold tracking-wide">
-                {feature.title}
-              </h3>
+          {features.map((feature) => {
+            const imageUrl = feature.icon?.asset
+              ? urlFor(feature.icon).width(400).height(232).url()
+              : undefined;
 
-              <p
-                className={clsx({
+            return (
+              <FeatureCard
+                key={feature._key}
+                title={feature.title}
+                description={feature.description ?? ""}
+                image={imageUrl}
+                titleClassName="text-faect-blue mb-2 text-xl font-semibold tracking-wide"
+                descriptionClassName={clsx({
                   "text-[1.05rem]/7 text-gray-700": isAflopendeMicoisoft,
                   "leading-relaxed": !isAflopendeMicoisoft,
                 })}
-              >
-                {feature.description}
-              </p>
-            </div>
-          ))}
+                cardClassName="border border-gray-100 bg-white p-6 shadow-sm hover:shadow-lg"
+                imageWrapperClassName="mb-6 rounded-lg"
+                imageClassName="h-auto w-full object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
+              />
+            );
+          })}
         </div>
         {ctaText && ctaLink && (
           <div className="mt-12 flex justify-center">

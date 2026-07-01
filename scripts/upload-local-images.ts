@@ -9,7 +9,6 @@
 
 import {createClient} from '@sanity/client'
 import {createReadStream} from 'fs'
-import {readdir} from 'fs/promises'
 import path from 'path'
 import {fileURLToPath} from 'url'
 import dotenv from 'dotenv'
@@ -69,7 +68,8 @@ async function uploadHomepageImages() {
     contactBackground: 'contact.png',
     solutionsImage: 'faect_onzeOplossingen_home.png',
     efficiencyImage: 'Efficientie-en-Innovatie.jpg',
-    integratedImage: 'Firefly-contour-drawing-some-arms-and-hands-holding-office-ERP-system-instruments-multitask-eff-scaled-1-2048x1170.jpg',
+    integratedImage:
+      'Firefly-contour-drawing-some-arms-and-hands-holding-office-ERP-system-instruments-multitask-eff-scaled-1-2048x1170.jpg',
     userFriendlyImage: 'Gebruiksvriendelijkheid.jpg',
   }
 
@@ -85,7 +85,9 @@ async function uploadHomepageImages() {
     }
   }
 
-  console.log(`\n📊 Uploaded ${Object.keys(uploadedImages).length}/${Object.keys(imageMapping).length} images`)
+  console.log(
+    `\n📊 Uploaded ${Object.keys(uploadedImages).length}/${Object.keys(imageMapping).length} images`,
+  )
 
   return uploadedImages
 }
@@ -94,9 +96,7 @@ async function updateHomepageWithImages(images: Record<string, ImageAsset>) {
   console.log('\n📝 Updating homepage document...\n')
 
   // Find the homepage document
-  const homepage = await sanityClient.fetch(
-    `*[_type == "page" && slug.current == "home"][0]`
-  )
+  const homepage = await sanityClient.fetch(`*[_type == "page" && slug.current == "home"][0]`)
 
   if (!homepage) {
     console.error('❌ Homepage not found!')
@@ -153,10 +153,7 @@ async function updateHomepageWithImages(images: Record<string, ImageAsset>) {
 
   // Patch the document
   try {
-    await sanityClient
-      .patch(homepage._id)
-      .set({pageBuilder: updatedPageBuilder})
-      .commit()
+    await sanityClient.patch(homepage._id).set({pageBuilder: updatedPageBuilder}).commit()
 
     console.log('\n✅ Homepage updated successfully!')
   } catch (error) {
@@ -172,10 +169,7 @@ async function uploadLogoAndUpdateSettings() {
 
   if (logo) {
     try {
-      await sanityClient
-        .patch('siteSettings')
-        .set({logo})
-        .commit()
+      await sanityClient.patch('siteSettings').set({logo}).commit()
       console.log('✅ Site settings updated with logo!')
     } catch (error) {
       console.error('❌ Failed to update site settings:', error)

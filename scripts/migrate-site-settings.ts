@@ -1,4 +1,4 @@
-/**
+/*
  * Site Settings Migration Script
  *
  * Creates the global site settings document in Sanity

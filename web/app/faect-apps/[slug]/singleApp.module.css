@@ -24,10 +24,6 @@ I couldn't fully escape that chain.  This is one off */
   @apply mt-10 mb-4 flex items-start gap-3 text-3xl font-bold;
 }
 
-.articleContent h2 .icon-wrapper {
-  @apply border-faect-blue bg-faect-blue/10 text-faect-blue flex h-9 w-9 shrink-0 items-end justify-center rounded-lg;
-}
-
 .articleContent h3 {
   @apply mt-3 mb-1 pl-11 text-xl font-semibold;
 }
@@ -61,7 +57,7 @@ I couldn't fully escape that chain.  This is one off */
 }
 
 /* Voordelen list */
-.voordelen-list p {
+.voordelenList p {
   display: flex;
   align-items: baseline;
   gap: 1.25rem;

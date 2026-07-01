@@ -252,7 +252,7 @@ export default async function AppDetailPage({ params }: PageProps) {
                             }[];
                           };
                         }) => (
-                          <div className="voordelen-list">
+                          <div className={styles.voordelenList}>
                             {value.items.map((item) => {
                               const text = item.children?.[0]?.text ?? "";
                               return (

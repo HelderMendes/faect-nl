@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "create:pages": "npx tsx create-pages.ts",
+    "migrate:site-settings": "npx tsx migrate-site-settings.ts",
     "migrate:homepage": "npx tsx migrate-homepage.ts",
     "migrate:posts": "npx tsx migrate-posts.ts",
     "migrate:team": "npx tsx migrate-team.ts",
@@ -12,9 +14,7 @@
   },
   "dependencies": {
     "@sanity/client": "^6.28.0",
-    "@sanity/image-url": "^1.1.0",
-    "dotenv": "^16.4.5",
-    "node-fetch": "^3.3.2"
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",

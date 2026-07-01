@@ -1,6 +1,6 @@
 import {defineField} from 'sanity'
 
-export const linkFields = [
+const linkFields = [
   defineField({
     name: 'linkType',
     title: 'Link Type',

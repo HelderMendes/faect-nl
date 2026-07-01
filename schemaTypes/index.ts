@@ -31,6 +31,7 @@ import blockTextWithServiceGrid from './blockTextWithServiceGrid'
 import blockTextWithAccordion from './blockTextWithAccordion'
 import blockTwoColumnCTA from './blockTwoColumnCTA'
 
+import {linkObject} from './shared/linkFields'
 import {sectionSettings} from './shared/sectionSettings'
 
 export const schemaTypes = [
@@ -68,5 +69,6 @@ export const schemaTypes = [
   blockTwoColumnCTA,
 
   // Shared
+  linkObject,
   sectionSettings,
 ]

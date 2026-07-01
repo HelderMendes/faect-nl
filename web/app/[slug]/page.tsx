@@ -18,7 +18,11 @@ type DynamicPageData = {
   seoDescription?: string;
   seoImage?: { asset?: { url?: string } };
   pageFolder?: string;
-  pageBuilder?: unknown[];
+  pageBuilder?: Array<{
+    _type: string;
+    _key: string;
+    [key: string]: unknown;
+  }>;
 };
 
 export async function generateMetadata({
@@ -50,7 +54,9 @@ export default async function DynamicPage({ params }: PageProps) {
     notFound();
   }
 
-  const heroConfig = heroConfigs[slug] ?? heroConfigs[data.pageFolder];
+  const heroConfig =
+    heroConfigs[slug] ??
+    (data.pageFolder ? heroConfigs[data.pageFolder] : undefined);
 
   return (
     <main className="flex flex-col">
