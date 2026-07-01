@@ -123,6 +123,7 @@ export function BlockHero({
                       cx.subheadingFont,
                       cx.subheadingSize,
                       cx.subheadingColor,
+                      cx.subheadingClass,
                     )}
                   >
                     {subheading}

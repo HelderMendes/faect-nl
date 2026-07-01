@@ -32,7 +32,7 @@ async function createSiteSettings() {
   console.log('📷 Uploading logo...')
   const logo = await uploadImageFromUrl(
     'https://faect.nl/wp-content/uploads/2025/07/Faect_logo_beeldmerk_kleur-1.png',
-    'faect-logo.png'
+    'faect-logo.png',
   )
   console.log('✅ Logo uploaded\n')
 
@@ -42,8 +42,7 @@ async function createSiteSettings() {
 
     // General
     siteName: 'Faect',
-    siteTagline:
-      'Specialisten in Microsoft Dynamics 365 Business Central',
+    siteTagline: 'Specialisten in Microsoft Dynamics 365 Business Central',
     logo: logo,
 
     // Contact Info
@@ -76,7 +75,7 @@ async function createSiteSettings() {
           {_key: generateKey(), label: 'Inrichten', url: '/oplossingen/inrichten'},
           {_key: generateKey(), label: 'Optimaliseren', url: '/oplossingen/optimaliseren'},
           {_key: generateKey(), label: 'Upgrade NAV', url: '/oplossingen/upgrade'},
-          {_key: generateKey(), label: 'Support', url: '/support'},
+          {_key: generateKey(), label: 'Support', url: '/help-en-ondersteuning'},
         ],
       },
       {

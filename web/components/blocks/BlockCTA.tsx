@@ -8,6 +8,7 @@ interface BlockCTAProps {
   ctaText: string;
   ctaLink: string;
   backgroundImage?: { asset?: { _ref?: string; url?: string } };
+  backgroundPhotoUrl?: string;
 }
 
 export function BlockCTA({
@@ -16,7 +17,13 @@ export function BlockCTA({
   ctaText,
   ctaLink,
   backgroundImage,
+  backgroundPhotoUrl,
 }: BlockCTAProps) {
+  const backgroundSrc = backgroundImage?.asset
+    ? backgroundImage.asset.url ||
+      urlFor(backgroundImage).width(1920).height(500).url()
+    : backgroundPhotoUrl;
+
   return (
     <section className="section-dither relative overflow-visible pt-20 pb-16 md:pt-28 md:pb-20 lg:pt-34 lg:pb-24">
       <>
@@ -35,12 +42,9 @@ export function BlockCTA({
           className="absolute inset-0"
           style={{ clipPath: "url(#cta-clip)" }}
         >
-          {backgroundImage?.asset && (
+          {backgroundSrc && (
             <Image
-              src={
-                backgroundImage.asset.url ||
-                urlFor(backgroundImage).width(1920).height(500).url()
-              }
+              src={backgroundSrc}
               alt={heading}
               fill
               className="object-cover object-bottom"

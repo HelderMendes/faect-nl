@@ -77,6 +77,18 @@ function NumberedFeatureCard({
               block: {
                 normal: ({ children }) => <p>{children}</p>,
               },
+              list: {
+                bullet: ({ children }) => (
+                  <ul className="list-disc space-y-1 pl-5">{children}</ul>
+                ),
+                number: ({ children }) => (
+                  <ol className="list-decimal space-y-1 pl-5">{children}</ol>
+                ),
+              },
+              listItem: {
+                bullet: ({ children }) => <li>{children}</li>,
+                number: ({ children }) => <li>{children}</li>,
+              },
               marks: {
                 strong: ({ children }) => (
                   <strong className="font-semibold opacity-70">
@@ -113,6 +125,7 @@ export function BlockFeatureGrid({
   const isAflopendeMicoisoft =
     pathname ===
     "/aflopende-microsoft-support-voor-navision-versies-2016-2017-en-2018";
+  const isVacatures = pathname === "/vacatures";
 
   if (!features || features.length === 0) return null;
 
@@ -122,7 +135,7 @@ export function BlockFeatureGrid({
         className={getSectionStyles(settings) + ""}
         data-block-key={_key}
       >
-        <div className="container mx-auto px-8">
+        <div className="container mx-auto px-8 xl:px-16">
           {title && (
             <h2 className="text-faect-blue m-auto mb-3 max-w-4xl text-center text-3xl font-medium md:text-4xl">
               {title}
@@ -134,7 +147,12 @@ export function BlockFeatureGrid({
             </p>
           )}
 
-          <div className="mt-10 grid grid-cols-1 gap-x-14 gap-y-12 md:grid-cols-2 lg:mt-16">
+          <div
+            className={cn(
+              "mt-10 grid grid-cols-1 gap-x-14 gap-y-12 md:grid-cols-2 lg:mt-16",
+              isVacatures && "xl:mx-auto xl:max-w-5xl",
+            )}
+          >
             {features.map((feature) => (
               <article key={feature._key} className="text-center md:text-left">
                 <div className="flex flex-col items-center md:flex-row md:items-end md:gap-3">
@@ -163,6 +181,22 @@ export function BlockFeatureGrid({
                           normal: ({ children }) => (
                             <p className="mb-2 last:mb-0">{children}</p>
                           ),
+                        },
+                        list: {
+                          bullet: ({ children }) => (
+                            <ul className="list-disc space-y-1 pl-5">
+                              {children}
+                            </ul>
+                          ),
+                          number: ({ children }) => (
+                            <ol className="list-decimal space-y-1 pl-5">
+                              {children}
+                            </ol>
+                          ),
+                        },
+                        listItem: {
+                          bullet: ({ children }) => <li>{children}</li>,
+                          number: ({ children }) => <li>{children}</li>,
                         },
                       }}
                     />
@@ -197,7 +231,7 @@ export function BlockFeatureGrid({
         className={cn(getSectionStyles(settings), "section-dither-flipped")}
         data-block-key={_key}
       >
-        <div className="container mx-auto -mt-6 px-4 pb-16 lg:px-8">
+        <div className="container mx-auto -mt-6 px-4 pb-16 lg:px-8 xl:px-16">
           {title && (
             <h2 className="text-faect-blue mx-2 mb-2 max-w-4xl text-center text-3xl font-semibold lg:mx-auto lg:text-4xl">
               {title}

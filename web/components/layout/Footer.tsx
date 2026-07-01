@@ -3,33 +3,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Check } from "lucide-react";
+import { navigation } from "@/config/navigation";
 
 type FooterLink = { name: string; href: string };
 type FooterGroup = {
-  title: string;
+  title?: string;
   checkmarks?: boolean;
   links: FooterLink[];
 };
 
 const footerGroups: FooterGroup[] = [
   {
-    title: "Main navigatie",
-    links: [
-      { name: "Home", href: "/" },
-      { name: "Oplossingen", href: "/oplossingen" },
-      { name: "Apps", href: "/faect-apps" },
-      { name: "Klanten & Cases", href: "/klanten-cases" },
-      { name: "Team", href: "/team" },
-      { name: "Partners", href: "/partners" },
-      { name: "Nieuws", href: "/blog-nieuws" },
-    ],
+    links: navigation,
   },
   {
-    title: "Vacatures",
     links: [
+      { name: "Vacatures", href: "/vacatures" },
       { name: "Algemene Voorwaarden", href: "/voorwaarden" },
       { name: "Privacy Policy", href: "/privacy" },
-      { name: "Help & Ondersteuning", href: "/support" },
+      { name: "Help & Ondersteuning", href: "/help-en-ondersteuning" },
       { name: "Contact", href: "/contact" },
     ],
   },
@@ -66,25 +58,10 @@ export function Footer() {
 
   return (
     <footer className="relative bg-[url(/faect_over-Business-Central_footer.jpg)] bg-cover bg-bottom pt-0 pb-3 font-sans text-white">
-      {/* Dark overlay */}
       <div className="absolute inset-0 z-0 bg-[#020b1a]/10" />
 
-      {/* Wave separator — white arc that visually curves the top of the footer */}
-      {/* <div className="absolute inset-x-0 top-0 z-10">
-        <svg
-          viewBox="0 0 1440 88"
-          preserveAspectRatio="none"
-          className="block h-[88px] w-full"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <path d="M0,0 L1440,0 C1080,88 360,88 0,0 Z" fill="white" />
-        </svg>
-      </div> */}
-
       <div className="relative z-10 container mx-auto px-4 lg:px-8">
-        <div className="my-12 grid grid-cols-1 gap-10 text-center md:grid-cols-2 md:gap-1.5 xl:grid-cols-[1.5fr_2fr_2fr_3.5fr] xl:text-left">
-          {/* Contact column */}
+        <div className="my-12 grid grid-cols-1 gap-10 text-center md:grid-cols-2 md:gap-x-1.5 md:gap-y-10 xl:grid-cols-[1.5fr_2fr_2fr_3.5fr] xl:text-left">
           <div className="space-y-5">
             <div className="space-y-3">
               <a
@@ -140,7 +117,6 @@ export function Footer() {
               </a>
             </div>
 
-            {/* LinkedIn */}
             <a
               href="https://www.linkedin.com/company/faect/"
               target="_blank"
@@ -158,9 +134,11 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Link groups */}
-          {footerGroups.map((group, i) => (
-            <div key={i} className="space-y-4 px-6 xl:pl-12">
+          {footerGroups.map((group) => (
+            <div
+              key={group.links[0]?.href ?? "footer-group"}
+              className="space-y-4 px-6 xl:pl-12"
+            >
               {group.title && (
                 <h3 className="border-faect-blue border-b-2 pb-1 font-bold tracking-wide text-white/90">
                   {group.title}
@@ -170,7 +148,7 @@ export function Footer() {
                 {group.links.map((link) => (
                   <li
                     key={link.name}
-                    className="flex items-start justify-center gap-1.5 space-y-2 xl:justify-start"
+                    className="flex items-start justify-center gap-1.5 xl:justify-start"
                   >
                     {group.checkmarks && (
                       <Check
@@ -182,8 +160,8 @@ export function Footer() {
                       href={link.href}
                       className={
                         pathname === link.href
-                          ? "text-faect-blue before:text-faect-blue transition-colors before:content-['.../'] hover:text-white"
-                          : "hover:text-faect-blue tracking-wide text-white/80 transition-colors"
+                          ? "text-faect-blue transition-colors hover:text-white"
+                          : "hover:text-faect-blue text-white/80 transition-colors"
                       }
                     >
                       {link.name}

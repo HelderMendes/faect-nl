@@ -7,9 +7,39 @@ export function cn(...inputs: ClassValue[]) {
 
 // 3-char Dutch national prefixes that have 2 significant area-code digits (0XX + 7 subscriber digits)
 const NL_TWO_DIGIT_AREA_PREFIXES = new Set([
-  "010","013","015","020","023","024","026","030","033","035","036","038",
-  "040","043","045","046","050","053","055","058","070","071","072","073",
-  "074","075","076","077","078","079","085","087","088",
+  "010",
+  "013",
+  "015",
+  "020",
+  "023",
+  "024",
+  "026",
+  "030",
+  "033",
+  "035",
+  "036",
+  "038",
+  "040",
+  "043",
+  "045",
+  "046",
+  "050",
+  "053",
+  "055",
+  "058",
+  "070",
+  "071",
+  "072",
+  "073",
+  "074",
+  "075",
+  "076",
+  "077",
+  "078",
+  "079",
+  "085",
+  "087",
+  "088",
 ]);
 
 /**
@@ -98,7 +128,8 @@ export type HeroHeadingWeight =
 export type HeroHeadingSize =
   | "default" // text-4xl → md:text-5xl → xl:text-[52px]
   | "sm" // text-3xl → md:text-4xl → xl:text-[44px]
-  | "lg"; // text-5xl → md:text-6xl → xl:text-[64px]
+  | "lg" // text-5xl → md:text-6xl → xl:text-[64px]
+  | "xl"; // text-[3rem] → md:text-[4.5rem] → xl:text-[rem]
 
 /** Controls the bottom spacing between h1 and the subheading */
 export type HeroHeadingSpacing =
@@ -203,6 +234,7 @@ export const HERO_HEADING_SIZE_CLASSES: Record<HeroHeadingSize, string> = {
   default: "text-4xl md:text-5xl xl:text-[52px]",
   sm: "text-3xl md:text-4xl xl:text-[44px]",
   lg: "text-5xl md:text-6xl xl:text-[64px]",
+  xl: "text-6xl md:text-[4.5rem] xl:text-[5rem]",
 };
 
 export const HERO_HEADING_SPACING_CLASSES: Record<HeroHeadingSpacing, string> =
@@ -279,7 +311,7 @@ export function resolveHeroClasses(config?: HeroConfig) {
       ? HERO_PADDING_BOTTOM_CLASSES[config.paddingBottom]
       : undefined,
     headingClass: config?.headingClass,
-    subheadingClass: config?.subheadingSizeClass,
+    subheadingClass: config?.subheadingClass,
   };
 }
 

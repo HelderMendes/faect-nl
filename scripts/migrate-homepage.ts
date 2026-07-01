@@ -196,7 +196,7 @@ async function createHomepage() {
             title: 'Support',
             description:
               'Ons supportteam staat klaar om je te helpen met al je vragen en technische uitdagingen.',
-            link: '/support',
+            link: '/help-en-ondersteuning',
           },
         ],
       },

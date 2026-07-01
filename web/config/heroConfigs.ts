@@ -21,6 +21,7 @@ const INTRO_OPLOSSINGEN =
 const HEADING_APPS = HEADING_HOME + " -mt-26 shadow-lg";
 const SUBHEADING_APPS = SUBHEADING_HOME + " mb-8";
 const INTRO_APPS = "border-white bg-faect-blue/95 lg:ml-[40%] xl:ml-[52%]";
+const HEADING_VACATURES = "font-extrabold -mt-26 shadow-lg";
 
 const HEADING_KLANTEN =
   "sm:text-[3.4rem]/14 md:text-[3.6rem]/15 lg:text-[4.2rem]/17 xl:text-[4.4rem]/18 font-semibold pt-0 lg:pt-1 mx-auto text-center md:text-left  lg:-mt-15 -mt-17 text-[3.2rem]/15  xl:-mt-20 -mt-26  mb-2 md:mb-0";
@@ -62,6 +63,7 @@ const HEADING_UPGRADEN =
   "font-extrabold tracking-tight sm:text-4xl md:text-[2.6rem]/12 lg:text-[2.8rem]/13 xl:text-[2.9rem]/14 text-[2.5rem]/10 mt-15 px-2 md:pl-0  md:mr-20 sm:mt-24  md:-mt-24 xl:-mt-32 xl:mr-0 text-shadow-md text-shadow-black/40 md:text-shadow-lg  lg:text-shadow-xl  xl:tracking-normal";
 
 const HEADING_OVERSTAPEN = HEADING_HOME + " -mt-38 tracking-wide";
+
 // ── Hero configs per slug ─────────────────────────────────────────────────────
 // Home page uses all BlockHero defaults — no entry needed:
 //   headingColor: "white-to-blue" | introVariant: "navy-tinted" | spacing: "default"
@@ -197,4 +199,16 @@ export const heroConfigs: Record<string, HeroConfig> = {
       introClass: INTRO_HOME,
       mobileIntroBelow: true,
     },
+
+  vacatures: {
+    subheadingColor: "white",
+    headingColor: "blue",
+    subheadingSize: "lg",
+    subheadingClass: "-mt-3",
+    introClass: INTRO_OPLOSSINGEN,
+    headingClass:
+      "font-extrabold tracking-tight sm:text-5xl md:text-[2.6rem]/12 lg:text-[2.8rem]/13 xl:text-[3.8rem]/17 text-[2.5rem]/12 px-2 md:pl-0 md:mr-20 sm:-mt-12 mt-24 md:-mt-18 lg:-mt-10 xl:-mt-6 xl:mr-0 text-shadow-md text-shadow-black/40 md:text-shadow-lg  lg:text-shadow-xl xl:mb-2 xl:tracking-normal -mt-22",
+    headingSize: "xl",
+    mobileIntroBelow: true,
+  },
 };
