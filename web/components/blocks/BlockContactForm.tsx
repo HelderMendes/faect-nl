@@ -20,16 +20,41 @@ export function BlockContactForm({
 }: BlockContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    // Simulate form submission - replace with actual form handler
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const formData = new FormData(e.currentTarget);
+    const payload = {
+      name: formData.get("name") as string,
+      email: formData.get("email") as string,
+      subject: formData.get("subject") as string,
+      message: formData.get("message") as string,
+    };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = (await res.json()) as { success?: boolean; error?: string };
+
+      if (!res.ok || data.error) {
+        setError(data.error || "Er is iets misgegaan. Probeer het opnieuw.");
+        return;
+      }
+
+      setIsSubmitted(true);
+    } catch {
+      setError("Verbinding mislukt. Controleer uw internetverbinding.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -73,6 +98,12 @@ export function BlockContactForm({
               {subheading && (
                 <p className="text-lg text-gray-600">{subheading}</p>
               )}
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-4 rounded-lg bg-red-50 p-4 text-red-700">
+              {error}
             </div>
           )}
 

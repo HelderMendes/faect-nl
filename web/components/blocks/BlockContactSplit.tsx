@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, type FormEvent } from "react";
 import { MapPin, Phone, Mail, Send, CheckCircle2 } from "lucide-react";
 import {
   GoogleReCaptchaProvider,
@@ -57,14 +57,16 @@ function ContactForm({
   const [formState, setFormState] = useState<FormState>({ _tag: "idle" });
 
   const handleSubmit = useCallback(
-    async (e: { preventDefault(): void; currentTarget: HTMLFormElement }) => {
+    async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!executeRecaptcha) return;
+
+      const form = e.currentTarget;
+      const data = Object.fromEntries(new FormData(form));
 
       setFormState({ _tag: "submitting" });
 
       const recaptchaToken = await executeRecaptcha("contact_form");
-      const data = Object.fromEntries(new FormData(e.currentTarget));
 
       try {
         const res = await fetch("/api/contact", {
@@ -83,6 +85,7 @@ function ContactForm({
         }
 
         setFormState({ _tag: "success" });
+        form.reset();
       } catch {
         setFormState({
           _tag: "error",

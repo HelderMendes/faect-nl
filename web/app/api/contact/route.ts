@@ -55,13 +55,15 @@ export async function POST(request: Request) {
   const toAddress = process.env.MAIL_TO_EMAIL || process.env.MAIL_FROM_EMAIL!;
 
   const optionalRows = [
-    company?.trim() && `<tr><td style="padding:8px 0;color:#666;width:120px;"><strong>Bedrijf</strong></td><td style="padding:8px 0;">${company}</td></tr>`,
-    formPhone?.trim() && `<tr><td style="padding:8px 0;color:#666;"><strong>Telefoon</strong></td><td style="padding:8px 0;">${formPhone}</td></tr>`,
+    company?.trim() &&
+      `<tr><td style="padding:8px 0;color:#666;width:120px;"><strong>Bedrijf</strong></td><td style="padding:8px 0;">${company}</td></tr>`,
+    formPhone?.trim() &&
+      `<tr><td style="padding:8px 0;color:#666;"><strong>Telefoon</strong></td><td style="padding:8px 0;">${formPhone}</td></tr>`,
   ]
     .filter(Boolean)
     .join("");
 
-  const { error } = await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: fromAddress,
     to: [toAddress],
     replyTo: email,
@@ -88,11 +90,28 @@ export async function POST(request: Request) {
 
   if (error) {
     console.error("Resend error:", error);
+    const isProd = process.env.NODE_ENV === "production";
     return NextResponse.json(
-      { error: "Versturen mislukt. Probeer het opnieuw." },
+      {
+        error: "Versturen mislukt. Probeer het opnieuw.",
+        ...(isProd
+          ? {}
+          : {
+              debug: {
+                statusCode: (error as { statusCode?: number }).statusCode,
+                message: (error as { message?: string }).message,
+              },
+            }),
+      },
       { status: 500 },
     );
   }
 
-  return NextResponse.json({ success: true });
+  console.info("Contact email queued", {
+    messageId: data?.id,
+    to: toAddress,
+    subject: emailSubject,
+  });
+
+  return NextResponse.json({ success: true, messageId: data?.id });
 }
