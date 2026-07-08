@@ -58,10 +58,11 @@ export async function POST(request: Request) {
       challenge_ts?: string;
       "error-codes"?: string[];
     };
-    if (!result.success || result.score < 0.5) {
+    const score = result.score ?? 0;
+    if (!result.success || score < 0.5) {
       console.warn("reCAPTCHA verification failed", {
         success: result.success,
-        score: result.score,
+        score,
         hostname: result.hostname,
         challengeTs: result.challenge_ts,
         errorCodes: result["error-codes"],
