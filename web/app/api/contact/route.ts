@@ -2,6 +2,25 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  if (!process.env.RESEND_API_KEY?.trim()) {
+    console.error("Missing RESEND_API_KEY for /api/contact");
+    return NextResponse.json(
+      { error: "Versturen is tijdelijk niet beschikbaar." },
+      { status: 503 },
+    );
+  }
+
+  if (
+    !process.env.MAIL_FROM_EMAIL?.trim() ||
+    !process.env.MAIL_FROM_NAME?.trim()
+  ) {
+    console.error("Missing MAIL_FROM_EMAIL or MAIL_FROM_NAME for /api/contact");
+    return NextResponse.json(
+      { error: "Versturen is tijdelijk niet beschikbaar." },
+      { status: 503 },
+    );
+  }
+
   const resend = new Resend(process.env.RESEND_API_KEY);
   const body = await request.json();
   const { name, email, message, subject, company, formPhone, recaptchaToken } =
@@ -32,8 +51,21 @@ export async function POST(request: Request) {
         body: `secret=${secretKey}&response=${recaptchaToken}`,
       },
     );
-    const result = (await verify.json()) as { success: boolean; score: number };
+    const result = (await verify.json()) as {
+      success: boolean;
+      score?: number;
+      hostname?: string;
+      challenge_ts?: string;
+      "error-codes"?: string[];
+    };
     if (!result.success || result.score < 0.5) {
+      console.warn("reCAPTCHA verification failed", {
+        success: result.success,
+        score: result.score,
+        hostname: result.hostname,
+        challengeTs: result.challenge_ts,
+        errorCodes: result["error-codes"],
+      });
       return NextResponse.json(
         { error: "Verificatie mislukt. Probeer het opnieuw." },
         { status: 400 },

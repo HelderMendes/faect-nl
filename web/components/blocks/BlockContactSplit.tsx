@@ -55,20 +55,32 @@ function ContactForm({
 }: Required<BlockContactSplitProps>) {
   const { executeRecaptcha } = useGoogleReCaptcha();
   const [formState, setFormState] = useState<FormState>({ _tag: "idle" });
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ?? "";
+  const isRecaptchaConfigured = recaptchaSiteKey.trim().length > 0;
 
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (!executeRecaptcha) return;
 
       const form = e.currentTarget;
       const data = Object.fromEntries(new FormData(form));
 
       setFormState({ _tag: "submitting" });
 
-      const recaptchaToken = await executeRecaptcha("contact_form");
-
       try {
+        if (isRecaptchaConfigured && !executeRecaptcha) {
+          setFormState({
+            _tag: "error",
+            message:
+              "Beveiligingscontrole is nog niet geladen. Herlaad de pagina of probeer het zo opnieuw.",
+          });
+          return;
+        }
+
+        const recaptchaToken = executeRecaptcha
+          ? await executeRecaptcha("contact_form")
+          : undefined;
+
         const res = await fetch("/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +105,7 @@ function ContactForm({
         });
       }
     },
-    [executeRecaptcha],
+    [executeRecaptcha, isRecaptchaConfigured],
   );
 
   return (
@@ -328,9 +340,7 @@ function ContactForm({
 
                   <button
                     type="submit"
-                    disabled={
-                      formState._tag === "submitting" || !executeRecaptcha
-                    }
+                    disabled={formState._tag === "submitting"}
                     className="bg-faect-blue hover:bg-faect-navy inline-flex w-full items-center justify-center gap-2.5 rounded-lg px-8 py-3 font-semibold text-white transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {formState._tag === "submitting" ? (
