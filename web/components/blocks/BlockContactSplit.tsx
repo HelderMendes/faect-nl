@@ -68,7 +68,16 @@ function ContactForm({
       setFormState({ _tag: "submitting" });
 
       try {
-        if (isRecaptchaConfigured && !executeRecaptcha) {
+        if (!isRecaptchaConfigured) {
+          setFormState({
+            _tag: "error",
+            message:
+              "Beveiligingssleutel ontbreekt in productie. Voeg NEXT_PUBLIC_RECAPTCHA_SITE_KEY toe en deploy opnieuw.",
+          });
+          return;
+        }
+
+        if (!executeRecaptcha) {
           setFormState({
             _tag: "error",
             message:
