@@ -8,6 +8,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { buildMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 type BlogSeoData = {
   seoTitle?: string;
   seoDescription?: string;

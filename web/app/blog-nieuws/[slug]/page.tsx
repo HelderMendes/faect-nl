@@ -9,6 +9,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 
+export const revalidate = 60;
+
 // ── Types ──────────────────────────────────────────────────────────────────
 type PostImage = { asset?: { url?: string; _ref?: string } };
 
