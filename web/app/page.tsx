@@ -166,6 +166,7 @@ export default async function Home() {
         settings={{ backgroundColor: "white" }}
       />
 
+
       {/* CTA Section */}
       <BlockCTA
         heading="Klaar om te groeien met Faect?"

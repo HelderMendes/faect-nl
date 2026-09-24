@@ -90,7 +90,13 @@ export function formatDutchPhone(raw: string): string {
 }
 
 export interface SectionSettings {
-  backgroundColor?: "white" | "gray" | "dither" | "navy" | "none";
+  backgroundColor?:
+    | "white"
+    | "gray"
+    | "dither"
+    | "dither-flipped"
+    | "navy"
+    | "none";
   paddingTop?: "default" | "compact" | "none";
   paddingBottom?: "default" | "compact" | "none";
   verticalSpacing?: "default" | "compact";
@@ -321,8 +327,9 @@ export function getSectionStyles(
     white: "bg-white",
     gray: "bg-gray-50",
     dither: "section-dither",
+    "dither-flipped": "section-dither-flipped",
     navy: "bg-faect-navy text-white",
-    none: "bg-transparent",
+    none: "",
   };
 
   const paddingTopClasses = {

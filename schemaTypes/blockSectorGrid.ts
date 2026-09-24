@@ -80,6 +80,24 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'ctaPrompt',
+      title: 'CTA Tekst / Vraag',
+      type: 'string',
+      description: 'Bijvoorbeeld: "Heeft u vragen over uw sector of staat uw sector er niet bij?" (Laat leeg om niet te tonen)',
+    }),
+    defineField({
+      name: 'ctaText',
+      title: 'CTA Knoptekst',
+      type: 'string',
+      description: 'Bijvoorbeeld: "Neem contact op" of "Stel je vraag" (Laat leeg om geen knop te tonen)',
+    }),
+    defineField({
+      name: 'ctaLink',
+      title: 'CTA Knoplink (optioneel)',
+      type: 'string',
+      description: 'Optionele link (bijv. /contact). Als dit leeg blijft, opent de knop direct het contactformulier popup.',
+    }),
+    defineField({
       name: 'settings',
       title: 'Section Settings',
       type: 'sectionSettings',

@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
-import { getSectionStyles, type SectionSettings } from "./sectionUtils";
+import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
+import { ContactModal } from "@/components/ui/ContactModal";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -21,6 +25,9 @@ interface BlockSectorGridProps {
   image?: SanityImage;
   sectors?: Sector[];
   columns?: number;
+  ctaPrompt?: string;
+  ctaText?: string;
+  ctaLink?: string;
   settings?: SectionSettings;
 }
 
@@ -30,8 +37,12 @@ export function BlockSectorGrid({
   image,
   sectors,
   columns = 4,
+  ctaPrompt,
+  ctaText,
+  ctaLink,
   settings,
 }: BlockSectorGridProps) {
+  const [modalOpen, setModalOpen] = useState(false);
   const displaySectors = sectors || [];
 
   if (displaySectors.length === 0) return null;
@@ -43,7 +54,13 @@ export function BlockSectorGrid({
   };
 
   return (
-    <section className={(getSectionStyles(settings), "section-dither pt-22")}>
+    <section
+      className={cn(
+        "section-dither-flipped relative overflow-hidden",
+        getSectionStyles(settings, { noOverlay: true }),
+        "pt-22 pb-16",
+      )}
+    >
       <div className="container mx-auto gap-12 px-4 lg:grid lg:grid-cols-2 lg:items-start lg:px-8">
         {(heading || subheading) && (
           <div className="mx-4 mb-16 space-y-3 text-center lg:mx-1 lg:gap-1 lg:space-y-0 lg:text-left">
@@ -149,8 +166,45 @@ export function BlockSectorGrid({
               </div>
             );
           })}
+
+          {(ctaPrompt || ctaText) && (
+            <div className="col-span-full mt-6 text-center">
+              {ctaPrompt && (
+                <p className="font-work-sans text-faect-blue gray mt-4 mb-2 text-[1.2rem]/7 font-medium">
+                  {ctaPrompt}
+                </p>
+              )}
+              {ctaText && (
+                <div className="flex justify-center">
+                  {ctaLink ? (
+                    <Link
+                      href={ctaLink}
+                      className="border-faect-blue text-faect-blue font-ui nav-item-sweep inline-block rounded-[8px] border bg-white px-10 py-2.5 text-center text-[1.05rem] font-medium transition-all duration-300 ease-out hover:ml-2 hover:scale-105 hover:border-white hover:text-white"
+                    >
+                      {ctaText}
+                    </Link>
+                  ) : (
+                    <button
+                      onClick={() => setModalOpen(true)}
+                      className="border-faect-blue text-faect-blue font-ui nav-item-sweep inline-block rounded-[8px] border bg-white px-10 py-2.5 text-center text-[1.05rem] font-medium transition-all duration-300 ease-out hover:ml-2 hover:scale-105 hover:border-white hover:text-white"
+                    >
+                      {ctaText}
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
+
+      <ContactModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Vragen over uw sector?"
+        description="Staat uw sector er niet bij of heeft u een specifieke vraag? We helpen u graag verder."
+        subject="Sector vraag via faect.nl"
+      />
     </section>
   );
 }

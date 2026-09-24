@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 import { getSectionStyles, cn, type SectionSettings } from "./sectionUtils";
+import { BlockCTA } from "./BlockCTA";
 
 type SanityImage = {
   asset?: { _ref?: string; url?: string };
@@ -156,7 +157,6 @@ export function BlockAppShowcase({
       className={cn(getSectionStyles(settings), "section-dither-flipped p-4")}
     >
       <div className="p container mx-auto px-4 pb-16 lg:px-8">
-
         <div className="-mt-22 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {displayApps.map((app, index) => (
             <AppCard key={app._id} app={app} index={index} />

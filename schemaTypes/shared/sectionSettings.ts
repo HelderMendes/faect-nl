@@ -15,6 +15,7 @@ export const sectionSettings = {
           {title: 'White', value: 'white'},
           {title: 'Off-White / Gray', value: 'gray'},
           {title: 'Dither Gradient', value: 'dither'},
+          {title: 'Dither Gradient (Flipped 180°)', value: 'dither-flipped'},
           {title: 'Navy (Dark)', value: 'navy'},
           {title: 'None / Transparent', value: 'none'},
         ],
