@@ -21,7 +21,8 @@ export default defineType({
     defineField({
       name: 'heading',
       title: 'Main Heading',
-      type: 'string',
+      type: 'text',
+      rows: 2,
     }),
     defineField({
       name: 'subheading',

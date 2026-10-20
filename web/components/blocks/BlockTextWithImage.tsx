@@ -209,9 +209,13 @@ export function BlockTextWithImage({
           <div className="flex flex-col items-center text-center">
             {headerTitle && (
               <p className="hover:text-faect-blue relative mb-6 border-b-3 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span className="hidden md:inline">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
                 {headerTitle}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span className="hidden md:inline">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
               </p>
             )}
 

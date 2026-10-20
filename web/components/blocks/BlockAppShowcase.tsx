@@ -35,9 +35,13 @@ type BlockAppShowcaseProps = {
 function AppCard({ app, index }: { app: App; index: number }) {
   const description = app.description || app.excerpt;
   const features = app.features?.slice(0, 3) ?? [];
+  const appSlug = app.slug?.current
+    ? app.slug.current.split("/").filter(Boolean).pop()
+    : null;
+  const appHref = appSlug ? `/faect-apps/${appSlug}` : null;
 
   return (
-    <article className="group hover:border-faect-blue/20 bg-faect-light-blue/10 relative mt-10 flex flex-col overflow-hidden rounded-2xl border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <article className="group hover:border-faect-blue/20 bg-faect-light-blue/10 relative mt-6 flex flex-col overflow-hidden rounded-2xl border border-gray-100 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:mt-10">
       {/* Decorative number watermark */}
       <span className="font-cairo pointer-events-none absolute top-3 right-4 text-[7rem] leading-none font-extrabold text-white/35 select-none">
         {String(index + 1).padStart(2, "0")}
@@ -45,7 +49,26 @@ function AppCard({ app, index }: { app: App; index: number }) {
       {/* Card header */}
       <div className="border-faect-blue relative flex items-start gap-4 border-t-4 px-6 pt-6 pb-2">
         <div className="flex shrink-0 items-center justify-center">
-          {app.icon?.asset ? (
+          {appHref ? (
+            <Link
+              href={appHref}
+              tabIndex={-1}
+              aria-hidden="true"
+              className="inline-block transition-transform duration-200 hover:scale-105"
+            >
+              {app.icon?.asset ? (
+                <Image
+                  src={urlFor(app.icon).width(90).height(90).url()}
+                  alt=""
+                  width={56}
+                  height={56}
+                  className="size-22 rounded-full object-cover"
+                />
+              ) : (
+                <div className="bg-faect-blue/20 h-14 w-14 rounded-lg" />
+              )}
+            </Link>
+          ) : app.icon?.asset ? (
             <Image
               src={urlFor(app.icon).width(90).height(90).url()}
               alt={app.title}
@@ -58,8 +81,17 @@ function AppCard({ app, index }: { app: App; index: number }) {
           )}
         </div>
         <div className="flex h-20 flex-col justify-end pt-1">
-          <h3 className="font-cairo text-faect-blue group-hover:text-faect-blue text-2xl/7 font-bold transition-colors duration-200">
-            {app.title}
+          <h3 className="font-cairo text-faect-blue text-2xl/7 font-bold transition-colors duration-200">
+            {appHref ? (
+              <Link
+                href={appHref}
+                className="hover:text-faect-navy transition-colors duration-200"
+              >
+                {app.title}
+              </Link>
+            ) : (
+              app.title
+            )}
           </h3>
         </div>
       </div>
@@ -93,9 +125,9 @@ function AppCard({ app, index }: { app: App; index: number }) {
           !features.length && "mt-auto",
         )}
       >
-        {app.slug?.current ? (
+        {appHref ? (
           <Link
-            href={`/faect-apps/${app.slug.current.split("/").filter(Boolean).pop()}`}
+            href={appHref}
             className="text-faect-blue hover:text-faect-navy inline-flex items-center gap-1 font-semibold transition-all duration-200 hover:gap-2"
           >
             Meer informatie
@@ -154,10 +186,10 @@ export function BlockAppShowcase({
 
   return (
     <section
-      className={cn(getSectionStyles(settings), "section-dither-flipped p-4")}
+      className={cn(getSectionStyles(settings), "section-dither-flipped px-0")}
     >
-      <div className="p container mx-auto px-4 pb-16 lg:px-8">
-        <div className="-mt-22 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="container mx-auto px-4 pb-16 lg:px-8">
+        <div className="-mt-16 grid grid-cols-1 gap-4 md:-mt-22 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {displayApps.map((app, index) => (
             <AppCard key={app._id} app={app} index={index} />
           ))}

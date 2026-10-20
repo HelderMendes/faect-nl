@@ -31,6 +31,23 @@ interface BlockHeroProps {
   heroConfig?: HeroConfig;
 }
 
+function formatHeroText(text?: string) {
+  if (!text) return null;
+  // Replace HTML entity &nbsp; with unicode non-breaking space
+  const decoded = text.replace(/&nbsp;/gi, "\u00A0");
+
+  // Support <br> or <br/> tags as real JSX line breaks
+  const parts = decoded.split(/<br\s*\/?>/gi);
+  if (parts.length === 1) return decoded;
+
+  return parts.map((part, i) => (
+    <span key={i}>
+      {part}
+      {i < parts.length - 1 && <br />}
+    </span>
+  ));
+}
+
 export function BlockHero({
   heading,
   subheading,
@@ -95,7 +112,7 @@ export function BlockHero({
               >
                 <h1
                   className={cn(
-                    "text-center leading-14 text-shadow-lg md:text-left md:text-shadow-none",
+                    "text-center leading-14 text-shadow-lg md:text-left md:text-shadow-none whitespace-pre-wrap",
                     cx.headingFont,
                     cx.headingWeight,
                     cx.headingSize,
@@ -104,7 +121,7 @@ export function BlockHero({
                     cx.headingClass,
                   )}
                 >
-                  {heading}
+                  {formatHeroText(heading)}
                 </h1>
               </div>
 
@@ -126,7 +143,7 @@ export function BlockHero({
                       cx.subheadingClass,
                     )}
                   >
-                    {subheading}
+                    {formatHeroText(subheading)}
                   </p>
                 </div>
               )}

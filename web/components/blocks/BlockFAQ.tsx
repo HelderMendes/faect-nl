@@ -113,8 +113,13 @@ export function BlockFAQ({
             <div className="mb-12 text-center">
               {label && (
                 <p className="hover:text-faect-blue relative mb-6 inline-block border-b-2 border-gray-400 pb-1 text-2xl font-medium text-gray-500 transition-all duration-200">
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{label}
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <span className="hidden sm:inline">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </span>
+                  {label}
+                  <span className="hidden sm:inline">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </span>
                 </p>
               )}
               {heading && (
