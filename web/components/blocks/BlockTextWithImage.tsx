@@ -197,7 +197,14 @@ export function BlockTextWithImage({
   // ── Centered layout ────────────────────────────────────────────────────────
   if (layout === "centered" || imagePosition === "center") {
     return (
-      <section className={cn(getSectionStyles(settings))} data-block-key={_key}>
+      <section
+        id={resolvedSectionId}
+        className={cn(
+          getSectionStyles(settings),
+          resolvedSectionId && "scroll-mt-24",
+        )}
+        data-block-key={_key}
+      >
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col items-center text-center">
             {headerTitle && (
@@ -362,7 +369,14 @@ export function BlockTextWithImage({
   }
 
   return (
-    <section className={getSectionStyles(settings)} data-block-key={_key}>
+    <section
+      id={resolvedSectionId}
+      className={cn(
+        getSectionStyles(settings),
+        resolvedSectionId && "scroll-mt-24",
+      )}
+      data-block-key={_key}
+    >
       {headerTitle && (
         <div
           className={cn(

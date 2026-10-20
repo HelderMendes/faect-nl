@@ -427,7 +427,8 @@ function SectionIcon({ heading }: { heading: string }) {
     return <KeyRound className="h-4.5 w-4.5" />;
   if (h.includes("voordelen")) return <TrendingUp className="h-4.5 w-4.5" />;
   if (h.includes("beschikbaarheid")) return <Monitor className="h-4.5 w-4.5" />;
-  if (h.includes("call")) return <Zap className="h-4.5 w-4.5" />;
+  if (h.includes("call") || h.includes("direct") || h.includes("slag"))
+    return <Zap className="h-4.5 w-4.5" />;
   return <Star className="h-4.5 w-4.5" />;
 }
 

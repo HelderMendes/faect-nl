@@ -86,6 +86,17 @@ export const heroConfigs: Record<string, HeroConfig> = {
     subheadingSizeClass: SUBHEADING_OPLOSSINGEN,
   },
 
+  sectoren: {
+    headingColor: "white",
+    paddingTop: "none",
+    headingSize: "lg",
+    subheadingColor: "blue",
+    introClass: INTRO_OPLOSSINGEN,
+    headingClass: HEADING_OPLOSSINGEN,
+    subheadingSizeClass: SUBHEADING_OPLOSSINGEN,
+    mobileIntroBelow: true,
+  },
+
   "faect-apps": {
     headingClass: HEADING_APPS,
     subheadingSizeClass: SUBHEADING_APPS,

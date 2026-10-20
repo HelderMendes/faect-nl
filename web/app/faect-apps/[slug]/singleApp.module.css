@@ -1,57 +1,86 @@
-/* source quality determines styling complexity::after
-Clean Sanity content → clean PortableText renderer → clean styles. 
-PDF-derived content → messy pipeline → styling overhead. 
-I couldn't fully escape that chain.  This is one off */
-
-@reference "../../globals.css";
+/* Single App Detail Page Styles */
 
 .articleContent {
   max-width: none;
   line-height: 1.8;
 }
 
-.articleContent > *:first-child {
+.articleContent > p:first-child,
+.articleContent > div:first-child {
   margin-top: -20px;
 }
 
 /* Paragraphs */
 .articleContent p {
-  @apply m-0 py-2 text-[1.2rem]/8 font-medium;
+  margin: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  font-weight: 500;
 }
 
 /* Headings */
 .articleContent h2 {
-  @apply mt-10 mb-4 flex items-start gap-3 text-3xl font-bold;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
 }
 
 .articleContent h3 {
-  @apply mt-3 mb-1 pl-11 text-xl font-semibold;
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+  padding-left: 2.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
 }
+
 .articleContent h3:first-child {
-  @apply m-5;
+  margin: 1.25rem;
 }
 
 /* Links */
 .articleContent a {
-  @apply text-faect-blue hover:text-faect-navy no-underline transition-colors duration-200;
+  color: var(--color-faect-blue, #2b87c8);
+  text-decoration: none;
+  transition: color 200ms ease;
+}
+
+.articleContent a:hover {
+  color: var(--color-faect-navy, #1e3e74);
 }
 
 /* Lists */
 .articleContent ul {
-  @apply mt-4 space-y-2 pb-1;
+  margin-top: 1rem;
   padding-left: 3.8rem;
+  padding-bottom: 0.25rem;
 }
+
+.articleContent ul > li + li {
+  margin-top: 0.5rem;
+}
+
 .articleContent h3 + ul {
-  @apply mt-4 mb-0 space-y-2 pb-1;
+  margin-top: 1rem;
+  margin-bottom: 0;
   padding-left: 3.72rem;
 }
 
 .articleContent li {
-  @apply text-[1.2rem]/8 font-medium;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  font-weight: 500;
 }
 
 .articleContent h3 + ul li {
-  @apply leading-5;
+  line-height: 1.25rem;
   list-style-type: none;
   padding-left: 0;
 }
@@ -67,19 +96,29 @@ I couldn't fully escape that chain.  This is one off */
 
 /* Features box */
 .featuresBox {
-  @apply mt-10 rounded-2xl border p-8;
+  margin-top: 2.5rem;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  padding: 2rem;
 }
 
 .featuresBox h2 {
-  @apply mb-6 text-2xl font-bold;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
 }
 
 .featureList {
-  @apply grid gap-3;
+  display: grid;
+  gap: 0.75rem;
 }
 
 .featureList li {
-  @apply flex items-start gap-3 font-medium;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-weight: 500;
 }
 
 .checkmark {

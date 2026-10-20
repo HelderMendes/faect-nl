@@ -131,9 +131,9 @@ export function BlockSectorGrid({
                     {sector.description}
                   </p>
                 )}
-                {/* {sector.link && (
-                  <span className="text-faect-blue mt-2 inline-flex items-center text-sm font-bold tracking-wider uppercase transition-all group-hover:gap-2">
-                    Ontdek meer
+                {sector.link && (
+                  <span className="text-faect-blue font-ui mt-auto pt-2 inline-flex items-center text-sm font-semibold tracking-normal transition-all duration-200 group-hover:translate-x-1">
+                    Lees meer
                     <svg
                       className="ml-1 h-4 w-4"
                       fill="none"
@@ -148,13 +148,17 @@ export function BlockSectorGrid({
                       />
                     </svg>
                   </span>
-                )} */}
+                )}
               </div>
             );
 
             if (sector.link) {
               return (
-                <Link key={index} href={sector.link} className={borderClasses}>
+                <Link
+                  key={index}
+                  href={sector.link}
+                  className={cn(borderClasses, "group block cursor-pointer transition-colors duration-200 hover:bg-white/40")}
+                >
                   {content}
                 </Link>
               );
