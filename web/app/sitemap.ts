@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { client } from "@/sanity/lib/client";
 
+export const revalidate = 3600;
+
 const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://faect.nl"
 ).replace(/\/$/, "");

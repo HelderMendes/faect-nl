@@ -71,9 +71,11 @@ export async function generateMetadata({
 
 export async function generateStaticParams() {
   const slugs = await client.fetch<string[]>(
-    `*[_type == "app" && defined(slug.current) && !("/" in slug.current)].slug.current`,
+    `*[_type == "app" && defined(slug.current)].slug.current`,
   );
-  return slugs.map((slug) => ({ slug }));
+  return (slugs || [])
+    .filter((slug) => !slug.includes("/"))
+    .map((slug) => ({ slug }));
 }
 
 // Groups consecutive ✔ normal blocks into a single voordelen_group entry
