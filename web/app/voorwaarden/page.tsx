@@ -8,6 +8,8 @@ import {
 import { buildMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 
+export const revalidate = 60;
+
 type VoorwaardenSeoData = {
   seoTitle?: string;
   seoDescription?: string;

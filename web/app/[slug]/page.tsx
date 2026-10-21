@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 
+export const revalidate = 60;
+
 interface PageProps {
   params: Promise<{
     slug: string;
