@@ -317,7 +317,7 @@ export function BlockFeatureGrid({
         >
           {features.map((feature) => {
             const imageUrl = feature.icon?.asset
-              ? urlFor(feature.icon).width(400).height(232).url()
+              ? urlFor(feature.icon).url()
               : undefined;
 
             return (
@@ -332,8 +332,8 @@ export function BlockFeatureGrid({
                   "leading-relaxed": !isAflopendeMicoisoft,
                 })}
                 cardClassName="border border-gray-100 bg-white p-6 shadow-sm hover:shadow-lg"
-                imageWrapperClassName="mb-6 rounded-lg"
-                imageClassName="h-auto w-full object-cover object-bottom transition-transform duration-300 group-hover:scale-105"
+                imageWrapperClassName="mb-3 rounded-lg"
+                imageClassName="object-bottom transition-transform duration-300 group-hover:scale-105 "
               />
             );
           })}

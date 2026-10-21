@@ -42,10 +42,52 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const data = await client.fetch(PAGE_QUERY, { slug: "home" });
 
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://faect.nl/#organization",
+        name: "Faect",
+        url: "https://faect.nl",
+        logo: "https://faect.nl/Logo_Faect_fc.png",
+        image: "https://faect.nl/og-image.jpg",
+        description:
+          "Microsoft Dynamics 365 Business Central specialist: implementatie, optimalisatie, support en apps op maat.",
+        email: "info@faect.nl",
+        telephone: "+31 88 707 7000",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Gooimeer 12",
+          postalCode: "1411 DE",
+          addressLocality: "Naarden",
+          addressCountry: "NL",
+        },
+        sameAs: ["https://www.linkedin.com/company/faect/"],
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://faect.nl/#website",
+        url: "https://faect.nl",
+        name: "Faect",
+        publisher: {
+          "@id": "https://faect.nl/#organization",
+        },
+        inLanguage: "nl-NL",
+      },
+    ],
+  };
+
   // If we have Sanity page data with blocks, render them
   if (data?.pageBuilder && data.pageBuilder.length > 0) {
     return (
       <main className="flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
         <BlockRenderer
           blocks={data.pageBuilder}
           heroConfig={heroConfigs["home"]}

@@ -237,7 +237,7 @@ export function BlockTextWithImage({
             )}
 
             {resolvedImageSrc && (
-              <div className="mb-32 w-full max-w-2xl overflow-hidden rounded-2xl">
+              <div className="mb-8 w-full max-w-2xl overflow-hidden rounded-2xl">
                 <Image
                   src={resolvedImageSrc}
                   alt={heading ?? ""}

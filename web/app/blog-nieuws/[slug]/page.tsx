@@ -39,6 +39,7 @@ type Post = {
   categories?: { _id: string; title: string }[];
   cta?: { text?: string; link?: string } | null;
   mainImage?: PostImage;
+  author?: { name?: string; image?: PostImage };
   body?: unknown[];
   prevPost?: RelatedPost | null;
   nextPost?: RelatedPost | null;
@@ -219,8 +220,47 @@ export default async function PostPage({ params }: PostPageProps) {
   const heroSrc = getImageSrc(post.mainImage, 1920, 900);
   const readTime = estimateReadTime(post.body);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt || undefined,
+    image: heroSrc ? [heroSrc] : ["https://faect.nl/og-image.jpg"],
+    datePublished: post.publishedAt || undefined,
+    dateModified: post.publishedAt || undefined,
+    author: post.author?.name
+      ? {
+          "@type": "Person",
+          name: post.author.name,
+        }
+      : {
+          "@type": "Organization",
+          name: "Faect",
+          url: "https://faect.nl",
+        },
+    publisher: {
+      "@type": "Organization",
+      name: "Faect",
+      url: "https://faect.nl",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://faect.nl/Logo_Faect_fc.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://faect.nl/blog-nieuws/${slug}`,
+    },
+  };
+
   return (
     <main className="flex flex-col bg-[#0d1e3b]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd),
+        }}
+      />
       {/* ── Hero: image only ──────────────────────────────────────────── */}
       <div className="relative h-[55vh] min-h-80 w-full overflow-hidden">
         {heroSrc ? (

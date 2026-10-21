@@ -18,6 +18,8 @@ type BuildMetadataInput = {
   noIndex?: boolean;
 };
 
+const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+
 export function buildMetadata({
   title,
   description,
@@ -26,6 +28,7 @@ export function buildMetadata({
   noIndex = false,
 }: BuildMetadataInput): Metadata {
   const canonical = toAbsoluteUrl(path);
+  const resolvedImage = image ? (image.startsWith("http") ? image : toAbsoluteUrl(image)) : DEFAULT_OG_IMAGE;
 
   return {
     title,
@@ -41,13 +44,20 @@ export function buildMetadata({
       siteName: "Faect",
       locale: "nl_NL",
       type: "website",
-      images: image ? [image] : undefined,
+      images: [
+        {
+          url: resolvedImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
     },
     twitter: {
-      card: image ? "summary_large_image" : "summary",
+      card: "summary_large_image",
       title,
       description,
-      images: image ? [image] : undefined,
+      images: [resolvedImage],
     },
   };
 }

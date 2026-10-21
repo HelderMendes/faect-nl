@@ -20,7 +20,10 @@ const workSans = Work_Sans({
   subsets: ["latin"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://faect.nl";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Faect | Microsoft Dynamics 365 Business Central specialist",
   description:
     "Faect helpt organisaties met Microsoft Dynamics 365 Business Central: implementatie, optimalisatie, support en apps op maat.",
