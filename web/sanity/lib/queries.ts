@@ -63,6 +63,11 @@ const appReference = `{
   tagline,
   description,
   features,
+  "order": coalesce(
+    *[_type == "app" && !(slug.current match "/onze-apps/**") && (slug.current == ^.slug.current || "/onze-apps/" + slug.current == ^.slug.current)][0].order,
+    order,
+    999
+  ),
   factsheet { asset-> { url } },
   icon ${imageAsset}
 }`;
@@ -145,7 +150,10 @@ export const PAGE_QUERY = groq`
       },
       _type == "blockAppShowcase" => {
         ...,
-        apps[]-> ${appReference}
+        "apps": select(
+          count(apps) > 0 => (apps[]-> ${appReference}) | order(order asc, title asc),
+          *[_type == "app" && defined(slug.current) && !(slug.current match "/onze-apps/**")] | order(order asc, title asc) ${appReference}
+        )
       },
       _type == "blockTeamGrid" => {
         ...,
@@ -168,12 +176,13 @@ export const PAGE_QUERY = groq`
   }
 `;
 
-export const APPS_QUERY = groq`*[_type == "app" && defined(slug.current)] | order(order asc, title asc){
+export const APPS_QUERY = groq`*[_type == "app" && defined(slug.current) && !(slug.current match "/onze-apps/**")] | order(order asc, title asc){
   _id,
   title,
   slug,
   tagline,
   description,
+  order,
   icon ${imageAsset}
 }`;
 
@@ -186,15 +195,17 @@ export const APP_QUERY = groq`*[_type == "app" && slug.current == $slug][0]{
   body,
   features,
   appStoreUrl,
+  order,
   icon ${imageAsset},
   factsheet { asset-> }
 }`;
 
-export const APPS_SIDEBAR_QUERY = groq`*[_type == "app" && defined(slug.current)] | order(order asc, title asc){
+export const APPS_SIDEBAR_QUERY = groq`*[_type == "app" && defined(slug.current) && !(slug.current match "/onze-apps/**")] | order(order asc, title asc){
   _id,
   title,
   slug,
   tagline,
+  order,
   icon ${imageAsset},
   factsheet { asset-> { url } }
 }`;

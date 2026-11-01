@@ -21,6 +21,7 @@ type App = {
   description?: string;
   excerpt?: string;
   features?: string[];
+  order?: number;
   factsheet?: AppFactsheet;
   icon?: SanityImage;
 };
@@ -181,7 +182,11 @@ export function BlockAppShowcase({
   apps,
   settings,
 }: BlockAppShowcaseProps) {
-  const displayApps = apps ?? [];
+  const displayApps = [...(apps ?? [])].sort(
+    (a, b) =>
+      (a.order ?? 999) - (b.order ?? 999) ||
+      a.title.localeCompare(b.title, "nl"),
+  );
   if (displayApps.length === 0) return null;
 
   return (
